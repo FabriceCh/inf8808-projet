@@ -18,21 +18,31 @@ class SC2ReplayWrapper:
                 else:
                     yield event
 
-    def select_from_list(self, ev_list, predicate):
+    def _select_from_list(self, ev_list, predicate):
         """Select all events from a list satisfying a predicate"""
         for e in ev_list:
             if predicate(e):
                 yield e
 
-    def select_events(self, predicate):
+    def select_from_list(self, ev_list, predicate):
+        return list(self._select_from_list(ev_list, predicate))
+
+
+    def _select_events(self, predicate):
         """ Select from the object's events list"""
         for e in self.select_from_list(self._replay.events, predicate):
             yield e
 
-    def select_game_events(self, predicate):
+    def select_events(self, predicate):
+        return list(self._select_events(predicate))
+
+    def _select_game_events(self, predicate):
         """ Select from the object's game_events list"""
         for e in self.select_from_list(self._replay.game_events, predicate):
             yield e
+
+    def select_game_events(self, predicate):
+        return list(self._select_game_events(self))
 
     def categorize(self, event_list, category_map, value_map=None):
         values = {}
