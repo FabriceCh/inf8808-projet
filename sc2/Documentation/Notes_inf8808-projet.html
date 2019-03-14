@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2019-03-13 Wed 21:25 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>INF8808 - Projet Starcraft II</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Philippe Carphin" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">INF8808 - Projet Starcraft II</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orge5e7460">1. INF8808 - Projet Starcraft II</a>
+<ul>
+<li><a href="#org427a8ae">1.1. The sc2replay module and how starcraft 2 works</a>
+<ul>
+<li><a href="#org8369bea">1.1.1. Overview</a></li>
+<li><a href="#org6718968">1.1.2. An individual event</a></li>
+</ul>
+</li>
+<li><a href="#org3849917">1.2. Wrapper interface</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orge5e7460" class="outline-2">
+<h2 id="orge5e7460"><span class="section-number-2">1</span> INF8808 - Projet Starcraft II</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org427a8ae" class="outline-3">
+<h3 id="org427a8ae"><span class="section-number-3">1.1</span> The sc2replay module and how starcraft 2 works</h3>
+<div class="outline-text-3" id="text-1-1">
+</div>
+<div id="outline-container-org8369bea" class="outline-4">
+<h4 id="org8369bea"><span class="section-number-4">1.1.1</span> Overview</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<p>
+The python module is <code>sc2reader</code> and it is available with pip.  It offers the
+function <code>sc2reader.load_replay(filename)</code> which returns an python object.
+</p>
+
+<p>
+This object has a bunch of attributes, most notable of which is the
+<code>game_events</code> attribute.  Starcraft 2 is a deterministic state machine.  A game
+is recorded by recording all these game events, and the game is replayed by
+having the state machine consume these events.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org6718968" class="outline-4">
+<h4 id="org6718968"><span class="section-number-4">1.1.2</span> An individual event</h4>
+<div class="outline-text-4" id="text-1-1-2">
+<p>
+The types of actual events are stored in <code>sc2reader.events</code> and in
+<code>sc2reader.events.game</code> there is a subset of these types.  These are the types
+that are interesting.
+</p>
+
+<p>
+It is useful to create a replay, get all the events of a certain type, and then
+put a breakpoint in your IDE to inspect the event objects for it's attributes.
+</p>
+
+<p>
+Knowing what attributes a certain type of event has allows us to design a
+selector to select events matching certain criteria.  We can then use the
+<code>select_events</code> method of the wrapper to get the selected events.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python">python3 -m bpython
+bpython version <span style="color: #a45bad;">0</span>.<span style="color: #a45bad;">17</span>.<span style="color: #a45bad;">1</span> on top of Python <span style="color: #a45bad;">3</span>.<span style="color: #a45bad;">7</span>.<span style="color: #a45bad;">2</span> /usr/local/<span style="color: #4f97d7;">bin</span>/python3
+&gt;&gt;&gt; <span style="color: #4f97d7; font-weight: bold;">import</span> sc2reader
+&gt;&gt;&gt; sc2reader.events.
+&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;
+&#9474; AddToControlGroupEvent            BasicCommandEvent             &#9474;
+&#9474; CameraEvent                       ChatEvent                     &#9474;
+&#9474; CommandEvent                      ControlGroupEvent             &#9474;
+&#9474; DataCommandEvent                  Event                         &#9474;
+&#9474; GameEvent                         GameStartEvent                &#9474;
+&#9474; GetControlGroupEvent              HijackReplayGameEvent         &#9474;
+&#9474; Length                            MessageEvent                  &#9474;
+&#9474; PingEvent                         PlayerLeaveEvent              &#9474;
+&#9474; PlayerSetupEvent                  PlayerStatsEvent              &#9474;
+&#9474; ProgressEvent                     ResourceRequestCancelEvent    &#9474;
+&#9474; ResourceRequestEvent              ResourceRequestFulfillEvent   &#9474;
+&#9474; ResourceTradeEvent                SelectionEvent                &#9474;
+&#9474; SetControlGroupEvent              TargetPointCommandEvent       &#9474;
+&#9474; TargetUnitCommandEvent            TrackerEvent                  &#9474;
+&#9474; UnitBornEvent                     UnitDiedEvent                 &#9474;
+&#9474; UnitDoneEvent                     UnitInitEvent                 &#9474;
+&#9474; UnitOwnerChangeEvent              UnitPositionsEvent            &#9474;
+&#9474; UnitTypeChangeEvent               UpdateTargetPointCommandEvent &#9474;
+&#9474; UpdateTargetUnitCommandEvent      UpgradeCompleteEvent          &#9474;
+&#9474; UserOptionsEvent                  absolute_import               &#9474;
+&#9474; base                              chain                         &#9474;
+&#9474; clamp                             create_command_event          &#9474;
+&#9474; create_control_group_event        division                      &#9474;
+&#9474; functools                         game                          &#9474;
+&#9474; loggable                          message                       &#9474;
+&#9474; print_function                    tracker                       &#9474;
+&#9474; unicode_literals                                                &#9474;
+&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-python">python3 -m bpython
+bpython version <span style="color: #a45bad;">0</span>.<span style="color: #a45bad;">17</span>.<span style="color: #a45bad;">1</span> on top of Python <span style="color: #a45bad;">3</span>.<span style="color: #a45bad;">7</span>.<span style="color: #a45bad;">2</span> /usr/local/<span style="color: #4f97d7;">bin</span>/python3
+&gt;&gt;&gt; <span style="color: #4f97d7; font-weight: bold;">import</span> sc2reader
+&gt;&gt;&gt; sc2reader.events.game.
+&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;
+&#9474; AddToControlGroupEvent           BasicCommandEvent              &#9474;
+&#9474; CameraEvent                      CommandEvent                   &#9474;
+&#9474; ControlGroupEvent                DataCommandEvent               &#9474;
+&#9474; Event                            GameEvent                      &#9474;
+&#9474; GameStartEvent                   GetControlGroupEvent           &#9474;
+&#9474; HijackReplayGameEvent            Length                         &#9474;
+&#9474; PlayerLeaveEvent                 ResourceRequestCancelEvent     &#9474;
+&#9474; ResourceRequestEvent             ResourceRequestFulfillEvent    &#9474;
+&#9474; ResourceTradeEvent               SelectionEvent                 &#9474;
+&#9474; SetControlGroupEvent             TargetPointCommandEvent        &#9474;
+&#9474; TargetUnitCommandEvent           UpdateTargetPointCommandEvent  &#9474;
+&#9474; UpdateTargetUnitCommandEvent     UserOptionsEvent               &#9474;
+&#9474; absolute_import                  chain                          &#9474;
+&#9474; create_command_event             create_control_group_event     &#9474;
+&#9474; division                         loggable                       &#9474;
+&#9474; print_function                   unicode_literals               &#9474;
+&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;
+</pre>
+</div>
+
+<p>
+Each of these events has a different set of attributes.  For example, some
+events have a <code>location</code> attribute, some don't.  <code>CameraEvent</code> has a <code>location</code>
+attribute but <code>TargetUnitCommandEvent</code> does not.  The targeted unit will have a
+location and the player will be looking at the location of their last
+<code>CameraEvent</code>.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3849917" class="outline-3">
+<h3 id="org3849917"><span class="section-number-3">1.2</span> Wrapper interface</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+To allow easy data gathering, the following wrapper interface can be used:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #4f97d7; font-weight: bold;">import</span> pysc2
+<span style="color: #7590db;">my_replay_wrapper</span> = pysc2.SC2ReplayWrapper<span style="color: #4f97d7;">(</span><span style="color: #2d9574;">'spawningtool_replays/dark_v_Solar_Game1_PortAleksanderLE.SC2Replay'</span><span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+
+<p>
+We can get events by type or by any other predicate.  We can categorize them
+using a helper function, and we can draw scatter plots with color and also bar
+charts (although bar charts are not going to be in our project, they might be
+useful to analyse various sets of data.
+</p>
+
+<p>
+The best and most up-to-date examples can be found in the <code>test_pysc2.py</code> file
+but the following give a brief overview (I updated it after I wrote all the
+code, but I did write this before I wrote the code, so things might be different
+but the idea will stay the same.
+</p>
+</div>
+
+<ol class="org-ol">
+<li><a id="org347a79a"></a>Get events of a certain type:<br />
+<div class="outline-text-5" id="text-1-2-0-1">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">selector</span><span style="color: #4f97d7;">(</span>e<span style="color: #4f97d7;">)</span>:
+    <span style="color: #4f97d7; font-weight: bold;">return</span> <span style="color: #4f97d7;">isinstance</span><span style="color: #4f97d7;">(</span>e, sc2reader.events.game.GetControlGroupEvent<span style="color: #4f97d7;">)</span>
+<span style="color: #7590db;">selected_events</span> = my_replay_wrapper.select_from_list<span style="color: #4f97d7;">(</span>my_replay_wrapper._replay.game_events, selector<span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+
+<p>
+It's a bit weird that you have to pass the list of events because we're calling
+a method of the object that owns those lists, but it's because there are two
+lists that we will want to select events from, the <code>_replay.events</code> and the
+<code>_replay.game_events</code> lists.  So for now, this is how you tell it which of the
+two lists to select from.
+</p>
+
+<p>
+I did make convenience functions <code>select_from_events()</code> and
+<code>select_from_game_events()</code> to avoid that funny looking stuff.
+</p>
+
+<p>
+Also, in coding, one might create a list and select from that list, and that
+might be useful.
+</p>
+</div>
+</li>
+
+<li><a id="orga15d42f"></a>For more precision<br />
+<div class="outline-text-5" id="text-1-2-0-2">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">player_2_zealot_born_selector</span><span style="color: #4f97d7;">(</span>event<span style="color: #4f97d7;">)</span>:
+    <span style="color: #4f97d7; font-weight: bold;">return</span> <span style="color: #4f97d7;">(</span><span style="color: #4f97d7;">isinstance</span><span style="color: #bc6ec5;">(</span>event, sc2reader.events.UnitBornEvent<span style="color: #bc6ec5;">)</span>:
+            <span style="color: #4f97d7; font-weight: bold;">and</span> event.player == <span style="color: #a45bad;">2</span>
+            <span style="color: #4f97d7; font-weight: bold;">and</span> <span style="color: #2d9574;">"bla bla to ceck if it's a zealot"</span><span style="color: #4f97d7;">)</span>
+<span style="color: #7590db;">selected_events</span> = my_replay_wrapper.select_from_events<span style="color: #4f97d7;">(</span>player_2_zealot_born_selector<span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="orgdc4e6f8"></a>For locations<br />
+<div class="outline-text-5" id="text-1-2-0-3">
+<p>
+If a list of events needs locations based on where the player is looking, then
+we have
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">color_map</span><span style="color: #4f97d7;">(</span>event, i<span style="color: #4f97d7;">)</span>:
+    <span style="color: #4f97d7; font-weight: bold;">if</span> i % <span style="color: #a45bad;">2</span> == <span style="color: #a45bad;">0</span>:
+        <span style="color: #4f97d7; font-weight: bold;">return</span> <span style="color: #2d9574;">'gray'</span>
+    <span style="color: #4f97d7; font-weight: bold;">else</span>:
+        <span style="color: #4f97d7; font-weight: bold;">return</span> <span style="color: #2d9574;">'blue'</span>
+
+<span style="color: #7590db;">locations</span> = my_replay.create_locations<span style="color: #4f97d7;">(</span>event_list<span style="color: #4f97d7;">)</span>
+
+<span style="color: #7590db;">colors</span> = <span style="color: #4f97d7;">list</span><span style="color: #4f97d7;">(</span><span style="color: #4f97d7;">map</span><span style="color: #bc6ec5;">(</span>event_list, color_map<span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>
+plt.scatter<span style="color: #4f97d7;">(</span>x=locations<span style="color: #bc6ec5;">[</span><span style="color: #a45bad;">0</span>,:<span style="color: #bc6ec5;">]</span>, y=locations<span style="color: #bc6ec5;">[</span><span style="color: #a45bad;">1</span>,:<span style="color: #bc6ec5;">]</span>, c=colors<span style="color: #4f97d7;">)</span>
+plt.show<span style="color: #4f97d7;">()</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">category_map</span><span style="color: #4f97d7;">(</span>event<span style="color: #4f97d7;">)</span>:
+    <span style="color: #4f97d7; font-weight: bold;">if</span> ...:
+        <span style="color: #4f97d7; font-weight: bold;">return</span> <span style="color: #2d9574;">"offensive"</span>
+    <span style="color: #4f97d7; font-weight: bold;">elif</span> ...:
+        <span style="color: #4f97d7; font-weight: bold;">return</span> <span style="color: #2d9574;">"defensive"</span>
+
+my_replay.category_bar_chart<span style="color: #4f97d7;">(</span>category_map<span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">cumulative_map</span><span style="color: #4f97d7;">(</span>event_list, category_map, value_map<span style="color: #4f97d7;">)</span>:
+    <span style="color: #7590db;">values</span> = <span style="color: #4f97d7;">{}</span>
+    <span style="color: #4f97d7; font-weight: bold;">for</span> e <span style="color: #4f97d7; font-weight: bold;">in</span> event_list:
+        <span style="color: #7590db;">cat</span> = category_map<span style="color: #4f97d7;">(</span>e<span style="color: #4f97d7;">)</span>
+        <span style="color: #4f97d7; font-weight: bold;">if</span> cat <span style="color: #4f97d7; font-weight: bold;">is</span> <span style="color: #4f97d7; font-weight: bold;">not</span> <span style="color: #a45bad;">None</span>:
+            <span style="color: #7590db;">values</span><span style="color: #4f97d7;">[</span>cat<span style="color: #4f97d7;">]</span> += value_map<span style="color: #4f97d7;">(</span>e<span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">value_map</span><span style="color: #4f97d7;">(</span>event<span style="color: #4f97d7;">)</span>:
+    <span style="color: #4f97d7; font-weight: bold;">return</span> event.damage
+<span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">category_map</span><span style="color: #4f97d7;">(</span>event<span style="color: #4f97d7;">)</span>:
+    <span style="color: #4f97d7; font-weight: bold;">if</span> ...:
+        <span style="color: #4f97d7; font-weight: bold;">return</span> <span style="color: #2d9574;">"offensive"</span>
+    <span style="color: #4f97d7; font-weight: bold;">elif</span> ...:
+        <span style="color: #4f97d7; font-weight: bold;">return</span> <span style="color: #2d9574;">"defensive"</span>
+<span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">player_2_damage_done_selector</span><span style="color: #4f97d7;">(</span>event<span style="color: #4f97d7;">)</span>:
+    <span style="color: #4f97d7; font-weight: bold;">return</span> <span style="color: #4f97d7;">(</span><span style="color: #4f97d7;">isinstance</span><span style="color: #bc6ec5;">(</span>xyz<span style="color: #bc6ec5;">)</span>
+            <span style="color: #4f97d7; font-weight: bold;">and</span> event.pid == <span style="color: #a45bad;">2</span>
+            <span style="color: #4f97d7; font-weight: bold;">and</span> event.something_else == this<span style="color: #4f97d7;">)</span>
+
+my_replay.cumulative_bar_chart<span style="color: #4f97d7;">(</span>player_2_damage_done_selector, category_map, value_map<span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Philippe Carphin</p>
+<p class="date">Created: 2019-03-13 Wed 21:25</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
