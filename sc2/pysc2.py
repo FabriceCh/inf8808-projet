@@ -2,6 +2,14 @@ import sc2reader
 import matplotlib.pyplot as plt
 import numpy as np
 
+def _select_from_list(ev_list, predicate):
+    """Select all events from a list satisfying a predicate"""
+    for e in ev_list:
+        if predicate(e):
+            yield e
+
+def select_from_list(ev_list, predicate):
+    return list(_select_from_list(ev_list, predicate))
 
 class SC2ReplayWrapper:
     def __init__(self, replay_file):
@@ -18,14 +26,6 @@ class SC2ReplayWrapper:
                 else:
                     yield event
 
-    def _select_from_list(self, ev_list, predicate):
-        """Select all events from a list satisfying a predicate"""
-        for e in ev_list:
-            if predicate(e):
-                yield e
-
-    def select_from_list(self, ev_list, predicate):
-        return list(self._select_from_list(ev_list, predicate))
 
 
     def _select_from_events(self, predicate):
@@ -60,7 +60,7 @@ class SC2ReplayWrapper:
 
     def bar_chart(self, selector, ev_list, category_map, value_map=None):
         assert(isinstance(ev_list, list))
-        event_list = list(self.select_from_list(ev_list, selector))
+        event_list = list(select_from_list(ev_list, selector))
         categories = self.categorize(event_list, category_map, value_map)
         plt.bar(categories.keys(), categories.values())
         plt.show()

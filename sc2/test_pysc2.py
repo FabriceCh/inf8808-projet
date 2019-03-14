@@ -14,20 +14,20 @@ class TestPysc2(unittest.TestCase):
     def test_select_from_list(self):
         def selector(e):
             return True
-        l = self.replay.select_from_list(self.replay._replay.game_events, selector)
+        l = pysc2.select_from_list(self.replay._replay.game_events, selector)
         self.assertTrue(len(l) > 1000)
 
     def test_select_from_list_complex_selector(self):
 
         def selector(e):
             return isinstance(e, sc2reader.events.game.GetControlGroupEvent)
-        l = self.replay.select_from_list(self.replay._replay.game_events, selector)
+        l = pysc2.select_from_list(self.replay._replay.game_events, selector)
         self.assertIsInstance(l[0], sc2reader.events.game.GetControlGroupEvent)
 
     def test_bar_chart_get_list(self):
         def selector(e):
             return isinstance(e, sc2reader.events.game.GetControlGroupEvent)
-        event_list = self.replay.select_from_list(self.replay._replay.game_events, selector)
+        event_list = pysc2.select_from_list(self.replay._replay.game_events, selector)
         self.assertIsInstance(event_list[0], sc2reader.events.game.GetControlGroupEvent)
 
     def test_bar_chart(self):
