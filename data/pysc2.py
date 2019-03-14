@@ -56,7 +56,7 @@ class SC2ReplayWrapper:
                     values[cat] += 1
         return values
 
-    def categorize_as_lists(event_list, category_map):
+    def categorize_as_lists(self, event_list, category_map):
         categories = {}
         for e in event_list:
             cat = category_map(e)
