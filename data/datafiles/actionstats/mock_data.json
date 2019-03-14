@@ -1,0 +1,25 @@
+{
+  "events": {
+    "player1": [
+      { "category": "offensive", "event_type": "SelectionEvent", "location": [3,3] },
+      { "category": "defensive", "event_type": "SelectionEvent", "location": [3,3] },
+      { "category": "defensive", "event_type": "SelectionEvent", "location": [3,3] },
+      { "category": "defensive", "event_type": "SelectionEvent", "location": [3,3] },
+      { "category": "defensive", "event_type": "SelectionEvent", "location": [3,3] },
+    ],
+    "player2" : [
+      { "category": "offensive", "event_type": "SelectionEvent", "location": [3,3] },
+      { "category": "defensive", "event_type": "SelectionEvent", "location": [3,3] },
+      { "category": "defensive", "event_type": "SelectionEvent", "location": [3,3] },
+    ]
+  },
+  "apms": {
+    "player1": {
+      { "type": "defensive", "apm": [0,0,0,0,0,0,875,731,650,0,0,0,4,0,0] },
+      { "type": "offensive", "apm": [0,0,0,0,5,5,5,5,3,3,4,3,800,811,812,831,830,4,4,4,3,2] }
+    }
+    "player2": {
+      { "type": "defensive", "apm": [0,0,0,0,0,0,875,731,650,0,0,0,4,0,0] },
+      { "type": "offensive", "apm": [0,0,0,0,5,5,5,5,3,3,4,3,800,811,812,831,830,4,4,4,3,2] }
+  }
+}
