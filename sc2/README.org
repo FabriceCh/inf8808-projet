@@ -1,0 +1,32 @@
+* Sc2 replay parsing tools
+
+** Installation
+
+*** Virtual environment
+
+#+BEGIN_SRC sh
+virtualenv -p python3 venv
+source ./venv/bin/activate
+pip install -r requirements.txt
+#+END_SRC
+
+*** No virtual environment
+
+#+BEGIN_SRC sh
+pip3 install -r requirements --user
+#+END_SRC
+
+** Running
+
+To run the unit tests.
+
+#+BEGIN_SRC sh
+python3 -m unittest ./test_*
+#+END_SRC
+
+There is nothing else that runs.
+
+* Documentation
+
+See the subdirectory =Documentation=.  Some documentation was written in an
+org-mode file and exported to HTML and LaTeX.
