@@ -102,3 +102,7 @@ class TestPysc2(unittest.TestCase):
         pysc2.plot_locations(event_list, "Title for the plot that I made so easily")
 
         self.assertRaises(pysc2.Pysc2EmptyListError, pysc2.plot_locations, [], "Should not print")
+
+    def test_open_competitive_replay(self):
+        path = './replays/pvpGame1.SC2Replay'
+        self.replay = pysc2.SC2ReplayWrapper(path)

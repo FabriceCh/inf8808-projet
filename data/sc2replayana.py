@@ -9,7 +9,7 @@ def printInformation(replay):
 
 def main():
     #path = sys.argv[1]
-    path = 'C:/Users/fabrice/Documents/StarCraft II/Accounts/80372218/1-S2-1-3558622/Replays/Multiplayer/Abyssal Reef LE.SC2Replay'
+    path = './replays/pvpGame1.SC2Replay'
     sc2reader.configure(debug=True)
     replay = sc2reader.load_replay(path, load_level=1)
     printInformation(replay)
