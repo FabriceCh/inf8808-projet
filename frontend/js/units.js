@@ -1,13 +1,19 @@
 (function () {
   "use strict";
-  let svg = d3.select("#units-viz").append("svg");
 
-  svg
-      .append("rect")
-      .attr("x", 50)
-      .attr("y", 50)
-      .attr("height", 100)
-      .attr("width", 100)
-      .attr("fill", "blue")
-  ;
+  const filePath = "datafiles/unitcomposition/mockdata.json";
+
+  d3.json(filePath).then(function(data) {
+    console.log("test");
+    let svg = d3.select("#units-viz").append("svg");
+
+    let g = svg.append("g");
+
+    console.log(data);
+    // g.selectAll("circle")
+    //     .enter()
+    //     .data()
+    //     .append("circle")
+    // ;
+  });
 })();
