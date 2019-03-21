@@ -10,5 +10,4 @@
     .attr("width", 100)
     .attr("fill", "blue")
   ;
-
 })();
