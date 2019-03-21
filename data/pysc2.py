@@ -2,6 +2,7 @@ import sc2reader
 import matplotlib.pyplot as plt
 import numpy as np
 
+import sc2reader.events
 
 class Pysc2Error(Exception):
     pass
@@ -71,6 +72,22 @@ class SC2ReplayWrapper:
         categories = self.categorize(event_list, category_map, value_map)
         plt.bar(categories.keys(), categories.values())
         plt.show()
+
+    def get_unit_lifetime_events(self):
+        def selector(e):
+            return (isinstance(e, sc2reader.events.UnitBornEvent)
+                    or isinstance(e, sc2reader.events.UnitInitEvent)
+                    or isinstance(e, sc2reader.events.UnitDiedEvent)
+                    or isinstance(e, sc2reader.events.UnitDoneEvent)
+            )
+        return self.select_from_events(predicate=selector)
+
+
+    def process_unit_lifetime_events(self):
+        def category_map(e):
+            return type(e)
+
+        return self.categorize_as_lists(self.get_unit_lifetime_events(), category_map)
 
 
 def plot_locations(events, title):
