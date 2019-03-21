@@ -23,7 +23,19 @@
     var player1Apms   = data.apms.player1;
     var player2Apms   = data.apms.player2;
 
+    let g = svg.append("g");
+
+    g.selectAll("circle")
+        .data(player1Events)
+        .enter()
+      .append("circle")
+        .attr("cx", function (d) { return d.location[0]; })
+        .attr("cy", function (d) { return d.location[1]; })
+        .attr("r", 10)
+        .attr("fill", "black");
+
     console.log(player1Events);
+    console.log(player1Events[0].location)
   });
   
 
