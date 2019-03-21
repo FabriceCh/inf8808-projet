@@ -2,9 +2,9 @@
   "events": {
     "player1": [
       { "category": "offensive", "event_type": "SelectionEvent", "location": [20,10] },
-      { "category": "defensive", "event_type": "SelectionEvent", "location": [30,20] },
-      { "category": "defensive", "event_type": "SelectionEvent", "location": [40,30] },
-      { "category": "defensive", "event_type": "SelectionEvent", "location": [30,40] },
+      { "category": "defensive", "event_type": "CommandEvent", "location": [30,20] },
+      { "category": "defensive", "event_type": "CommandEvent", "location": [40,30] },
+      { "category": "defensive", "event_type": "ControlGroupEvent", "location": [30,40] },
       { "category": "defensive", "event_type": "SelectionEvent", "location": [50,50] }
     ],
     "player2" : [

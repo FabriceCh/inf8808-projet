@@ -5,15 +5,6 @@
   svg.attr("height", "200%")
     .attr("width", "100%");
 
-  svg
-    .append("rect")
-    .attr("x", 50)
-    .attr("y", 50)
-    .attr("height", 100)
-    .attr("width", 100)
-    .attr("fill", "blue")
-  ;
-
   var promises = [];
   console.log("test");
 
@@ -31,8 +22,16 @@
       .append("circle")
         .attr("cx", function (d) { return d.location[0]; })
         .attr("cy", function (d) { return d.location[1]; })
-        .attr("r", 10)
-        .attr("fill", "black");
+        .attr("r", 2)
+        .attr("fill", function(d) {
+          if(d.event_type === "SelectionEvent") {
+            return "red";
+          } else if(d.event_type === "CommandEvent") {
+            return "blue";
+          } else {
+            return "green";
+          }
+        });
 
     console.log(player1Events);
     console.log(player1Events[0].location)
