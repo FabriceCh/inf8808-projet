@@ -132,7 +132,7 @@ class SC2ReplayWrapper:
     def bar_chart(self, selector, ev_list, category_map, value_map=None):
         assert (isinstance(ev_list, list))
         event_list = select_from_list(ev_list, selector)
-        categories = self.categorize(event_list, category_map, value_map)
+        categories = categorize(event_list, category_map, value_map)
         plt.bar(categories.keys(), categories.values())
         plt.show()
 

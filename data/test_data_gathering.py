@@ -47,4 +47,5 @@ class TestDataGathering(unittest.TestCase):
         import json
         json.dumps(post_post_processed)
         print(post_post_processed)
+        print(len(post_post_processed))
         pass
