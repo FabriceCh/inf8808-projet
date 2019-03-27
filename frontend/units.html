@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css" integrity="sha256-8B1OaG0zT7uYA572S2xOxWACq9NXYPQ+U5kHPV1bJN4=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/css/main.css" />
+  </head>
+  <body>
+
+    <div class="layout">
+
+      <div class="section">
+        <div class="container">
+
+          <h1 class="title">Comparison of the distribution of units between an elite player and AlphaStar</h1>
+
+          <svg id="viz" width="1344"></svg>
+
+        </div>
+      </div>
+
+      <div class="aggregation">
+        <div class="container">
+          <svg id="aggregation" width="1344"></svg>
+        </div>
+      </div>
+
+      <div id="tooltip"></div>
+
+    </div>
+
+    <script type="text/javascript" src="js/libs/d3.js"></script>
+
+    <script type="text/javascript" src="js/units.js"></script>
+
+  </body>
+
+</html>
