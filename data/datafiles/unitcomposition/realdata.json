@@ -1,0 +1,1807 @@
+{
+  "p1": {
+    "unit_lifetimes": [
+      {
+        "unit_type": "BeaconArmy",
+        "born_time": 0,
+        "died_time": "EOG",
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "BeaconDefend",
+        "born_time": 0,
+        "died_time": "EOG",
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "BeaconAttack",
+        "born_time": 0,
+        "died_time": "EOG",
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "BeaconHarass",
+        "born_time": 0,
+        "died_time": "EOG",
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "BeaconIdle",
+        "born_time": 0,
+        "died_time": "EOG",
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "BeaconAuto",
+        "born_time": 0,
+        "died_time": "EOG",
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "BeaconDetect",
+        "born_time": 0,
+        "died_time": "EOG",
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "BeaconScout",
+        "born_time": 0,
+        "died_time": "EOG",
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "BeaconClaim",
+        "born_time": 0,
+        "died_time": "EOG",
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "BeaconExpand",
+        "born_time": 0,
+        "died_time": "EOG",
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "BeaconRally",
+        "born_time": 0,
+        "died_time": "EOG",
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "BeaconCustom1",
+        "born_time": 0,
+        "died_time": "EOG",
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "BeaconCustom2",
+        "born_time": 0,
+        "died_time": "EOG",
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "BeaconCustom3",
+        "born_time": 0,
+        "died_time": "EOG",
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "BeaconCustom4",
+        "born_time": 0,
+        "died_time": "EOG",
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "Nexus",
+        "born_time": 0,
+        "died_time": "EOG",
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 0,
+        "died_time": {
+          "second": 308,
+          "frame": 4936
+        },
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": {
+            "second": 308,
+            "frame": 4936
+          }
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 0,
+        "died_time": "EOG",
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 0,
+        "died_time": {
+          "second": 309,
+          "frame": 4952
+        },
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": {
+            "second": 309,
+            "frame": 4952
+          }
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 0,
+        "died_time": "EOG",
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 0,
+        "died_time": {
+          "second": 316,
+          "frame": 5069
+        },
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": {
+            "second": 316,
+            "frame": 5069
+          }
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 0,
+        "died_time": "EOG",
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 0,
+        "died_time": {
+          "second": 314,
+          "frame": 5027
+        },
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": {
+            "second": 314,
+            "frame": 5027
+          }
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 0,
+        "died_time": {
+          "second": 280,
+          "frame": 4490
+        },
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": {
+            "second": 280,
+            "frame": 4490
+          }
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 0,
+        "died_time": "EOG",
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 0,
+        "died_time": {
+          "second": 320,
+          "frame": 5135
+        },
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": {
+            "second": 320,
+            "frame": 5135
+          }
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 0,
+        "died_time": {
+          "second": 314,
+          "frame": 5025
+        },
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": {
+            "second": 314,
+            "frame": 5025
+          }
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 0,
+        "died_time": "EOG",
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 17,
+        "died_time": "EOG",
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 17,
+            "frame": 284
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 34,
+        "died_time": {
+          "second": 306,
+          "frame": 4899
+        },
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 34,
+            "frame": 555
+          },
+          "died_time": {
+            "second": 306,
+            "frame": 4899
+          }
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 50,
+        "died_time": {
+          "second": 307,
+          "frame": 4918
+        },
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 50,
+            "frame": 806
+          },
+          "died_time": {
+            "second": 307,
+            "frame": 4918
+          }
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 61,
+        "died_time": "EOG",
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 61,
+            "frame": 987
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 73,
+        "died_time": {
+          "second": 287,
+          "frame": 4599
+        },
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 73,
+            "frame": 1168
+          },
+          "died_time": {
+            "second": 287,
+            "frame": 4599
+          }
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 87,
+        "died_time": {
+          "second": 309,
+          "frame": 4959
+        },
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 87,
+            "frame": 1405
+          },
+          "died_time": {
+            "second": 309,
+            "frame": 4959
+          }
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 99,
+        "died_time": {
+          "second": 330,
+          "frame": 5285
+        },
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 99,
+            "frame": 1586
+          },
+          "died_time": {
+            "second": 330,
+            "frame": 5285
+          }
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 113,
+        "died_time": {
+          "second": 312,
+          "frame": 5007
+        },
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 113,
+            "frame": 1812
+          },
+          "died_time": {
+            "second": 312,
+            "frame": 5007
+          }
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 129,
+        "died_time": {
+          "second": 315,
+          "frame": 5045
+        },
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 129,
+            "frame": 2074
+          },
+          "died_time": {
+            "second": 315,
+            "frame": 5045
+          }
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 146,
+        "died_time": {
+          "second": 278,
+          "frame": 4449
+        },
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 146,
+            "frame": 2345
+          },
+          "died_time": {
+            "second": 278,
+            "frame": 4449
+          }
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 163,
+        "died_time": {
+          "second": 322,
+          "frame": 5156
+        },
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 163,
+            "frame": 2616
+          },
+          "died_time": {
+            "second": 322,
+            "frame": 5156
+          }
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 180,
+        "died_time": {
+          "second": 268,
+          "frame": 4288
+        },
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 180,
+            "frame": 2887
+          },
+          "died_time": {
+            "second": 268,
+            "frame": 4288
+          }
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 197,
+        "died_time": {
+          "second": 334,
+          "frame": 5355
+        },
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 197,
+            "frame": 3158
+          },
+          "died_time": {
+            "second": 334,
+            "frame": 5355
+          }
+        }
+      },
+      {
+        "unit_type": "Adept",
+        "born_time": 213,
+        "died_time": "EOG",
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 213,
+            "frame": 3421
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "Adept",
+        "born_time": 214,
+        "died_time": {
+          "second": 314,
+          "frame": 5036
+        },
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 214,
+            "frame": 3424
+          },
+          "died_time": {
+            "second": 314,
+            "frame": 5036
+          }
+        }
+      },
+      {
+        "unit_type": "AdeptPhaseShift",
+        "born_time": 214,
+        "died_time": {
+          "second": 224,
+          "frame": 3591
+        },
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 214,
+            "frame": 3431
+          },
+          "died_time": {
+            "second": 224,
+            "frame": 3591
+          }
+        }
+      },
+      {
+        "unit_type": "AdeptPhaseShift",
+        "born_time": 214,
+        "died_time": {
+          "second": 224,
+          "frame": 3591
+        },
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 214,
+            "frame": 3431
+          },
+          "died_time": {
+            "second": 224,
+            "frame": 3591
+          }
+        }
+      },
+      {
+        "unit_type": "AdeptPhaseShift",
+        "born_time": 239,
+        "died_time": {
+          "second": 249,
+          "frame": 3999
+        },
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 239,
+            "frame": 3839
+          },
+          "died_time": {
+            "second": 249,
+            "frame": 3999
+          }
+        }
+      },
+      {
+        "unit_type": "AdeptPhaseShift",
+        "born_time": 239,
+        "died_time": {
+          "second": 249,
+          "frame": 3999
+        },
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 239,
+            "frame": 3839
+          },
+          "died_time": {
+            "second": 249,
+            "frame": 3999
+          }
+        }
+      },
+      {
+        "unit_type": "Sentry",
+        "born_time": 255,
+        "died_time": {
+          "second": 273,
+          "frame": 4375
+        },
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 255,
+            "frame": 4081
+          },
+          "died_time": {
+            "second": 273,
+            "frame": 4375
+          }
+        }
+      },
+      {
+        "unit_type": "Sentry",
+        "born_time": 255,
+        "died_time": {
+          "second": 305,
+          "frame": 4881
+        },
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 255,
+            "frame": 4085
+          },
+          "died_time": {
+            "second": 305,
+            "frame": 4881
+          }
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 279,
+        "died_time": {
+          "second": 311,
+          "frame": 4989
+        },
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 279,
+            "frame": 4479
+          },
+          "died_time": {
+            "second": 311,
+            "frame": 4989
+          }
+        }
+      },
+      {
+        "unit_type": "AdeptPhaseShift",
+        "born_time": 281,
+        "died_time": {
+          "second": 291,
+          "frame": 4658
+        },
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 281,
+            "frame": 4498
+          },
+          "died_time": {
+            "second": 291,
+            "frame": 4658
+          }
+        }
+      },
+      {
+        "unit_type": "AdeptPhaseShift",
+        "born_time": 281,
+        "died_time": {
+          "second": 291,
+          "frame": 4658
+        },
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 281,
+            "frame": 4498
+          },
+          "died_time": {
+            "second": 291,
+            "frame": 4658
+          }
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 298,
+        "died_time": {
+          "second": 316,
+          "frame": 5064
+        },
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 298,
+            "frame": 4780
+          },
+          "died_time": {
+            "second": 316,
+            "frame": 5064
+          }
+        }
+      },
+      {
+        "unit_type": "AdeptPhaseShift",
+        "born_time": 298,
+        "died_time": {
+          "second": 308,
+          "frame": 4934
+        },
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 298,
+            "frame": 4781
+          },
+          "died_time": {
+            "second": 308,
+            "frame": 4934
+          }
+        }
+      },
+      {
+        "unit_type": "AdeptPhaseShift",
+        "born_time": 298,
+        "died_time": {
+          "second": 308,
+          "frame": 4934
+        },
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 298,
+            "frame": 4781
+          },
+          "died_time": {
+            "second": 308,
+            "frame": 4934
+          }
+        }
+      },
+      {
+        "unit_type": "Stalker",
+        "born_time": 311,
+        "died_time": "EOG",
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 311,
+            "frame": 4991
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 315,
+        "died_time": {
+          "second": 318,
+          "frame": 5098
+        },
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 315,
+            "frame": 5051
+          },
+          "died_time": {
+            "second": 318,
+            "frame": 5098
+          }
+        }
+      },
+      {
+        "unit_type": "AdeptPhaseShift",
+        "born_time": 317,
+        "died_time": {
+          "second": 327,
+          "frame": 5241
+        },
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 317,
+            "frame": 5081
+          },
+          "died_time": {
+            "second": 327,
+            "frame": 5241
+          }
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 332,
+        "died_time": "EOG",
+        "player": 1,
+        "lifetime": {
+          "born_time": {
+            "second": 332,
+            "frame": 5322
+          },
+          "died_time": "EOG"
+        }
+      }
+    ],
+    "unit_counts": []
+  },
+  "p2": {
+    "unit_lifetimes": [
+      {
+        "unit_type": "BeaconArmy",
+        "born_time": 0,
+        "died_time": "EOG",
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "BeaconDefend",
+        "born_time": 0,
+        "died_time": "EOG",
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "BeaconAttack",
+        "born_time": 0,
+        "died_time": "EOG",
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "BeaconHarass",
+        "born_time": 0,
+        "died_time": "EOG",
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "BeaconIdle",
+        "born_time": 0,
+        "died_time": "EOG",
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "BeaconAuto",
+        "born_time": 0,
+        "died_time": "EOG",
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "BeaconDetect",
+        "born_time": 0,
+        "died_time": "EOG",
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "BeaconScout",
+        "born_time": 0,
+        "died_time": "EOG",
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "BeaconClaim",
+        "born_time": 0,
+        "died_time": "EOG",
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "BeaconExpand",
+        "born_time": 0,
+        "died_time": "EOG",
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "BeaconRally",
+        "born_time": 0,
+        "died_time": "EOG",
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "BeaconCustom1",
+        "born_time": 0,
+        "died_time": "EOG",
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "BeaconCustom2",
+        "born_time": 0,
+        "died_time": "EOG",
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "BeaconCustom3",
+        "born_time": 0,
+        "died_time": "EOG",
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "BeaconCustom4",
+        "born_time": 0,
+        "died_time": "EOG",
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "Nexus",
+        "born_time": 0,
+        "died_time": "EOG",
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 0,
+        "died_time": {
+          "second": 309,
+          "frame": 4958
+        },
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": {
+            "second": 309,
+            "frame": 4958
+          }
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 0,
+        "died_time": {
+          "second": 298,
+          "frame": 4775
+        },
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": {
+            "second": 298,
+            "frame": 4775
+          }
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 0,
+        "died_time": "EOG",
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 0,
+        "died_time": "EOG",
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 0,
+        "died_time": "EOG",
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 0,
+        "died_time": {
+          "second": 302,
+          "frame": 4847
+        },
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": {
+            "second": 302,
+            "frame": 4847
+          }
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 0,
+        "died_time": {
+          "second": 307,
+          "frame": 4920
+        },
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": {
+            "second": 307,
+            "frame": 4920
+          }
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 0,
+        "died_time": {
+          "second": 305,
+          "frame": 4885
+        },
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": {
+            "second": 305,
+            "frame": 4885
+          }
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 0,
+        "died_time": "EOG",
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 0,
+        "died_time": "EOG",
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 0,
+        "died_time": "EOG",
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 0,
+        "died_time": "EOG",
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 0,
+            "frame": 0
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 17,
+        "died_time": "EOG",
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 17,
+            "frame": 287
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 34,
+        "died_time": "EOG",
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 34,
+            "frame": 558
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 51,
+        "died_time": "EOG",
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 51,
+            "frame": 819
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 62,
+        "died_time": "EOG",
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 62,
+            "frame": 1000
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 73,
+        "died_time": "EOG",
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 73,
+            "frame": 1181
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 88,
+        "died_time": "EOG",
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 88,
+            "frame": 1412
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 99,
+        "died_time": {
+          "second": 224,
+          "frame": 3599
+        },
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 99,
+            "frame": 1593
+          },
+          "died_time": {
+            "second": 224,
+            "frame": 3599
+          }
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 110,
+        "died_time": {
+          "second": 296,
+          "frame": 4738
+        },
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 110,
+            "frame": 1774
+          },
+          "died_time": {
+            "second": 296,
+            "frame": 4738
+          }
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 125,
+        "died_time": {
+          "second": 293,
+          "frame": 4699
+        },
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 125,
+            "frame": 2009
+          },
+          "died_time": {
+            "second": 293,
+            "frame": 4699
+          }
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 142,
+        "died_time": "EOG",
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 142,
+            "frame": 2280
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 159,
+        "died_time": "EOG",
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 159,
+            "frame": 2551
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 178,
+        "died_time": "EOG",
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 178,
+            "frame": 2861
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "Adept",
+        "born_time": 213,
+        "died_time": "EOG",
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 213,
+            "frame": 3421
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "Adept",
+        "born_time": 218,
+        "died_time": {
+          "second": 299,
+          "frame": 4795
+        },
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 218,
+            "frame": 3500
+          },
+          "died_time": {
+            "second": 299,
+            "frame": 4795
+          }
+        }
+      },
+      {
+        "unit_type": "AdeptPhaseShift",
+        "born_time": 219,
+        "died_time": {
+          "second": 229,
+          "frame": 3673
+        },
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 219,
+            "frame": 3513
+          },
+          "died_time": {
+            "second": 229,
+            "frame": 3673
+          }
+        }
+      },
+      {
+        "unit_type": "AdeptPhaseShift",
+        "born_time": 219,
+        "died_time": {
+          "second": 229,
+          "frame": 3673
+        },
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 219,
+            "frame": 3513
+          },
+          "died_time": {
+            "second": 229,
+            "frame": 3673
+          }
+        }
+      },
+      {
+        "unit_type": "AdeptPhaseShift",
+        "born_time": 236,
+        "died_time": {
+          "second": 246,
+          "frame": 3937
+        },
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 236,
+            "frame": 3777
+          },
+          "died_time": {
+            "second": 246,
+            "frame": 3937
+          }
+        }
+      },
+      {
+        "unit_type": "AdeptPhaseShift",
+        "born_time": 236,
+        "died_time": {
+          "second": 246,
+          "frame": 3937
+        },
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 236,
+            "frame": 3777
+          },
+          "died_time": {
+            "second": 246,
+            "frame": 3937
+          }
+        }
+      },
+      {
+        "unit_type": "AdeptPhaseShift",
+        "born_time": 257,
+        "died_time": {
+          "second": 267,
+          "frame": 4281
+        },
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 257,
+            "frame": 4121
+          },
+          "died_time": {
+            "second": 267,
+            "frame": 4281
+          }
+        }
+      },
+      {
+        "unit_type": "AdeptPhaseShift",
+        "born_time": 257,
+        "died_time": {
+          "second": 267,
+          "frame": 4281
+        },
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 257,
+            "frame": 4121
+          },
+          "died_time": {
+            "second": 267,
+            "frame": 4281
+          }
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 263,
+        "died_time": "EOG",
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 263,
+            "frame": 4223
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "Stalker",
+        "born_time": 264,
+        "died_time": "EOG",
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 264,
+            "frame": 4230
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "Oracle",
+        "born_time": 274,
+        "died_time": "EOG",
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 274,
+            "frame": 4393
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "AdeptPhaseShift",
+        "born_time": 275,
+        "died_time": {
+          "second": 284,
+          "frame": 4559
+        },
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 275,
+            "frame": 4411
+          },
+          "died_time": {
+            "second": 284,
+            "frame": 4559
+          }
+        }
+      },
+      {
+        "unit_type": "AdeptPhaseShift",
+        "born_time": 275,
+        "died_time": {
+          "second": 284,
+          "frame": 4559
+        },
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 275,
+            "frame": 4411
+          },
+          "died_time": {
+            "second": 284,
+            "frame": 4559
+          }
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 310,
+        "died_time": "EOG",
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 310,
+            "frame": 4961
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "Oracle",
+        "born_time": 314,
+        "died_time": "EOG",
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 314,
+            "frame": 5025
+          },
+          "died_time": "EOG"
+        }
+      },
+      {
+        "unit_type": "Probe",
+        "born_time": 327,
+        "died_time": "EOG",
+        "player": 2,
+        "lifetime": {
+          "born_time": {
+            "second": 327,
+            "frame": 5232
+          },
+          "died_time": "EOG"
+        }
+      }
+    ],
+    "unit_counts": []
+  }
+}
