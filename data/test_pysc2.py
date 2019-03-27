@@ -57,13 +57,13 @@ class TestPysc2(unittest.TestCase):
             return e.control_group
         event_list = self.replay.select_from_game_events(selector)
 
-        categories = self.replay.categorize(event_list, category_map=category_map)
+        categories = pysc2.categorize(event_list, category_map=category_map)
 
         self.assertTrue(categories[1] > 800)
 
         def value_map(e):
             return 2
-        categories = self.replay.categorize(event_list, category_map=category_map, value_map=value_map)
+        categories = pysc2.categorize(event_list, category_map=category_map, value_map=value_map)
         self.assertTrue(categories[1] > 1600)
 
     def test_categorize_as_lists(self):
@@ -73,8 +73,8 @@ class TestPysc2(unittest.TestCase):
             return e.control_group
         event_list = self.replay.select_from_game_events(selector)
 
-        category_counts = self.replay.categorize(event_list, category_map)
-        categorized_events = self.replay.categorize_as_lists(event_list, category_map)
+        category_counts = pysc2.categorize(event_list, category_map)
+        categorized_events = pysc2.categorize_as_lists(event_list, category_map)
 
         self.assertTrue(len(categorized_events[2]) == category_counts[2])
 

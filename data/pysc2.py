@@ -65,10 +65,19 @@ def get_event_time(e: sc2reader.events.tracker.Event):
 def prepare_signle_unit_for_visualisation(unit_lifetime_events):
     prepared_datum = {}
     born_time = get_event_time(unit_lifetime_events['born'])
-    prepared_datum['born_time'] = born_time
+    prepared_datum['unit_type'] = unit_lifetime_events['born'].unit.name
+    prepared_datum['born_time'] = born_time['second']
 
-    died_time = get_event_time(unit_lifetime_events['died']) if unit_lifetime_events['died'] else None
+
+    # TODO Change this to get_died_time(unit_lifetime_events) which will look at
+    #  all lifetime events, find the one that is not none, and use that as the
+    #  died time.  Otherwise, the function should return the end-time of the
+    #  game or a special value to indicate that the unit was never killed.
+    died_time = get_event_time(unit_lifetime_events['died']) if unit_lifetime_events['died'] else 'EOG'
     prepared_datum['died_time'] = died_time
+    prepared_datum['player'] = unit_lifetime_events['born'].control_pid
+
+    # Redundant data or other secondary stuff to add for whatever practical purposes
     prepared_datum['lifetime'] = {
         'born_time': born_time,
         'died_time': died_time
@@ -79,10 +88,44 @@ def prepare_signle_unit_for_visualisation(unit_lifetime_events):
 def prepare_data_for_visualisation(unit_lifetime_events):
     first_element = unit_lifetime_events[0]
     assert ('born' in first_element)
-    prepared_data = []
-    for unit in unit_lifetime_events:
-        prepared_data.append(prepare_signle_unit_for_visualisation(unit))
-    return prepared_data
+    prepared_lifetime_events = list(map(prepare_signle_unit_for_visualisation, unit_lifetime_events))
+
+    for le in prepared_lifetime_events:
+        print(le)
+
+    # NOTE: Fun fact about generators, if I don't wrap the map in a list(), then
+    #  p2_unit_lifetime_events will be empty.  Because map returns a generator,
+    #  we use that in calculating the p1_unit_lifetime_events.  But that uses up
+    #  the generator so the second one doesn't work.
+    #  The simpler way would be to iterate using a for loop and putting each element
+    #  in one list or the other as we read it.
+    # I'm being overly cautious about turning everything into lists, but that is
+    # because I like using the map, filter and other features of python, but for
+    # the rest of you who haven't been bitten in the ass by having generators
+    # instead of lists, it's better to hide the generators.
+    p1_unit_lifetime_events = list(filter(lambda ule: ule['player'] == 1, prepared_lifetime_events))
+    p2_unit_lifetime_events = list(filter(lambda ule: ule['player'] == 2, prepared_lifetime_events))
+
+    # TODO Calculate total numbers of live units of each type, for each of the two preceding lists.
+    #   This task involves some problem solving and since it is used to draw
+    #   paths on a line graph, it can wait, I think.
+    #  p1_unit_counts, p2_unit_counts
+    # They should be of the form
+    # p1_unit_counts = {
+    #     "Zealot": [ ... #TODO Refise what should go into that list ],
+    #     "Stalker: [ ... ],
+    #     ...
+    # }
+    return {
+         "p1": {
+             'unit_lifetimes' : list(p1_unit_lifetime_events),
+             'unit_counts': []
+         },
+         "p2": {
+             'unit_lifetimes' : list(p2_unit_lifetime_events),
+             'unit_counts': []
+         }
+    }
 
 def categorize(event_list, category_map, value_map=None):
     values = {}
@@ -132,20 +175,31 @@ class SC2ReplayWrapper:
     def bar_chart(self, selector, ev_list, category_map, value_map=None):
         assert (isinstance(ev_list, list))
         event_list = select_from_list(ev_list, selector)
-        categories = self.categorize(event_list, category_map, value_map)
+        categories = categorize(event_list, category_map, value_map)
         plt.bar(categories.keys(), categories.values())
         plt.show()
 
     def get_unit_lifetime_events(self):
+        # TODO Add all possible unit names to this list.
+        valid_unit_names = [
+            'Zealot',
+            'Probe',
+            'Immortal',
+            'Sentry',
+            'Adept',
+            'Stalker'
+        ]
         def selector(e):
-            # TODO Refine this filtering to exclude everything real units produced by buildings
             return (
-                    (isinstance(e, sc2reader.events.UnitBornEvent)
-                     and (e.control_pid == 1 or e.control_pid == 2)
-                     and not e.unit.name.startswith("Beacon"))
-                    or isinstance(e, sc2reader.events.UnitInitEvent)
-                    or isinstance(e, sc2reader.events.UnitDiedEvent)
-                    or isinstance(e, sc2reader.events.UnitDoneEvent)
+                        (isinstance(e, sc2reader.events.UnitBornEvent)
+                         and (e.control_pid == 1 or e.control_pid == 2)
+                             # TODO Remove the true when we are sure that all the
+                             #  names are good.  Leave it though so that the output
+                             #  can show what the good and bad names are.
+                         and (True or e.unit.name in valid_unit_names))
+                        or isinstance(e, sc2reader.events.UnitInitEvent)
+                        or isinstance(e, sc2reader.events.UnitDiedEvent)
+                        or isinstance(e, sc2reader.events.UnitDoneEvent)
             )
 
         return self.select_from_events(predicate=selector)
