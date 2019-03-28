@@ -90,9 +90,6 @@ def prepare_data_for_visualisation(unit_lifetime_events):
     assert ('born' in first_element)
     prepared_lifetime_events = list(map(prepare_signle_unit_for_visualisation, unit_lifetime_events))
 
-    for le in prepared_lifetime_events:
-        print(le)
-
     # NOTE: Fun fact about generators, if I don't wrap the map in a list(), then
     #  p2_unit_lifetime_events will be empty.  Because map returns a generator,
     #  we use that in calculating the p1_unit_lifetime_events.  But that uses up

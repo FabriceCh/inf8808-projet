@@ -51,12 +51,6 @@ class TestDataGathering(unittest.TestCase):
         post_post_processed = pysc2.prepare_data_for_visualisation(processed_data)
         import json
         json.dumps(post_post_processed)
-        print(post_post_processed)
-        # for unit in post_post_processed['p1']['unit_lifetimes']:
-        #     print(unit)
-        for unit in post_post_processed['p2']['unit_lifetimes']:
-            print(unit)
-        print(len(post_post_processed))
         with open('datafiles/unitcomposition/realdata.json', 'w+') as f:
             f.write(json.dumps(post_post_processed, indent=2))
         pass
