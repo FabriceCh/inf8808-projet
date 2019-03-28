@@ -11,8 +11,8 @@ import sc2reader.events.game
 # SC2 Replay file
 #replay_filename = 'replays/pvpGame1.SC2Replay'
 #replay_filename = 'replays/Harstem-vs-ShoWTimE-time1403.SC2Replay'
-#replay_filename = 'replays/Harstem-vs-ShoWTimE-time1652.SC2Replay'
-replay_filename = 'replays/Neeb-vs-ShoWTimE-time1116.SC2Replay'
+replay_filename = 'replays/Harstem-vs-ShoWTimE-time1652.SC2Replay'
+#replay_filename = 'replays/Neeb-vs-ShoWTimE-time1116.SC2Replay'
 
 class TestDataGathering(unittest.TestCase):
 
