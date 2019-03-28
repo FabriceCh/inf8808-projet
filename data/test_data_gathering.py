@@ -8,12 +8,17 @@ import matplotlib.pyplot as plt
 import sc2reader.events
 import sc2reader.events.game
 
+# SC2 Replay file
+#replay_filename = 'replays/pvpGame1.SC2Replay'
+#replay_filename = 'replays/Harstem-vs-ShoWTimE-time1403.SC2Replay'
+#replay_filename = 'replays/Harstem-vs-ShoWTimE-time1652.SC2Replay'
+replay_filename = 'replays/Neeb-vs-ShoWTimE-time1116.SC2Replay'
 
 class TestDataGathering(unittest.TestCase):
 
     def __init__(self, methodName='runTest'):
         super(TestDataGathering, self).__init__(methodName=methodName)
-        self.replay = pysc2.SC2ReplayWrapper('replays/pvpGame1.SC2Replay')
+        self.replay = pysc2.SC2ReplayWrapper(replay_filename)
 
     def test_process_unit_lifetime_events(self):
         categories = self.replay.categorize_unit_lifetime_events()
