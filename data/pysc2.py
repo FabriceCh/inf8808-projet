@@ -180,14 +180,26 @@ class SC2ReplayWrapper:
         plt.show()
 
     def get_unit_lifetime_events(self):
-        # TODO Add all possible unit names to this list.
         valid_unit_names = [
-            'Zealot',
             'Probe',
-            'Immortal',
+            'Zealot',
             'Sentry',
+            'Stalker',
             'Adept',
-            'Stalker'
+            'HighTemplar',
+            'DarkTemplar',
+            'Archon',
+            'Observer',
+            'WarpPrism',
+            'Immortal',
+            'Colossus',
+            'Disruptor',
+            'Phoenix',
+            'VoidRay',
+            'Oracle',
+            'Tempest',
+            'Carrier',
+            'Mothership'
         ]
         def selector(e):
             return (
@@ -196,7 +208,7 @@ class SC2ReplayWrapper:
                              # TODO Remove the true when we are sure that all the
                              #  names are good.  Leave it though so that the output
                              #  can show what the good and bad names are.
-                         and (True or e.unit.name in valid_unit_names))
+                         and (e.unit.name in valid_unit_names))
                         or isinstance(e, sc2reader.events.UnitInitEvent)
                         or isinstance(e, sc2reader.events.UnitDiedEvent)
                         or isinstance(e, sc2reader.events.UnitDoneEvent)
