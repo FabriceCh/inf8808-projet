@@ -345,6 +345,7 @@
           (stackedChartDataset);
 
       const area = d3.area()
+          .curve(d3.curveCardinal)
           .x( function (d,i) {
             return x(i);
           })
@@ -361,7 +362,6 @@
             .enter()
             .append("path")
             .attr("d", area)
-            .style("stroke", "red")
             .style("fill", (d, i) => color(i));
       /*
       |--------------------------------------------------------------------------
