@@ -309,6 +309,62 @@
 
       /*
       |--------------------------------------------------------------------------
+      | Area Chart for each player
+      |--------------------------------------------------------------------------
+      */
+      let areaChart = player.append("g").attr("class", "area-chart");
+
+      const MAX_UNIT_N = 120;
+      let y = d3
+          .scaleLinear()
+          .range([height, 0])
+          .domain([0, MAX_UNIT_N]);
+
+      // set the ranges
+      x.domain([0, data.players[i].unit_counts.probe.length]);
+
+      // List of groups = header of the csv files
+      const unitsNames     = Object.keys(data.players[i].unit_counts);
+      const unitQuantities = Object.values(data.players[i].unit_counts);
+
+      let stackedChartDataset = [];
+      const maxTimeUnit = d3.max(unitQuantities.map(x => x.length));
+      let timeUnit = 0;
+      while (timeUnit < maxTimeUnit) {
+        stackedChartDataset.push({});
+        timeUnit++;
+      }
+      for (let i in stackedChartDataset) {
+        for (let j in unitQuantities) {
+          stackedChartDataset[i][unitsNames[j]] = unitQuantities[j][i];
+        }
+      }
+
+      const series = d3.stack()
+          .keys(unitsNames)
+          (stackedChartDataset);
+
+      const area = d3.area()
+          .x( function (d,i) {
+            return x(i);
+          })
+          .y0(function(d) {
+            return y(d[0]);
+          })
+          .y1(function(d) {
+            return y(d[1]);
+          });
+
+        areaChart
+            .selectAll("path")
+            .data(series)
+            .enter()
+            .append("path")
+            .attr("d", area)
+            .style("stroke", "red")
+            .style("fill", (d, i) => color(i));
+      /*
+      |--------------------------------------------------------------------------
       | Row : Column : Interaction Vertical Line
       |--------------------------------------------------------------------------
       */
@@ -321,7 +377,6 @@
       .attr("y2", height)
       .attr("stroke", "#000")
       .attr("display", "none")
-
   }
 
 
