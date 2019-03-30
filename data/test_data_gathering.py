@@ -3,6 +3,7 @@ import sc2reader
 import pysc2
 from pprint import pprint
 import matplotlib.pyplot as plt
+import json
 
 # THis helps the IDE
 import sc2reader.events
@@ -54,3 +55,16 @@ class TestDataGathering(unittest.TestCase):
         with open('datafiles/unitcomposition/realdata.json', 'w+') as f:
             f.write(json.dumps(post_post_processed, indent=2))
         pass
+
+    def test_event_to_dict(self):
+        for e in self.replay._replay.events[25:30]:
+            d = pysc2.event_to_dict(e)
+            try:
+                json.dumps(d)
+            except:
+                print("Could not serialize {}".format(d))
+            print(d)
+        return 0
+
+    def test_produce_data_for_apm_viz(self):
+        apm_data = pysc2.produce_data_for_apm_viz()

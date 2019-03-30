@@ -63,6 +63,14 @@ def get_event_time(e: sc2reader.events.tracker.Event):
 
 
 def prepare_signle_unit_for_visualisation(unit_lifetime_events):
+    """ Input: A dict like
+    {
+        born: A UnitBornEvent
+        died: A UnitDiedEvent concerning the same unit
+        init: A UnitDiedEvent concerning the same unit
+        : A UnitDiedEvent concerning the same unit
+
+        """
     prepared_datum = {}
     born_time = get_event_time(unit_lifetime_events['born'])
     prepared_datum['unit_type'] = unit_lifetime_events['born'].unit.name
@@ -147,9 +155,46 @@ def categorize_as_lists(event_list, category_map):
         categories[cat].append(e)
     return categories
 
+def event_to_dict(event):
+    """ Take an event and return a serializble dictionary """
+
+    # TODO Add things here
+    d = {}
+    d['type'] = event.name
+    try:
+        d['location'] = event.location
+    except AttributeError:
+        d['location'] = 'Not Yet Implemented'
+
+    try:
+        d['second'] = event.second
+    except AttributeError:
+        d['second'] = 'Event has no timestamp'
+
+    try:
+        d['unit'] = {
+            'id': event.unit.id,
+            'name': event.unit.name
+        }
+    except AttributeError:
+        pass
+
+    d['player'] = event.control_pid
+    d['unit_id'] = event.unit_id
+
+    return d
+
+
+
 class SC2ReplayWrapper:
     def __init__(self, replay_file):
         self._replay = sc2reader.load_replay(replay_file)
+
+    def produce_data_for_apm_viz(self):
+        # TODO Get event list
+
+        # TODO Map events to json
+        pass
 
     def _select_from_events(self, predicate):
         """ Select from the object's events list"""
