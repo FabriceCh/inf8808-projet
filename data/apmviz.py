@@ -49,7 +49,7 @@ def pre_serialize_event_list(events):
 
 def event_list_to_apms(events):
     """ Function to be used on the list of events of a certain category """
-    
+
     pass
 
 
@@ -80,5 +80,8 @@ def assemble_apmviz_data(replay_wrapper):
 if __name__ == '__main__':
     from pprint import pprint
     replay_wrapper = pysc2.SC2ReplayWrapper('replays/Neeb-vs-ShoWTimE-time1116.SC2Replay')
-    pre_serialized_data = assemble_apmviz_data(replay_wrapper)
-    pprint(pre_serialized_data)
+    apm_viz_data = assemble_apmviz_data(replay_wrapper)
+    import json
+    json.dumps(apm_viz_data)
+    with open('datafiles/actionstats/realdata.json', 'w+') as f:
+        f.write(json.dumps(apm_viz_data, indent=2))
