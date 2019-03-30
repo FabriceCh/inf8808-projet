@@ -1,0 +1,2938 @@
+{
+  "p1": {
+    "events": [
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          37,
+          139
+        ],
+        "second": 0,
+        "unit": {
+          "id": 38797313,
+          "name": "BeaconArmy"
+        },
+        "player": 1,
+        "unit_id": 38797313
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          37,
+          139
+        ],
+        "second": 0,
+        "unit": {
+          "id": 39059457,
+          "name": "BeaconDefend"
+        },
+        "player": 1,
+        "unit_id": 39059457
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          37,
+          139
+        ],
+        "second": 0,
+        "unit": {
+          "id": 39321601,
+          "name": "BeaconAttack"
+        },
+        "player": 1,
+        "unit_id": 39321601
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          37,
+          139
+        ],
+        "second": 0,
+        "unit": {
+          "id": 39583745,
+          "name": "BeaconHarass"
+        },
+        "player": 1,
+        "unit_id": 39583745
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          37,
+          139
+        ],
+        "second": 0,
+        "unit": {
+          "id": 39845889,
+          "name": "BeaconIdle"
+        },
+        "player": 1,
+        "unit_id": 39845889
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          37,
+          139
+        ],
+        "second": 0,
+        "unit": {
+          "id": 40108033,
+          "name": "BeaconAuto"
+        },
+        "player": 1,
+        "unit_id": 40108033
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          37,
+          139
+        ],
+        "second": 0,
+        "unit": {
+          "id": 40370177,
+          "name": "BeaconDetect"
+        },
+        "player": 1,
+        "unit_id": 40370177
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          37,
+          139
+        ],
+        "second": 0,
+        "unit": {
+          "id": 40632321,
+          "name": "BeaconScout"
+        },
+        "player": 1,
+        "unit_id": 40632321
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          37,
+          139
+        ],
+        "second": 0,
+        "unit": {
+          "id": 40894465,
+          "name": "BeaconClaim"
+        },
+        "player": 1,
+        "unit_id": 40894465
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          37,
+          139
+        ],
+        "second": 0,
+        "unit": {
+          "id": 41156609,
+          "name": "BeaconExpand"
+        },
+        "player": 1,
+        "unit_id": 41156609
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          37,
+          139
+        ],
+        "second": 0,
+        "unit": {
+          "id": 41418753,
+          "name": "BeaconRally"
+        },
+        "player": 1,
+        "unit_id": 41418753
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          37,
+          139
+        ],
+        "second": 0,
+        "unit": {
+          "id": 41680897,
+          "name": "BeaconCustom1"
+        },
+        "player": 1,
+        "unit_id": 41680897
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          37,
+          139
+        ],
+        "second": 0,
+        "unit": {
+          "id": 41943041,
+          "name": "BeaconCustom2"
+        },
+        "player": 1,
+        "unit_id": 41943041
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          37,
+          139
+        ],
+        "second": 0,
+        "unit": {
+          "id": 42205185,
+          "name": "BeaconCustom3"
+        },
+        "player": 1,
+        "unit_id": 42205185
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          37,
+          139
+        ],
+        "second": 0,
+        "unit": {
+          "id": 42467329,
+          "name": "BeaconCustom4"
+        },
+        "player": 1,
+        "unit_id": 42467329
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          37,
+          139
+        ],
+        "second": 0,
+        "unit": {
+          "id": 46661633,
+          "name": "Nexus"
+        },
+        "player": 1,
+        "unit_id": 46661633
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          34,
+          142
+        ],
+        "second": 0,
+        "unit": {
+          "id": 46923777,
+          "name": "Probe"
+        },
+        "player": 1,
+        "unit_id": 46923777
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          34,
+          141
+        ],
+        "second": 0,
+        "unit": {
+          "id": 47185921,
+          "name": "Probe"
+        },
+        "player": 1,
+        "unit_id": 47185921
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          35,
+          142
+        ],
+        "second": 0,
+        "unit": {
+          "id": 47448065,
+          "name": "Probe"
+        },
+        "player": 1,
+        "unit_id": 47448065
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          34,
+          140
+        ],
+        "second": 0,
+        "unit": {
+          "id": 47710209,
+          "name": "Probe"
+        },
+        "player": 1,
+        "unit_id": 47710209
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          36,
+          142
+        ],
+        "second": 0,
+        "unit": {
+          "id": 47972353,
+          "name": "Probe"
+        },
+        "player": 1,
+        "unit_id": 47972353
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          34,
+          139
+        ],
+        "second": 0,
+        "unit": {
+          "id": 48234497,
+          "name": "Probe"
+        },
+        "player": 1,
+        "unit_id": 48234497
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          37,
+          142
+        ],
+        "second": 0,
+        "unit": {
+          "id": 48496641,
+          "name": "Probe"
+        },
+        "player": 1,
+        "unit_id": 48496641
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          34,
+          138
+        ],
+        "second": 0,
+        "unit": {
+          "id": 48758785,
+          "name": "Probe"
+        },
+        "player": 1,
+        "unit_id": 48758785
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          38,
+          142
+        ],
+        "second": 0,
+        "unit": {
+          "id": 49020929,
+          "name": "Probe"
+        },
+        "player": 1,
+        "unit_id": 49020929
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          34,
+          137
+        ],
+        "second": 0,
+        "unit": {
+          "id": 49283073,
+          "name": "Probe"
+        },
+        "player": 1,
+        "unit_id": 49283073
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          39,
+          142
+        ],
+        "second": 0,
+        "unit": {
+          "id": 49545217,
+          "name": "Probe"
+        },
+        "player": 1,
+        "unit_id": 49545217
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          34,
+          136
+        ],
+        "second": 0,
+        "unit": {
+          "id": 49807361,
+          "name": "Probe"
+        },
+        "player": 1,
+        "unit_id": 49807361
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          34,
+          140
+        ],
+        "second": 17,
+        "unit": {
+          "id": 53477377,
+          "name": "Probe"
+        },
+        "player": 1,
+        "unit_id": 53477377
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          35,
+          135
+        ],
+        "second": 24,
+        "unit": {
+          "id": 54001665,
+          "name": "Pylon"
+        },
+        "player": 1,
+        "unit_id": 54001665
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          36,
+          142
+        ],
+        "second": 34,
+        "unit": {
+          "id": 54525953,
+          "name": "Probe"
+        },
+        "player": 1,
+        "unit_id": 54525953
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          37,
+          136
+        ],
+        "second": 50,
+        "unit": {
+          "id": 55050241,
+          "name": "Probe"
+        },
+        "player": 1,
+        "unit_id": 55050241
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          37,
+          131
+        ],
+        "second": 52,
+        "unit": {
+          "id": 55574529,
+          "name": "Gateway"
+        },
+        "player": 1,
+        "unit_id": 55574529
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          34,
+          140
+        ],
+        "second": 61,
+        "unit": {
+          "id": 56098817,
+          "name": "Probe"
+        },
+        "player": 1,
+        "unit_id": 56098817
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          30,
+          136
+        ],
+        "second": 64,
+        "unit": {
+          "id": 56360961,
+          "name": "Assimilator"
+        },
+        "player": 1,
+        "unit_id": 56360961
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          36,
+          142
+        ],
+        "second": 73,
+        "unit": {
+          "id": 56885249,
+          "name": "Probe"
+        },
+        "player": 1,
+        "unit_id": 56885249
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          34,
+          138
+        ],
+        "second": 88,
+        "unit": {
+          "id": 57933825,
+          "name": "Probe"
+        },
+        "player": 1,
+        "unit_id": 57933825
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          36,
+          136
+        ],
+        "second": 105,
+        "unit": {
+          "id": 58458113,
+          "name": "Probe"
+        },
+        "player": 1,
+        "unit_id": 58458113
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          34,
+          129
+        ],
+        "second": 114,
+        "unit": {
+          "id": 58720257,
+          "name": "Gateway"
+        },
+        "player": 1,
+        "unit_id": 58720257
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          34,
+          132
+        ],
+        "second": 118,
+        "unit": {
+          "id": 58982401,
+          "name": "CyberneticsCore"
+        },
+        "player": 1,
+        "unit_id": 58982401
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          34,
+          127
+        ],
+        "second": 122,
+        "unit": {
+          "id": 59506689,
+          "name": "Pylon"
+        },
+        "player": 1,
+        "unit_id": 59506689
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          38,
+          136
+        ],
+        "second": 122,
+        "unit": {
+          "id": 59768833,
+          "name": "Probe"
+        },
+        "player": 1,
+        "unit_id": 59768833
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          40,
+          143
+        ],
+        "second": 137,
+        "unit": {
+          "id": 60030977,
+          "name": "Pylon"
+        },
+        "player": 1,
+        "unit_id": 60030977
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          36,
+          133
+        ],
+        "second": 151,
+        "unit": {
+          "id": 60555265,
+          "name": "Zealot"
+        },
+        "player": 1,
+        "unit_id": 60555265
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          127,
+          17
+        ],
+        "second": 178,
+        "unit": {
+          "id": 61079553,
+          "name": "Assimilator"
+        },
+        "player": 1,
+        "unit_id": 61079553
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          40,
+          146
+        ],
+        "second": 184,
+        "unit": {
+          "id": 61341697,
+          "name": "Assimilator"
+        },
+        "player": 1,
+        "unit_id": 61341697
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          137,
+          27
+        ],
+        "second": 189,
+        "unit": {
+          "id": 61603841,
+          "name": "Assimilator"
+        },
+        "player": 1,
+        "unit_id": 61603841
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          36,
+          133
+        ],
+        "second": 202,
+        "unit": {
+          "id": 59244547,
+          "name": "Stalker"
+        },
+        "player": 1,
+        "unit_id": 59244547
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          38,
+          136
+        ],
+        "second": 216,
+        "unit": {
+          "id": 63176707,
+          "name": "ShieldBattery"
+        },
+        "player": 1,
+        "unit_id": 63176707
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          43,
+          142
+        ],
+        "second": 231,
+        "unit": {
+          "id": 63438857,
+          "name": "WarpGate"
+        },
+        "player": 1,
+        "unit_id": 63438857
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          37,
+          133
+        ],
+        "second": 243,
+        "unit": {
+          "id": 63701000,
+          "name": "Adept"
+        },
+        "player": 1,
+        "unit_id": 63701000
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          30,
+          134
+        ],
+        "second": 251,
+        "unit": {
+          "id": 62390277,
+          "name": "ShieldBattery"
+        },
+        "player": 1,
+        "unit_id": 62390277
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          42,
+          139
+        ],
+        "second": 276,
+        "unit": {
+          "id": 53215251,
+          "name": "RoboticsFacility"
+        },
+        "player": 1,
+        "unit_id": 53215251
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          34,
+          139
+        ],
+        "second": 289,
+        "unit": {
+          "id": 64225286,
+          "name": "Probe"
+        },
+        "player": 1,
+        "unit_id": 64225286
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          43,
+          146
+        ],
+        "second": 302,
+        "unit": {
+          "id": 64487433,
+          "name": "CyberneticsCore"
+        },
+        "player": 1,
+        "unit_id": 64487433
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          34,
+          139
+        ],
+        "second": 305,
+        "unit": {
+          "id": 65011715,
+          "name": "Probe"
+        },
+        "player": 1,
+        "unit_id": 65011715
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          41,
+          141
+        ],
+        "second": 327,
+        "unit": {
+          "id": 63176709,
+          "name": "Stalker"
+        },
+        "player": 1,
+        "unit_id": 63176709
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          30,
+          145
+        ],
+        "second": 338,
+        "unit": {
+          "id": 55050254,
+          "name": "Pylon"
+        },
+        "player": 1,
+        "unit_id": 55050254
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          32,
+          148
+        ],
+        "second": 338,
+        "unit": {
+          "id": 60293128,
+          "name": "Pylon"
+        },
+        "player": 1,
+        "unit_id": 60293128
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          35,
+          149
+        ],
+        "second": 339,
+        "unit": {
+          "id": 54001667,
+          "name": "Pylon"
+        },
+        "player": 1,
+        "unit_id": 54001667
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          46,
+          143
+        ],
+        "second": 391,
+        "unit": {
+          "id": 58458132,
+          "name": "Pylon"
+        },
+        "player": 1,
+        "unit_id": 58458132
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          40,
+          140
+        ],
+        "second": 409,
+        "unit": {
+          "id": 47972365,
+          "name": "Immortal"
+        },
+        "player": 1,
+        "unit_id": 47972365
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          42,
+          144
+        ],
+        "second": 436,
+        "unit": {
+          "id": 63963163,
+          "name": "Stalker"
+        },
+        "player": 1,
+        "unit_id": 63963163
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          38,
+          148
+        ],
+        "second": 466,
+        "unit": {
+          "id": 60555280,
+          "name": "ShieldBattery"
+        },
+        "player": 1,
+        "unit_id": 60555280
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          29,
+          143
+        ],
+        "second": 478,
+        "unit": {
+          "id": 62390301,
+          "name": "ShieldBattery"
+        },
+        "player": 1,
+        "unit_id": 62390301
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          28,
+          141
+        ],
+        "second": 487,
+        "unit": {
+          "id": 55574608,
+          "name": "ShieldBattery"
+        },
+        "player": 1,
+        "unit_id": 55574608
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          40,
+          139
+        ],
+        "second": 491,
+        "unit": {
+          "id": 65536002,
+          "name": "Probe"
+        },
+        "player": 1,
+        "unit_id": 65536002
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          42,
+          137
+        ],
+        "second": 494,
+        "unit": {
+          "id": 62652467,
+          "name": "Immortal"
+        },
+        "player": 1,
+        "unit_id": 62652467
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          37,
+          139
+        ],
+        "second": 523,
+        "unit": {
+          "id": 48234565,
+          "name": "Nexus"
+        },
+        "player": 1,
+        "unit_id": 48234565
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          35,
+          141
+        ],
+        "second": 684,
+        "unit": {
+          "id": 47972372,
+          "name": "Probe"
+        },
+        "player": 1,
+        "unit_id": 47972372
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          40,
+          141
+        ],
+        "second": 694,
+        "unit": {
+          "id": 58982496,
+          "name": "Immortal"
+        },
+        "player": 1,
+        "unit_id": 58982496
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          35,
+          141
+        ],
+        "second": 701,
+        "unit": {
+          "id": 56360979,
+          "name": "Probe"
+        },
+        "player": 1,
+        "unit_id": 56360979
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          35,
+          141
+        ],
+        "second": 749,
+        "unit": {
+          "id": 2097154,
+          "name": "Probe"
+        },
+        "player": 1,
+        "unit_id": 2097154
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          41,
+          143
+        ],
+        "second": 751,
+        "unit": {
+          "id": 20709380,
+          "name": "Stalker"
+        },
+        "player": 1,
+        "unit_id": 20709380
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          48,
+          144
+        ],
+        "second": 764,
+        "unit": {
+          "id": 54525960,
+          "name": "WarpGate"
+        },
+        "player": 1,
+        "unit_id": 54525960
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          35,
+          141
+        ],
+        "second": 766,
+        "unit": {
+          "id": 63176723,
+          "name": "Probe"
+        },
+        "player": 1,
+        "unit_id": 63176723
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          40,
+          138
+        ],
+        "second": 775,
+        "unit": {
+          "id": 66846724,
+          "name": "WarpPrism"
+        },
+        "player": 1,
+        "unit_id": 66846724
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          30,
+          136
+        ],
+        "second": 810,
+        "unit": {
+          "id": 58720266,
+          "name": "Assimilator"
+        },
+        "player": 1,
+        "unit_id": 58720266
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          41,
+          141
+        ],
+        "second": 814,
+        "unit": {
+          "id": 52428819,
+          "name": "Stalker"
+        },
+        "player": 1,
+        "unit_id": 52428819
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          35,
+          141
+        ],
+        "second": 825,
+        "unit": {
+          "id": 67108879,
+          "name": "Probe"
+        },
+        "player": 1,
+        "unit_id": 67108879
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          42,
+          137
+        ],
+        "second": 839,
+        "unit": {
+          "id": 61079557,
+          "name": "Immortal"
+        },
+        "player": 1,
+        "unit_id": 61079557
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          35,
+          141
+        ],
+        "second": 842,
+        "unit": {
+          "id": 67371023,
+          "name": "Probe"
+        },
+        "player": 1,
+        "unit_id": 67371023
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          41,
+          141
+        ],
+        "second": 843,
+        "unit": {
+          "id": 61865988,
+          "name": "Sentry"
+        },
+        "player": 1,
+        "unit_id": 61865988
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          35,
+          141
+        ],
+        "second": 859,
+        "unit": {
+          "id": 62914567,
+          "name": "Probe"
+        },
+        "player": 1,
+        "unit_id": 62914567
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          27,
+          142
+        ],
+        "second": 870,
+        "unit": {
+          "id": 65273873,
+          "name": "WarpGate"
+        },
+        "player": 1,
+        "unit_id": 65273873
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          35,
+          141
+        ],
+        "second": 876,
+        "unit": {
+          "id": 66584598,
+          "name": "Probe"
+        },
+        "player": 1,
+        "unit_id": 66584598
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          36,
+          113
+        ],
+        "second": 883,
+        "unit": {
+          "id": 62652493,
+          "name": "Nexus"
+        },
+        "player": 1,
+        "unit_id": 62652493
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          35,
+          144
+        ],
+        "second": 920,
+        "unit": {
+          "id": 51642371,
+          "name": "Stalker"
+        },
+        "player": 1,
+        "unit_id": 51642371
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          41,
+          137
+        ],
+        "second": 945,
+        "unit": {
+          "id": 53739527,
+          "name": "Immortal"
+        },
+        "player": 1,
+        "unit_id": 53739527
+      }
+    ],
+    "apms": null
+  },
+  "p2": {
+    "events": [
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          130,
+          24
+        ],
+        "second": 0,
+        "unit": {
+          "id": 42729473,
+          "name": "BeaconArmy"
+        },
+        "player": 2,
+        "unit_id": 42729473
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          130,
+          24
+        ],
+        "second": 0,
+        "unit": {
+          "id": 42991617,
+          "name": "BeaconDefend"
+        },
+        "player": 2,
+        "unit_id": 42991617
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          130,
+          24
+        ],
+        "second": 0,
+        "unit": {
+          "id": 43253761,
+          "name": "BeaconAttack"
+        },
+        "player": 2,
+        "unit_id": 43253761
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          130,
+          24
+        ],
+        "second": 0,
+        "unit": {
+          "id": 43515905,
+          "name": "BeaconHarass"
+        },
+        "player": 2,
+        "unit_id": 43515905
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          130,
+          24
+        ],
+        "second": 0,
+        "unit": {
+          "id": 43778049,
+          "name": "BeaconIdle"
+        },
+        "player": 2,
+        "unit_id": 43778049
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          130,
+          24
+        ],
+        "second": 0,
+        "unit": {
+          "id": 44040193,
+          "name": "BeaconAuto"
+        },
+        "player": 2,
+        "unit_id": 44040193
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          130,
+          24
+        ],
+        "second": 0,
+        "unit": {
+          "id": 44302337,
+          "name": "BeaconDetect"
+        },
+        "player": 2,
+        "unit_id": 44302337
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          130,
+          24
+        ],
+        "second": 0,
+        "unit": {
+          "id": 44564481,
+          "name": "BeaconScout"
+        },
+        "player": 2,
+        "unit_id": 44564481
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          130,
+          24
+        ],
+        "second": 0,
+        "unit": {
+          "id": 44826625,
+          "name": "BeaconClaim"
+        },
+        "player": 2,
+        "unit_id": 44826625
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          130,
+          24
+        ],
+        "second": 0,
+        "unit": {
+          "id": 45088769,
+          "name": "BeaconExpand"
+        },
+        "player": 2,
+        "unit_id": 45088769
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          130,
+          24
+        ],
+        "second": 0,
+        "unit": {
+          "id": 45350913,
+          "name": "BeaconRally"
+        },
+        "player": 2,
+        "unit_id": 45350913
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          130,
+          24
+        ],
+        "second": 0,
+        "unit": {
+          "id": 45613057,
+          "name": "BeaconCustom1"
+        },
+        "player": 2,
+        "unit_id": 45613057
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          130,
+          24
+        ],
+        "second": 0,
+        "unit": {
+          "id": 45875201,
+          "name": "BeaconCustom2"
+        },
+        "player": 2,
+        "unit_id": 45875201
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          130,
+          24
+        ],
+        "second": 0,
+        "unit": {
+          "id": 46137345,
+          "name": "BeaconCustom3"
+        },
+        "player": 2,
+        "unit_id": 46137345
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          130,
+          24
+        ],
+        "second": 0,
+        "unit": {
+          "id": 46399489,
+          "name": "BeaconCustom4"
+        },
+        "player": 2,
+        "unit_id": 46399489
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          130,
+          24
+        ],
+        "second": 0,
+        "unit": {
+          "id": 50069505,
+          "name": "Nexus"
+        },
+        "player": 2,
+        "unit_id": 50069505
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          133,
+          21
+        ],
+        "second": 0,
+        "unit": {
+          "id": 50331649,
+          "name": "Probe"
+        },
+        "player": 2,
+        "unit_id": 50331649
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          133,
+          22
+        ],
+        "second": 0,
+        "unit": {
+          "id": 50593793,
+          "name": "Probe"
+        },
+        "player": 2,
+        "unit_id": 50593793
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          132,
+          21
+        ],
+        "second": 0,
+        "unit": {
+          "id": 50855937,
+          "name": "Probe"
+        },
+        "player": 2,
+        "unit_id": 50855937
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          133,
+          23
+        ],
+        "second": 0,
+        "unit": {
+          "id": 51118081,
+          "name": "Probe"
+        },
+        "player": 2,
+        "unit_id": 51118081
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          131,
+          21
+        ],
+        "second": 0,
+        "unit": {
+          "id": 51380225,
+          "name": "Probe"
+        },
+        "player": 2,
+        "unit_id": 51380225
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          133,
+          24
+        ],
+        "second": 0,
+        "unit": {
+          "id": 51642369,
+          "name": "Probe"
+        },
+        "player": 2,
+        "unit_id": 51642369
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          130,
+          21
+        ],
+        "second": 0,
+        "unit": {
+          "id": 51904513,
+          "name": "Probe"
+        },
+        "player": 2,
+        "unit_id": 51904513
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          133,
+          25
+        ],
+        "second": 0,
+        "unit": {
+          "id": 52166657,
+          "name": "Probe"
+        },
+        "player": 2,
+        "unit_id": 52166657
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          129,
+          21
+        ],
+        "second": 0,
+        "unit": {
+          "id": 52428801,
+          "name": "Probe"
+        },
+        "player": 2,
+        "unit_id": 52428801
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          133,
+          26
+        ],
+        "second": 0,
+        "unit": {
+          "id": 52690945,
+          "name": "Probe"
+        },
+        "player": 2,
+        "unit_id": 52690945
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          128,
+          21
+        ],
+        "second": 0,
+        "unit": {
+          "id": 52953089,
+          "name": "Probe"
+        },
+        "player": 2,
+        "unit_id": 52953089
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          133,
+          27
+        ],
+        "second": 0,
+        "unit": {
+          "id": 53215233,
+          "name": "Probe"
+        },
+        "player": 2,
+        "unit_id": 53215233
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          130,
+          21
+        ],
+        "second": 18,
+        "unit": {
+          "id": 53739521,
+          "name": "Probe"
+        },
+        "player": 2,
+        "unit_id": 53739521
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          135,
+          28
+        ],
+        "second": 26,
+        "unit": {
+          "id": 54263809,
+          "name": "Pylon"
+        },
+        "player": 2,
+        "unit_id": 54263809
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          133,
+          24
+        ],
+        "second": 35,
+        "unit": {
+          "id": 54788097,
+          "name": "Probe"
+        },
+        "player": 2,
+        "unit_id": 54788097
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          133,
+          23
+        ],
+        "second": 52,
+        "unit": {
+          "id": 55312385,
+          "name": "Probe"
+        },
+        "player": 2,
+        "unit_id": 55312385
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          28,
+          111
+        ],
+        "second": 52,
+        "unit": {
+          "id": 55836673,
+          "name": "Pylon"
+        },
+        "player": 2,
+        "unit_id": 55836673
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          131,
+          21
+        ],
+        "second": 69,
+        "unit": {
+          "id": 56623105,
+          "name": "Probe"
+        },
+        "player": 2,
+        "unit_id": 56623105
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          26,
+          113
+        ],
+        "second": 78,
+        "unit": {
+          "id": 57147393,
+          "name": "Gateway"
+        },
+        "player": 2,
+        "unit_id": 57147393
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          26,
+          116
+        ],
+        "second": 85,
+        "unit": {
+          "id": 57409537,
+          "name": "Gateway"
+        },
+        "player": 2,
+        "unit_id": 57409537
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          133,
+          23
+        ],
+        "second": 86,
+        "unit": {
+          "id": 57671681,
+          "name": "Probe"
+        },
+        "player": 2,
+        "unit_id": 57671681
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          140,
+          28
+        ],
+        "second": 103,
+        "unit": {
+          "id": 58195969,
+          "name": "Forge"
+        },
+        "player": 2,
+        "unit_id": 58195969
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          31,
+          126
+        ],
+        "second": 119,
+        "unit": {
+          "id": 59244545,
+          "name": "Pylon"
+        },
+        "player": 2,
+        "unit_id": 59244545
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          40,
+          132
+        ],
+        "second": 146,
+        "unit": {
+          "id": 60293121,
+          "name": "Pylon"
+        },
+        "player": 2,
+        "unit_id": 60293121
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          32,
+          127
+        ],
+        "second": 159,
+        "unit": {
+          "id": 59244546,
+          "name": "Pylon"
+        },
+        "player": 2,
+        "unit_id": 59244546
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          28,
+          113
+        ],
+        "second": 169,
+        "unit": {
+          "id": 60293122,
+          "name": "Zealot"
+        },
+        "player": 2,
+        "unit_id": 60293122
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          28,
+          117
+        ],
+        "second": 176,
+        "unit": {
+          "id": 53215234,
+          "name": "Zealot"
+        },
+        "player": 2,
+        "unit_id": 53215234
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          133,
+          23
+        ],
+        "second": 177,
+        "unit": {
+          "id": 60817409,
+          "name": "Probe"
+        },
+        "player": 2,
+        "unit_id": 60817409
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          36,
+          124
+        ],
+        "second": 193,
+        "unit": {
+          "id": 61865985,
+          "name": "PhotonCannon"
+        },
+        "player": 2,
+        "unit_id": 61865985
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          34,
+          123
+        ],
+        "second": 195,
+        "unit": {
+          "id": 62128129,
+          "name": "PhotonCannon"
+        },
+        "player": 2,
+        "unit_id": 62128129
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          28,
+          117
+        ],
+        "second": 202,
+        "unit": {
+          "id": 62390273,
+          "name": "Zealot"
+        },
+        "player": 2,
+        "unit_id": 62390273
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          38,
+          123
+        ],
+        "second": 203,
+        "unit": {
+          "id": 62914561,
+          "name": "Pylon"
+        },
+        "player": 2,
+        "unit_id": 62914561
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          28,
+          113
+        ],
+        "second": 212,
+        "unit": {
+          "id": 62652421,
+          "name": "Zealot"
+        },
+        "player": 2,
+        "unit_id": 62652421
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          32,
+          127
+        ],
+        "second": 242,
+        "unit": {
+          "id": 58720260,
+          "name": "Pylon"
+        },
+        "player": 2,
+        "unit_id": 58720260
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          28,
+          113
+        ],
+        "second": 250,
+        "unit": {
+          "id": 55050251,
+          "name": "Zealot"
+        },
+        "player": 2,
+        "unit_id": 55050251
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          28,
+          117
+        ],
+        "second": 263,
+        "unit": {
+          "id": 63963143,
+          "name": "Zealot"
+        },
+        "player": 2,
+        "unit_id": 63963143
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          33,
+          129
+        ],
+        "second": 278,
+        "unit": {
+          "id": 49545239,
+          "name": "PhotonCannon"
+        },
+        "player": 2,
+        "unit_id": 49545239
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          31,
+          130
+        ],
+        "second": 285,
+        "unit": {
+          "id": 63701004,
+          "name": "PhotonCannon"
+        },
+        "player": 2,
+        "unit_id": 63701004
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          28,
+          113
+        ],
+        "second": 288,
+        "unit": {
+          "id": 59506727,
+          "name": "Zealot"
+        },
+        "player": 2,
+        "unit_id": 59506727
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          28,
+          117
+        ],
+        "second": 301,
+        "unit": {
+          "id": 55574550,
+          "name": "Zealot"
+        },
+        "player": 2,
+        "unit_id": 55574550
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          35,
+          130
+        ],
+        "second": 303,
+        "unit": {
+          "id": 60555276,
+          "name": "PhotonCannon"
+        },
+        "player": 2,
+        "unit_id": 60555276
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          35,
+          132
+        ],
+        "second": 317,
+        "unit": {
+          "id": 64749580,
+          "name": "Pylon"
+        },
+        "player": 2,
+        "unit_id": 64749580
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          28,
+          113
+        ],
+        "second": 344,
+        "unit": {
+          "id": 63963154,
+          "name": "Zealot"
+        },
+        "player": 2,
+        "unit_id": 63963154
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          39,
+          135
+        ],
+        "second": 348,
+        "unit": {
+          "id": 55574553,
+          "name": "PhotonCannon"
+        },
+        "player": 2,
+        "unit_id": 55574553
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          37,
+          135
+        ],
+        "second": 350,
+        "unit": {
+          "id": 62652443,
+          "name": "PhotonCannon"
+        },
+        "player": 2,
+        "unit_id": 62652443
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          39,
+          134
+        ],
+        "second": 353,
+        "unit": {
+          "id": 55574555,
+          "name": "PhotonCannon"
+        },
+        "player": 2,
+        "unit_id": 55574555
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          40,
+          132
+        ],
+        "second": 362,
+        "unit": {
+          "id": 62390293,
+          "name": "PhotonCannon"
+        },
+        "player": 2,
+        "unit_id": 62390293
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          33,
+          136
+        ],
+        "second": 377,
+        "unit": {
+          "id": 62652453,
+          "name": "PhotonCannon"
+        },
+        "player": 2,
+        "unit_id": 62652453
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          35,
+          136
+        ],
+        "second": 388,
+        "unit": {
+          "id": 48234531,
+          "name": "PhotonCannon"
+        },
+        "player": 2,
+        "unit_id": 48234531
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          33,
+          133
+        ],
+        "second": 400,
+        "unit": {
+          "id": 59506738,
+          "name": "PhotonCannon"
+        },
+        "player": 2,
+        "unit_id": 59506738
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          33,
+          135
+        ],
+        "second": 410,
+        "unit": {
+          "id": 48234532,
+          "name": "PhotonCannon"
+        },
+        "player": 2,
+        "unit_id": 48234532
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          28,
+          113
+        ],
+        "second": 416,
+        "unit": {
+          "id": 62652461,
+          "name": "Zealot"
+        },
+        "player": 2,
+        "unit_id": 62652461
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          37,
+          132
+        ],
+        "second": 438,
+        "unit": {
+          "id": 65273862,
+          "name": "Pylon"
+        },
+        "player": 2,
+        "unit_id": 65273862
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          133,
+          23
+        ],
+        "second": 449,
+        "unit": {
+          "id": 64749583,
+          "name": "Probe"
+        },
+        "player": 2,
+        "unit_id": 64749583
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          28,
+          113
+        ],
+        "second": 450,
+        "unit": {
+          "id": 48234552,
+          "name": "Zealot"
+        },
+        "player": 2,
+        "unit_id": 48234552
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          30,
+          132
+        ],
+        "second": 457,
+        "unit": {
+          "id": 59506763,
+          "name": "PhotonCannon"
+        },
+        "player": 2,
+        "unit_id": 59506763
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          28,
+          117
+        ],
+        "second": 463,
+        "unit": {
+          "id": 58982469,
+          "name": "Zealot"
+        },
+        "player": 2,
+        "unit_id": 58982469
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          32,
+          133
+        ],
+        "second": 472,
+        "unit": {
+          "id": 63176714,
+          "name": "PhotonCannon"
+        },
+        "player": 2,
+        "unit_id": 63176714
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          28,
+          113
+        ],
+        "second": 478,
+        "unit": {
+          "id": 56360968,
+          "name": "Zealot"
+        },
+        "player": 2,
+        "unit_id": 56360968
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          35,
+          131
+        ],
+        "second": 483,
+        "unit": {
+          "id": 63176715,
+          "name": "PhotonCannon"
+        },
+        "player": 2,
+        "unit_id": 63176715
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          33,
+          133
+        ],
+        "second": 496,
+        "unit": {
+          "id": 47972369,
+          "name": "PhotonCannon"
+        },
+        "player": 2,
+        "unit_id": 47972369
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          28,
+          117
+        ],
+        "second": 512,
+        "unit": {
+          "id": 47972370,
+          "name": "Zealot"
+        },
+        "player": 2,
+        "unit_id": 47972370
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          29,
+          130
+        ],
+        "second": 532,
+        "unit": {
+          "id": 65273865,
+          "name": "PhotonCannon"
+        },
+        "player": 2,
+        "unit_id": 65273865
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          133,
+          23
+        ],
+        "second": 534,
+        "unit": {
+          "id": 59506764,
+          "name": "Probe"
+        },
+        "player": 2,
+        "unit_id": 59506764
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          28,
+          113
+        ],
+        "second": 541,
+        "unit": {
+          "id": 65273867,
+          "name": "Zealot"
+        },
+        "player": 2,
+        "unit_id": 65273867
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          30,
+          128
+        ],
+        "second": 548,
+        "unit": {
+          "id": 62390311,
+          "name": "PhotonCannon"
+        },
+        "player": 2,
+        "unit_id": 62390311
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          28,
+          117
+        ],
+        "second": 550,
+        "unit": {
+          "id": 63176720,
+          "name": "Zealot"
+        },
+        "player": 2,
+        "unit_id": 63176720
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          28,
+          113
+        ],
+        "second": 573,
+        "unit": {
+          "id": 55574620,
+          "name": "Zealot"
+        },
+        "player": 2,
+        "unit_id": 55574620
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          31,
+          130
+        ],
+        "second": 590,
+        "unit": {
+          "id": 63701007,
+          "name": "PhotonCannon"
+        },
+        "player": 2,
+        "unit_id": 63701007
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          28,
+          117
+        ],
+        "second": 595,
+        "unit": {
+          "id": 56360978,
+          "name": "Zealot"
+        },
+        "player": 2,
+        "unit_id": 56360978
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          133,
+          23
+        ],
+        "second": 596,
+        "unit": {
+          "id": 65011716,
+          "name": "Probe"
+        },
+        "player": 2,
+        "unit_id": 65011716
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          28,
+          113
+        ],
+        "second": 603,
+        "unit": {
+          "id": 58982484,
+          "name": "Zealot"
+        },
+        "player": 2,
+        "unit_id": 58982484
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          132,
+          29
+        ],
+        "second": 615,
+        "unit": {
+          "id": 63701009,
+          "name": "CyberneticsCore"
+        },
+        "player": 2,
+        "unit_id": 63701009
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          137,
+          27
+        ],
+        "second": 625,
+        "unit": {
+          "id": 61603842,
+          "name": "Assimilator"
+        },
+        "player": 2,
+        "unit_id": 61603842
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          133,
+          23
+        ],
+        "second": 626,
+        "unit": {
+          "id": 46661638,
+          "name": "Probe"
+        },
+        "player": 2,
+        "unit_id": 46661638
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          28,
+          113
+        ],
+        "second": 641,
+        "unit": {
+          "id": 65798147,
+          "name": "Zealot"
+        },
+        "player": 2,
+        "unit_id": 65798147
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          28,
+          116
+        ],
+        "second": 645,
+        "unit": {
+          "id": 66060290,
+          "name": "Zealot"
+        },
+        "player": 2,
+        "unit_id": 66060290
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          130,
+          21
+        ],
+        "second": 648,
+        "unit": {
+          "id": 66322433,
+          "name": "Probe"
+        },
+        "player": 2,
+        "unit_id": 66322433
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          28,
+          131
+        ],
+        "second": 649,
+        "unit": {
+          "id": 66846721,
+          "name": "PhotonCannon"
+        },
+        "player": 2,
+        "unit_id": 66846721
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          130,
+          21
+        ],
+        "second": 668,
+        "unit": {
+          "id": 6291458,
+          "name": "Probe"
+        },
+        "player": 2,
+        "unit_id": 6291458
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          31,
+          131
+        ],
+        "second": 677,
+        "unit": {
+          "id": 66060291,
+          "name": "PhotonCannon"
+        },
+        "player": 2,
+        "unit_id": 66060291
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          130,
+          21
+        ],
+        "second": 685,
+        "unit": {
+          "id": 64225293,
+          "name": "Probe"
+        },
+        "player": 2,
+        "unit_id": 64225293
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          127,
+          17
+        ],
+        "second": 702,
+        "unit": {
+          "id": 65798150,
+          "name": "Assimilator"
+        },
+        "player": 2,
+        "unit_id": 65798150
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          28,
+          113
+        ],
+        "second": 703,
+        "unit": {
+          "id": 61079555,
+          "name": "Zealot"
+        },
+        "player": 2,
+        "unit_id": 61079555
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          35,
+          118
+        ],
+        "second": 725,
+        "unit": {
+          "id": 65273869,
+          "name": "Pylon"
+        },
+        "player": 2,
+        "unit_id": 65273869
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          28,
+          113
+        ],
+        "second": 736,
+        "unit": {
+          "id": 49545244,
+          "name": "Stalker"
+        },
+        "player": 2,
+        "unit_id": 49545244
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          131,
+          50
+        ],
+        "second": 740,
+        "unit": {
+          "id": 66060302,
+          "name": "Nexus"
+        },
+        "player": 2,
+        "unit_id": 66060302
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          28,
+          116
+        ],
+        "second": 740,
+        "unit": {
+          "id": 6,
+          "name": "Adept"
+        },
+        "player": 2,
+        "unit_id": 6
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          35,
+          131
+        ],
+        "second": 754,
+        "unit": {
+          "id": 62652485,
+          "name": "AdeptPhaseShift"
+        },
+        "player": 2,
+        "unit_id": 62652485
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          37,
+          118
+        ],
+        "second": 760,
+        "unit": {
+          "id": 62652486,
+          "name": "ShieldBattery"
+        },
+        "player": 2,
+        "unit_id": 62652486
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          38,
+          118
+        ],
+        "second": 764,
+        "unit": {
+          "id": 62652487,
+          "name": "ShieldBattery"
+        },
+        "player": 2,
+        "unit_id": 62652487
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          28,
+          113
+        ],
+        "second": 787,
+        "unit": {
+          "id": 62390317,
+          "name": "Stalker"
+        },
+        "player": 2,
+        "unit_id": 62390317
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          43,
+          124
+        ],
+        "second": 790,
+        "unit": {
+          "id": 58720262,
+          "name": "AdeptPhaseShift"
+        },
+        "player": 2,
+        "unit_id": 58720262
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          41,
+          120
+        ],
+        "second": 807,
+        "unit": {
+          "id": 55574622,
+          "name": "AdeptPhaseShift"
+        },
+        "player": 2,
+        "unit_id": 55574622
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          40,
+          118
+        ],
+        "second": 811,
+        "unit": {
+          "id": 66584597,
+          "name": "ShieldBattery"
+        },
+        "player": 2,
+        "unit_id": 66584597
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          33,
+          118
+        ],
+        "second": 818,
+        "unit": {
+          "id": 55574624,
+          "name": "ShieldBattery"
+        },
+        "player": 2,
+        "unit_id": 55574624
+      },
+      {
+        "type": "UnitBornEvent",
+        "location": [
+          28,
+          116
+        ],
+        "second": 828,
+        "unit": {
+          "id": 7,
+          "name": "Stalker"
+        },
+        "player": 2,
+        "unit_id": 7
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          135,
+          30
+        ],
+        "second": 847,
+        "unit": {
+          "id": 62128132,
+          "name": "WarpGate"
+        },
+        "player": 2,
+        "unit_id": 62128132
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          132,
+          33
+        ],
+        "second": 866,
+        "unit": {
+          "id": 55574629,
+          "name": "WarpGate"
+        },
+        "player": 2,
+        "unit_id": 55574629
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          139,
+          31
+        ],
+        "second": 870,
+        "unit": {
+          "id": 51118087,
+          "name": "Gateway"
+        },
+        "player": 2,
+        "unit_id": 51118087
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          135,
+          33
+        ],
+        "second": 889,
+        "unit": {
+          "id": 11796484,
+          "name": "Gateway"
+        },
+        "player": 2,
+        "unit_id": 11796484
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          130,
+          31
+        ],
+        "second": 906,
+        "unit": {
+          "id": 55836677,
+          "name": "Pylon"
+        },
+        "player": 2,
+        "unit_id": 55836677
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          132,
+          27
+        ],
+        "second": 924,
+        "unit": {
+          "id": 50855943,
+          "name": "Sentry"
+        },
+        "player": 2,
+        "unit_id": 50855943
+      },
+      {
+        "type": "UnitInitEvent",
+        "location": [
+          133,
+          25
+        ],
+        "second": 942,
+        "unit": {
+          "id": 65011725,
+          "name": "Stalker"
+        },
+        "player": 2,
+        "unit_id": 65011725
+      }
+    ],
+    "apms": null
+  }
+}
