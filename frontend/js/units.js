@@ -15,7 +15,7 @@
       top: 50,
       left: 150,
       right: 0,
-      bottom: 10
+      bottom: 0
     };
 
     let width = 1344 - margin.left - margin.right;
@@ -74,7 +74,7 @@
 
     data.units = data.units.map(u => {
       u.offset = offset;
-      u.height = d3.max(data.players, p =>p.unit_lifetimes[u.id].length) * (line.height+line.gap) + row.margin.top + row.margin.bottom;
+      u.height = Math.max(d3.max(data.players, p =>p.unit_lifetimes[u.id].length) * (line.height+line.gap) + row.margin.top + row.margin.bottom, 50);
       offset += u.height;
       return u;
     });
@@ -94,7 +94,7 @@
     |--------------------------------------------------------------------------
     */
 
-    let fullHeight = offset;
+    let fullHeight = offset + margin.bottom + margin.top;
     let height = fullHeight;
 
     /*
@@ -183,7 +183,9 @@
     rows.append("text")
     .attr("x", -margin.left + 40)
     .attr("y", 5)
+    .attr("style", "font-weight: 600")
     .text(d => d.name)
+    .attr("fill", d => color(d.category))
     .attr("alignment-baseline", "hanging");
 
     /*
@@ -295,7 +297,7 @@
     // Modify height
     fullHeight = 300;
     height = fullHeight - margin.top - margin.bottom;
-    innerHeight = height - padding.top - padding.bottom;
+    let contentHeight = height - padding.top - padding.bottom;
 
     // Select new SVG
     svg = d3.select("#aggregation").attr("height", fullHeight);
@@ -355,7 +357,7 @@
       .attr("x", 0)
       .attr("y", 0)
       .attr("width", x(game.duration))
-      .attr("height", innerHeight)
+      .attr("height", contentHeight)
       .attr("fill", "#f1f1f1");
 
       /*
@@ -368,7 +370,7 @@
       const MAX_UNIT_N = 120;
       let y = d3
           .scaleLinear()
-          .range([innerHeight, 0])
+          .range([contentHeight, 0])
           .domain([0, MAX_UNIT_N]);
 
       // set the ranges
@@ -425,7 +427,7 @@
       .attr("x1", 0)
       .attr("x2", 0)
       .attr("y1", 0)
-      .attr("y2", innerHeight)
+      .attr("y2", contentHeight)
       .attr("stroke", "#000")
       .attr("display", "none")
   }
@@ -526,16 +528,19 @@
         .attr("class", "is-active");
 
         let tooltipHeight = tooltipNode.node().clientHeight;
+        let tooltipWidth = tooltipNode.node().clientWidth;
         
-        let xTranslation = event.screenX - tooltip.width - tooltip.spacing;
-        let yTranslation = event.screenY - 100;
+        let xTranslation = event.x - tooltipWidth - tooltip.spacing;
+        let yTranslation = event.y;
         
-        if (window.innerWidth - event.screenX > tooltip.width + tooltip.spacing + 20) {
-          xTranslation = event.screenX + tooltip.spacing 
+        if (window.innerWidth - event.x > tooltipWidth + tooltip.spacing + 20) {
+          xTranslation = event.x + tooltip.spacing;
         }
 
-        if (window.innerHeight + 100 - event.screenY < tooltipHeight) {
-          yTranslation = event.screenY - 100 - tooltipHeight
+        console.log(window.innerHeight - event.y);
+
+        if (window.innerHeight - event.y < tooltipHeight) {
+          yTranslation = event.y - tooltipHeight;
         }
 
         tooltipNode.attr("style", `transform: translate(${xTranslation}px,${yTranslation}px)`);
