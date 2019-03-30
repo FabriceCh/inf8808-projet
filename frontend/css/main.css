@@ -31,6 +31,7 @@
 #tooltip .title {
     margin-bottom: 0.1rem;
     text-transform: uppercase;
+    font-size: 0.9rem;
 }
 
 #tooltip .dot {
@@ -41,8 +42,8 @@
     margin-right: 10px;
 }
 
-#tooltip .count {
-    
+#tooltip .unit {
+    font-size: 0.85rem;
 }
 
 .aggregation {
