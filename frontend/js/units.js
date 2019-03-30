@@ -57,6 +57,7 @@
     */
 
     data = generateRandomData(game.duration);
+    console.log(data);
 
     /*
     |--------------------------------------------------------------------------
@@ -265,7 +266,7 @@
     margin.bottom = 10;
 
     // Modify height
-    fullHeight = 250;
+    fullHeight = 300;
     height = fullHeight - margin.top - margin.bottom;
 
     // Select new SVG
