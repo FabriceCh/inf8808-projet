@@ -105,7 +105,7 @@
 
     // Color scale (based on the unit category)
     let color = d3.scaleOrdinal()
-    .domain(data.units.map(u => u.category))
+    .domain(uniq(data.units.map(u => u.category)))
     .range(d3.schemeSet1);
 
     // x scales : for the two player columns
