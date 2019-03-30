@@ -57,6 +57,7 @@
     */
 
     data = generateRandomData(game.duration);
+    console.log(data);
 
     /*
     |--------------------------------------------------------------------------
@@ -292,7 +293,7 @@
     };
 
     // Modify height
-    fullHeight = 250;
+    fullHeight = 300;
     height = fullHeight - margin.top - margin.bottom;
     innerHeight = height - padding.top - padding.bottom;
 

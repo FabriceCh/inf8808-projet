@@ -212,6 +212,15 @@ class SC2ReplayWrapper:
     def select_from_game_events(self, predicate):
         return list(self._select_from_game_events(predicate))
 
+    def get_player_events(self, player):
+        excluded_event_types = [
+            sc2reader.events.PlayerSetupEvent,
+            sc2reader.events.PlayerLeaveEvent,
+            sc2reader.events.PlayerStatsEvent,
+        ]
+        def selector(e):
+            return hasattr(e, 'control_pid') and e.control_pid == player
+        return self.select_from_events(predicate=selector)
 
 
     def bar_chart(self, selector, ev_list, category_map, value_map=None):
