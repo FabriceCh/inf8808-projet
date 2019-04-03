@@ -93,7 +93,20 @@ def event_list_to_apms(events):
             if s not in d:
                 d[s] = []
             d[s].append(e)
-        return d
+
+        # TODO Do this in a non-ghetto way, like obtaining the length of the
+        #  game from the replay file.
+        largest_second = 0
+        for s in d:
+            if s > largest_second:
+                largest_second = s
+
+        # TODO Use d to make a list:
+        path_data = []
+        for s in range(largest_second):
+            path_data.append(len(d.get(s, [])))
+
+        return path_data
 
     for cat in categories:
         categories[cat] = event_list_to_actions_per_second(categories[cat])
