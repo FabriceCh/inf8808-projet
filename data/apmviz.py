@@ -72,10 +72,10 @@ def event_list_to_apms(events):
         sc2reader.events.AddToControlGroupEvent,
         sc2reader.events.SelectionEvent
     ]
-    selection_map = { t:'selection_types' for t in selection_types}
+    selection_map = { t:'selection' for t in selection_types}
 
     camera_types = [sc2reader.events.CameraEvent]
-    camera_map = {t: 'camera_types' for t in camera_types}
+    camera_map = {t: 'camera' for t in camera_types}
 
     category_dict = {**command_map, ** selection_map, **camera_map}  # Merge the three preceding dictionaries
     def category_map(e):
@@ -87,7 +87,13 @@ def event_list_to_apms(events):
     def event_list_to_actions_per_second(event_list):
         # TODO
         # Use hashmap algorithm
-        return event_list
+        d = {}
+        for e in event_list:
+            s = e.second
+            if s not in d:
+                d[s] = []
+            d[s].append(e)
+        return d
 
     for cat in categories:
         categories[cat] = event_list_to_actions_per_second(categories[cat])

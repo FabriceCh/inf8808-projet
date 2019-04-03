@@ -223,11 +223,19 @@ class SC2ReplayWrapper:
         return self.select_from_events(predicate=selector)
 
     def _get_player_game_events(self, player):
+        # Note this list also exists implicitly in apmviz.py in event_list_to_apms()
+        relevant_event_types = [
+            sc2reader.events.BasicCommandEvent,
+            sc2reader.events.TargetUnitCommandEvent,
+            sc2reader.events.TargetPointCommandEvent,
+            sc2reader.events.DataCommandEvent,
+            sc2reader.events.SetControlGroupEvent,
+            sc2reader.events.GetControlGroupEvent,
+            sc2reader.events.AddToControlGroupEvent,
+            sc2reader.events.SelectionEvent,
+            sc2reader.events.CameraEvent]
         for e in self._replay.game_events:
-            if e.player.pid == player:
-                yield e
-            else:
-                print(e)
+            if e.player.pid == player and type(e) in relevant_event_types:
                 yield e
 
     def get_player_game_events(self, player):
