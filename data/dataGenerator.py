@@ -53,11 +53,13 @@ def generate_unit_composition_data(**kwargs):
 
     # pp.pprint(unit_composition['p1']['unit_counts'])
 
+
 def generate_apm_data(**kwargs):
     apmviz.replay_to_apm_data(
         replay_filename=kwargs.get('replay'),
         output_filename=kwargs.get('output')
     )
+
 
 if __name__ == "__main__":
     generate_unit_composition_data(
