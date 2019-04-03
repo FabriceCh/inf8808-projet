@@ -56,8 +56,8 @@ def pre_serialize_event_list(events):
     pretty much. """
     return list(map(event_to_dict, events))
 
-def event_list_to_apms(events):
-    """ Function to be used on the list of events of a certain category """
+def categorize_apm_events(events):
+
     command_types = [
         sc2reader.events.BasicCommandEvent,
         sc2reader.events.TargetUnitCommandEvent,
@@ -81,8 +81,14 @@ def event_list_to_apms(events):
     def category_map(e):
         return category_dict.get(type(e), None)
 
+    return pysc2.categorize_as_lists(events, category_map)
 
-    categories = pysc2.categorize_as_lists(events, category_map)
+def event_list_to_apms(events):
+    """ Function to be used on the list of events of a certain category """
+
+    # TODO Add locations to events before they are categorized
+
+    categories = categorize_apm_events(events)
 
     def event_list_to_actions_per_second(event_list):
         # TODO
