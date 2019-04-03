@@ -4,6 +4,7 @@ import pysc2
 import sc2reader
 import sc2reader.events
 
+
 def replay_to_apm_data(replay_filename, output_filename):
     # Create replay
 
@@ -12,6 +13,7 @@ def replay_to_apm_data(replay_filename, output_filename):
     # Write processed data to file
 
     pass
+
 
 # TODO Remove this function from the other file later.
 def event_to_dict(event):
@@ -50,6 +52,7 @@ def event_to_dict(event):
 
     return d
 
+
 def pre_serialize_event_list(events):
     """ Pre-serializing means transforming into a dict or a list that contains
     only serializable things.  So dicts of dicts or ints or strings or floats
@@ -57,15 +60,15 @@ def pre_serialize_event_list(events):
     events_with_locations = assign_locations_to_events(events)
     return list(map(event_to_dict, events_with_locations))
 
-def categorize_apm_events(events):
 
+def categorize_apm_events(events):
     command_types = [
         sc2reader.events.BasicCommandEvent,
         sc2reader.events.TargetUnitCommandEvent,
         sc2reader.events.TargetPointCommandEvent,
         sc2reader.events.DataCommandEvent
     ]
-    command_map = { t:'commands' for t in command_types   }
+    command_map = {t: 'commands' for t in command_types}
 
     selection_types = [
         sc2reader.events.SetControlGroupEvent,
@@ -73,16 +76,19 @@ def categorize_apm_events(events):
         sc2reader.events.AddToControlGroupEvent,
         sc2reader.events.SelectionEvent
     ]
-    selection_map = { t:'selection' for t in selection_types}
+    selection_map = {t: 'selection' for t in selection_types}
 
     camera_types = [sc2reader.events.CameraEvent]
     camera_map = {t: 'camera' for t in camera_types}
 
-    category_dict = {**command_map, ** selection_map, **camera_map}  # Merge the three preceding dictionaries
+    category_dict = {**command_map, **selection_map,
+                     **camera_map}  # Merge the three preceding dictionaries
+
     def category_map(e):
         return category_dict.get(type(e), None)
 
     return pysc2.categorize_as_lists(events, category_map)
+
 
 def get_first_location(events):
     for e in events:
@@ -102,6 +108,7 @@ def assign_locations_to_events(events):
             e.location = current_location
 
     return events
+
 
 def event_list_to_apms(events):
     """ Function to be used on the list of events of a certain category """
@@ -139,7 +146,6 @@ def event_list_to_apms(events):
 
 
 def assemble_player_data(replay_wrapper, player):
-
     # TODO Get all of the player's events
     player_events = replay_wrapper.get_player_events(player)
     player_game_events = replay_wrapper.get_player_game_events(player)
@@ -153,8 +159,8 @@ def assemble_player_data(replay_wrapper, player):
     }
     return player_data
 
-def assemble_apmviz_data(replay_wrapper):
 
+def assemble_apmviz_data(replay_wrapper):
     apmviz_data = {
         'p1': assemble_player_data(replay_wrapper, player=1),
         'p2': assemble_player_data(replay_wrapper, player=2)
@@ -165,9 +171,11 @@ def assemble_apmviz_data(replay_wrapper):
 
 if __name__ == '__main__':
     from pprint import pprint
-    replay_wrapper = pysc2.SC2ReplayWrapper('replays/Neeb-vs-ShoWTimE-time1116.SC2Replay')
+
+    replay_wrapper = pysc2.SC2ReplayWrapper(
+        'replays/Neeb-vs-ShoWTimE-time1116.SC2Replay')
     apm_viz_data = assemble_apmviz_data(replay_wrapper)
-    pprint(apm_viz_data['p1']['apms'])
+    pprint(apm_viz_data['p1']['events'])
     # import json
     # json.dumps(apm_viz_data)
     # with open('datafiles/actionstats/realdata.json', 'w+') as f:
