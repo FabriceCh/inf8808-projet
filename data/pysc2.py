@@ -222,6 +222,17 @@ class SC2ReplayWrapper:
             return hasattr(e, 'control_pid') and e.control_pid == player
         return self.select_from_events(predicate=selector)
 
+    def _get_player_game_events(self, player):
+        for e in self._replay.game_events:
+            if e.player.pid == player:
+                yield e
+            else:
+                print(e)
+                yield e
+
+    def get_player_game_events(self, player):
+        return list(self._get_player_game_events(player))
+
 
     def bar_chart(self, selector, ev_list, category_map, value_map=None):
         assert (isinstance(ev_list, list))
