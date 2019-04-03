@@ -158,13 +158,26 @@ def assemble_player_data(replay_wrapper, player):
 
 
 def assemble_apmviz_data(replay_wrapper):
-    apmviz_data = {
+    apm_viz_data = {
         'p1': assemble_player_data(replay_wrapper, player=1),
         'p2': assemble_player_data(replay_wrapper, player=2)
     }
 
-    return apmviz_data
+    # TODO Investigate the discrepancy between this value and the one in the replay
+    # _replay.game_length.seconds = 675
+    # value we find here : 945
+    # Since the value here is more practical, that is what I will put with the data.
+    max_length = 0
+    for p in ['p1', 'p2']:
+        apms = apm_viz_data[p]['apms']
+        for cat in apms:
+            l = len(apms[cat])
+            if l > max_length:
+                max_length = l
 
+    apm_viz_data['game_lenth'] = max_length
+
+    return apm_viz_data
 
 if __name__ == '__main__':
     from pprint import pprint
