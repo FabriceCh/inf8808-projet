@@ -173,7 +173,7 @@ if __name__ == '__main__':
         'replays/Neeb-vs-ShoWTimE-time1116.SC2Replay')
     apm_viz_data = assemble_apmviz_data(replay_wrapper)
     pprint(apm_viz_data['p1']['events'])
-    # import json
-    # json.dumps(apm_viz_data)
-    # with open('datafiles/actionstats/realdata.json', 'w+') as f:
-    #     f.write(json.dumps(apm_viz_data, indent=2))
+    import json
+    json.dumps(apm_viz_data)
+    with open('datafiles/actionstats/realdata.json', 'w+') as f:
+        f.write(json.dumps(apm_viz_data, indent=2))
