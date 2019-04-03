@@ -66,5 +66,3 @@ class TestDataGathering(unittest.TestCase):
             print(d)
         return 0
 
-    def test_produce_data_for_apm_viz(self):
-        apm_data = pysc2.produce_data_for_apm_viz()
