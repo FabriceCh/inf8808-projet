@@ -23,7 +23,7 @@ def event_to_dict(event):
     try:
         d['location'] = event.location
     except AttributeError:
-        d['location'] = 'Not Yet Implemented'
+        raise Exception("All events should have locations")
 
     try:
         d['second'] = event.second
@@ -54,7 +54,8 @@ def pre_serialize_event_list(events):
     """ Pre-serializing means transforming into a dict or a list that contains
     only serializable things.  So dicts of dicts or ints or strings or floats
     pretty much. """
-    return list(map(event_to_dict, events))
+    events_with_locations = assign_locations_to_events(events)
+    return list(map(event_to_dict, events_with_locations))
 
 def categorize_apm_events(events):
 
@@ -83,10 +84,27 @@ def categorize_apm_events(events):
 
     return pysc2.categorize_as_lists(events, category_map)
 
+def get_first_location(events):
+    for e in events:
+        if isinstance(e, sc2reader.events.CameraEvent):
+            return e.location
+    else:
+        return (0, 0)
+
+
+def assign_locations_to_events(events):
+    current_location = get_first_location(events)
+    for e in events:
+        if isinstance(e, sc2reader.events.CameraEvent):
+            current_location = e.location
+
+        if not hasattr(e, 'location'):
+            e.location = current_location
+
+    return events
+
 def event_list_to_apms(events):
     """ Function to be used on the list of events of a certain category """
-
-    # TODO Add locations to events before they are categorized
 
     categories = categorize_apm_events(events)
 
