@@ -3,16 +3,17 @@ import unittest
 import pysc2
 import sc2reader
 import sc2reader.events
+import json
 
 
 def replay_to_apm_data(replay_filename, output_filename):
-    # Create replay
+    replay_wrapper = pysc2.SC2ReplayWrapper(
+        replay_filename)
 
-    # Call data extracting function
+    apm_viz_data = assemble_apmviz_data(replay_wrapper)
 
-    # Write processed data to file
-
-    pass
+    with open(output_filename, 'w+') as f:
+        f.write(json.dumps(apm_viz_data, indent=2))
 
 
 # TODO Remove this function from the other file later.
@@ -178,6 +179,7 @@ def assemble_apmviz_data(replay_wrapper):
     apm_viz_data['game_lenth'] = max_length
 
     return apm_viz_data
+
 
 if __name__ == '__main__':
     from pprint import pprint

@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import apmviz
 import pysc2
 import json
 import pprint
@@ -8,6 +9,7 @@ from functools import reduce
 REPLAY_FILE = 'replays/Harstem-vs-ShoWTimE-time1652.SC2Replay'
 OUTPUT_PATH = 'datafiles/'
 OUTPUT_FILE = 'unit_composition_data.json'
+APM_OUTPUT_FILE = OUTPUT_PATH + 'action_stats_data.json'
 
 pp = pprint.PrettyPrinter(indent=4)
 
@@ -51,8 +53,18 @@ def generate_unit_composition_data(**kwargs):
 
     # pp.pprint(unit_composition['p1']['unit_counts'])
 
+def generate_apm_data(**kwargs):
+    apmviz.replay_to_apm_data(
+        replay_filename=kwargs.get('replay'),
+        output_filename=kwargs.get('output')
+    )
 
 if __name__ == "__main__":
     generate_unit_composition_data(
         replay=REPLAY_FILE,
         output=OUTPUT_FILE)
+
+    generate_apm_data(
+        replay=REPLAY_FILE,
+        output=APM_OUTPUT_FILE
+    )
