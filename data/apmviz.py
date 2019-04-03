@@ -85,11 +85,34 @@ def categorize_apm_events(events):
 
     return pysc2.categorize_as_lists(events, category_map)
 
+def event_list_to_actions_per_second(event_list):
+    d = {}
+    for e in event_list:
+        s = e.second
+        if s not in d:
+            d[s] = []
+        d[s].append(e)
+
+    # TODO Find the end of the game in a nicer way
+    largest_second = 0
+    for s in d:
+        if s > largest_second:
+            largest_second = s
+
+    path_data = []
+    for s in range(largest_second):
+        path_data.append(len(d.get(s, [])))
+
+    return path_data
+
+
 def event_list_to_apms(events):
     """ Function to be used on the list of events of a certain category """
 
     categories = categorize_apm_events(events)
 
+    for cat in categories:
+        categories[cat] = event_list_to_actions_per_second(categories[cat])
 
     return categories
 
