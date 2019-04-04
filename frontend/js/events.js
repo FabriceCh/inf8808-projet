@@ -2,7 +2,7 @@
   "use strict";
 
   // TODO: Change for correct data filepath
-  const filePath = "/data/actionstats/mockdata.json";
+  const filePath = "/data/actionstats/realdata.json";
 
   // TODO: Remove this print statement
   console.log("Test");
@@ -89,7 +89,7 @@
 
     // Color scale (based on the event category)
     let color = d3.scaleOrdinal()
-    .domain(uniq(data.apms.player1.map(u => u.type)))
+    .domain(Object.keys(data.p1.apms))
     .range(d3.schemeSet1);
 
     // x scales : for the two player columns
@@ -121,7 +121,7 @@
     .append("g")
     .attr('transform', (d,i) => `translate(${i * 100},${-margin.top + 20})`)
     .selectAll(".event")
-    .data(uniq(data.apms.player1.map(u => u.type)))
+    .data(Object.keys(data.p1.apms))
     .enter()
     .append("g")
     .attr('transform', (d,i) => `translate(${i * 100},0)`);
