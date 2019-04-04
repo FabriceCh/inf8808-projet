@@ -76,12 +76,11 @@ def prepare_signle_unit_for_visualisation(unit_lifetime_events):
     prepared_datum['unit_type'] = unit_lifetime_events['born'].unit.name
     prepared_datum['born_time'] = born_time['second']
 
-
     # TODO Change this to get_died_time(unit_lifetime_events) which will look at
     #  all lifetime events, find the one that is not none, and use that as the
     #  died time.  Otherwise, the function should return the end-time of the
     #  game or a special value to indicate that the unit was never killed.
-    died_time = get_event_time(unit_lifetime_events['died']) if unit_lifetime_events['died'] else 'EOG'
+    died_time = get_event_time(unit_lifetime_events['died'])['second'] if unit_lifetime_events['died'] else 'EOG'
     prepared_datum['died_time'] = died_time
     prepared_datum['player'] = unit_lifetime_events['born'].control_pid
 
@@ -121,28 +120,31 @@ def prepare_data_for_visualisation(unit_lifetime_events):
     #     "Stalker: [ ... ],
     #     ...
     # }
-    # return {
-    #      "p1": {
-    #          'unit_lifetimes' : list(p1_unit_lifetime_events),
-    #          'unit_counts': []
-    #      },
-    #      "p2": {
-    #          'unit_lifetimes' : list(p2_unit_lifetime_events),
-    #          'unit_counts': []
-    #      }
-    # }
+    lifetimes = []
+    for i in range(2):
+        lifetimes.append({})
+        for unit in p1_unit_lifetime_events:
+            if unit['unit_type'] not in lifetimes[i]:
+                lifetimes[i][unit['unit_type']] = []
+            # print(unit)
+            lifetimes[i][unit['unit_type']].append(
+                [
+                    unit['born_time'],
+                    unit['died_time'] if unit['died_time'] != 'EOG' else 1800,
+                ])
     return {
         "players": [
             {
-                'unit_lifetimes': list(p1_unit_lifetime_events),
-                'unit_counts': []
+                'unit_lifetimes': lifetimes[0],
+                'unit_counts': {}
             },
             {
-                'unit_lifetimes': list(p2_unit_lifetime_events),
-                'unit_counts': []
+                'unit_lifetimes': lifetimes[1],
+                'unit_counts': {}
             }
         ]
     }
+
 
 def categorize(event_list, category_map, value_map=None):
     values = {}
