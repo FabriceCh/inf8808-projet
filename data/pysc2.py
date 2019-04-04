@@ -121,15 +121,27 @@ def prepare_data_for_visualisation(unit_lifetime_events):
     #     "Stalker: [ ... ],
     #     ...
     # }
+    # return {
+    #      "p1": {
+    #          'unit_lifetimes' : list(p1_unit_lifetime_events),
+    #          'unit_counts': []
+    #      },
+    #      "p2": {
+    #          'unit_lifetimes' : list(p2_unit_lifetime_events),
+    #          'unit_counts': []
+    #      }
+    # }
     return {
-         "p1": {
-             'unit_lifetimes' : list(p1_unit_lifetime_events),
-             'unit_counts': []
-         },
-         "p2": {
-             'unit_lifetimes' : list(p2_unit_lifetime_events),
-             'unit_counts': []
-         }
+        "players": [
+            {
+                'unit_lifetimes': list(p1_unit_lifetime_events),
+                'unit_counts': []
+            },
+            {
+                'unit_lifetimes': list(p2_unit_lifetime_events),
+                'unit_counts': []
+            }
+        ]
     }
 
 def categorize(event_list, category_map, value_map=None):
