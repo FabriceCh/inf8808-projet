@@ -176,7 +176,7 @@ def assemble_apmviz_data(replay_wrapper):
             if l > max_length:
                 max_length = l
 
-    apm_viz_data['game_lenth'] = max_length
+    apm_viz_data['game_length'] = max_length
 
     return apm_viz_data
 
