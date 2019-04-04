@@ -6,9 +6,10 @@ import json
 import pprint
 from functools import reduce
 
+
 REPLAY_FILE = 'replays/Harstem-vs-ShoWTimE-time1652.SC2Replay'
-OUTPUT_PATH = 'datafiles/'
-OUTPUT_FILE = 'unit_composition_data.json'
+OUTPUT_PATH = '../frontend/datafiles/'
+OUTPUT_FILE = 'data.json'
 APM_OUTPUT_FILE = OUTPUT_PATH + 'action_stats_data.json'
 
 pp = pprint.PrettyPrinter(indent=4)
