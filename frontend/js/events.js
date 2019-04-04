@@ -43,12 +43,6 @@
       gap: 1
     };
 
-    // Game metadata
-    // TODO: Determine game length dynamically (read timestamp at end of file)
-    let game = {
-      duration: 30 * 60 // duration of the game in seconds
-    };
-
     /*
     |--------------------------------------------------------------------------
     | Generate random data (TEMP)
@@ -94,7 +88,7 @@
 
     // x scales : for the two player columns
     let x = d3.scaleLinear()
-    .domain([0, game.duration])
+    .domain([0, data.game_length])
     .range([0, width/2 - column.gap/2]);
 
     /*
