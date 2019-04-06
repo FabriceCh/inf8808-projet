@@ -126,7 +126,7 @@
     // Color scale (based on the event category)
     let color = d3.scaleOrdinal()
     .domain(data.categories.map(c => c.id))
-    .range(d3.schemeSet1);
+    .range(["#FF0000", "#009933" , "#FFFF00"]);
 
     // x scales : for the two player columns
     let x = d3.scaleLinear()
@@ -156,10 +156,12 @@
     |--------------------------------------------------------------------------
     */
 
-    let mapGroup1 = svg
+    const circleOpacity = 0.4;
+
+    const mapGroup1 = svg
     .append("g");
     
-    let mapGroup2 = svg
+    const mapGroup2 = svg
     .append("g");
 
     renderMapGroup(mapGroup1, 0, 0);
@@ -171,7 +173,7 @@
 
       mapgroup
       .append('image')
-      .attr('xlink:href','/data/maps/New_Repugnancy_Map_High_Res.jpg')
+      .attr('xlink:href','/data/maps/50percentBandW.png')
       .attr('height', image.height)
       .attr('width', image.width);
       
@@ -182,6 +184,7 @@
           .attr("cx", function (d) { return d.location[0]*3.2 - 70; })
           .attr("cy", function (d) { return d.location[1]*2 - 15; })
           .attr("r", 1.5)
+          .attr("opacity", circleOpacity)
           .attr("fill", function(d) {
             return color(generalType(d.type));
           });
