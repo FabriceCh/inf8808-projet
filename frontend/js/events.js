@@ -149,10 +149,12 @@
     |--------------------------------------------------------------------------
     */
 
-    let mapGroup1 = svg
+    const circleOpacity = 0.4;
+
+    const mapGroup1 = svg
     .append("g");
     
-    let mapGroup2 = svg
+    const mapGroup2 = svg
     .append("g");
 
     renderMapGroup(mapGroup1, 0, 0);
@@ -175,6 +177,7 @@
           .attr("cx", function (d) { return d.location[0]*3.2 - 70; })
           .attr("cy", function (d) { return d.location[1]*2 - 15; })
           .attr("r", 1.5)
+          .attr("opacity", circleOpacity)
           .attr("fill", function(d) {
             return color(generalType(d.type));
           });
