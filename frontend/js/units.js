@@ -59,7 +59,7 @@
     */
 
     data.units = units();
-
+    console.log(data);
 
     /*
     |--------------------------------------------------------------------------
@@ -381,7 +381,7 @@
       */
       let areaChart = player.append("g").attr("class", "area-chart");
 
-      const MAX_UNIT_N = 120;
+      const MAX_UNIT_N = 60;
       let y = d3
           .scaleLinear()
           .range([contentHeight, 0])
@@ -430,7 +430,10 @@
             .enter()
             .append("path")
             .attr("d", area)
-            .style("fill", (d, i) => color(i));
+            .style("fill", (d, i) => {
+              console.log(d.key, data.units.filter(u => u.id == d.key)[0])
+              return color(data.units.filter(u => u.id == d.key)[0].category);
+            });
       /*
       |--------------------------------------------------------------------------
       | Row : Column : Interaction Vertical Line
