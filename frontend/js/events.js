@@ -4,9 +4,6 @@
   // TODO: Change for correct data filepath
   const filePath = "/data/actionstats/realdata.json";
 
-  // TODO: Remove this print statement
-  console.log("Test");
-
   d3.json(filePath).then(function (data) {
 
     /*
@@ -54,8 +51,6 @@
 
     // For each event category, the height and vertical offset is calculated
     // to correctly position the rows on the graph.
-    let offset = 0;
-
     let players = [data.p1, data.p2];
 
     let maxPerCategory = [];
@@ -69,8 +64,19 @@
     let subPlotHeight = d3.max(maxPerCategory);
     //console.log("subPlotHeight:", subPlotHeight);
 
-    let numEventCategories = Object.keys(players[0].apms).length;
+    let numEventCategories = Object.keys(player1.apms).length;
     //console.log("numEventCategories:", numEventCategories);
+
+    // Add event category information section
+    data.categories = [];
+    Object.keys(player1.apms).forEach((eventCategory, i) => {
+      let categoryInfo = {};
+      categoryInfo.id = eventCategory;
+      categoryInfo.name = eventCategory.capitalize();
+      categoryInfo.offset = i * subPlotHeight;
+      categoryInfo.height = subPlotHeight;
+      data.categories.push(categoryInfo);
+    });
 
     /*
     |--------------------------------------------------------------------------

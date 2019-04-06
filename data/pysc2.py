@@ -107,8 +107,10 @@ def prepare_data_for_visualisation(unit_lifetime_events):
     # because I like using the map, filter and other features of python, but for
     # the rest of you who haven't been bitten in the ass by having generators
     # instead of lists, it's better to hide the generators.
-    p1_unit_lifetime_events = list(filter(lambda ule: ule['player'] == 1, prepared_lifetime_events))
-    p2_unit_lifetime_events = list(filter(lambda ule: ule['player'] == 2, prepared_lifetime_events))
+    lifetimes_by_player = [
+        list(filter(lambda ule: ule['player'] == 1, prepared_lifetime_events)),
+        list(filter(lambda ule: ule['player'] == 2, prepared_lifetime_events))
+    ]
 
     # TODO Calculate total numbers of live units of each type, for each of the two preceding lists.
     #   This task involves some problem solving and since it is used to draw
@@ -123,15 +125,16 @@ def prepare_data_for_visualisation(unit_lifetime_events):
     lifetimes = []
     for i in range(2):
         lifetimes.append({})
-        for unit in p1_unit_lifetime_events:
+        for unit in lifetimes_by_player[i]:
             if unit['unit_type'] not in lifetimes[i]:
                 lifetimes[i][unit['unit_type']] = []
-            # print(unit)
             lifetimes[i][unit['unit_type']].append(
                 [
                     unit['born_time'],
                     unit['died_time'] if unit['died_time'] != 'EOG' else 1800,
-                ])
+                ]
+            )
+
     return {
         "players": [
             {
