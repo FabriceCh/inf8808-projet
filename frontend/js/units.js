@@ -47,22 +47,18 @@
 
     // Game metadata
     let game = {
-      duration: 30 * 60 // duration of the game in seconds
+      duration: data.duration
     };
 
     let activeTutorial = true;
 
     /*
     |--------------------------------------------------------------------------
-    | Generate random data (TEMP)
+    | Adding units to data
     |--------------------------------------------------------------------------
     */
 
-    const fake = generateRandomData(game.duration);
-    data.units = fake.units;
-
-    const USE_FAKE_DATA = false;
-    if (USE_FAKE_DATA) data = fake;
+    data.units = units();
 
 
     /*
@@ -268,12 +264,12 @@
       .enter()
       .append("line")
       .attr("class", (d,i) => `lifetime lifetime-${i}`)
-      .attr("x1", d => d[0] / game.duration * (width/2 - column.gap/2))
-      .attr("x2", d => d[1] / game.duration * (width/2 - column.gap/2))
+      .attr("x1", d => x(d[0]))
+      .attr("x2", d => x(d[1]))
       .attr("y1", (d,i) => i*(line.height+line.gap))
       .attr("y2", (d,i) => i*(line.height+line.gap))
       .attr("stroke", (d,i,node) => {
-        let unit = getUnitFormNode(node);
+        let unit = getUnitFormNode(data, node);
         return color(unit.category)
       });
 
@@ -511,6 +507,7 @@
       tuto.transition()
       .style("opacity", 0);
       activeTutorial = false;
+      tuto.remove();
     });
 
     tuto.append("text")
@@ -715,28 +712,9 @@
  * 
  * @param {*} duration 
  */
-function generateRandomData(duration) {
+function units() {
 
-  let units = [
-    // { id: 'adept', name: 'Adept', category: 'resource' },
-    // { id: 'archon', name: 'Archon', category: 'resource' },
-    // { id: 'carrier', name: 'Carrier', category: 'resource' },
-    // { id: 'colossus', name: 'Colossus', category: 'offensive' },
-    // { id: 'dark-templar', name: 'Dark Templar', category: 'offensive' },
-    // { id: 'disruptor', name: 'Disruptor', category: 'offensive' },
-    // { id: 'high-templar', name: 'High Templar', category: 'offensive' },
-    // { id: 'immortal', name: 'Immortal', category: 'offensive' },
-    // { id: 'mothership', name: 'Mothership', category: 'scout' },
-    // { id: 'observer', name: 'Observer', category: 'scout' },
-    // { id: 'phoenix', name: 'Phoenix', category: 'flying' },
-    // { id: 'probe', name: 'Probe', category: 'resource' },
-    // { id: 'sentry', name: 'Sentry', category: 'flying' },
-    // { id: 'stalker', name: 'Stalker', category: 'flying' },
-    // { id: 'tempest', name: 'Tempest', category: 'flying' },
-    // { id: 'void-ray', name: 'Void Ray', category: 'offensive' },
-    // { id: 'warp-prism', name: 'Warp Prism', category: 'offensive' },
-    // { id: 'zealot', name: 'Zealot', category: 'offensive' },
-
+  return [
     { id: 'Probe', name: 'Probe', category: 'resource' },
     { id: 'Adept', name: 'Adept', category: 'resource' },
     { id: 'Archon', name: 'Archon', category: 'resource' },
@@ -756,38 +734,6 @@ function generateRandomData(duration) {
     { id: 'WarpPrism', name: 'Warp Prism', category: 'offensive' },
     { id: 'Zealot', name: 'Zealot', category: 'offensive' },
   ];
-
-  data = {
-    units: units,
-    players: []
-  };
-
-  for (let i = 0; i < 2; i++) {
-
-    data.players[i] = {
-      unit_lifetimes: {},
-      unit_counts: {}
-    };
-
-    units.forEach(u => {
-      data.players[i].unit_lifetimes[u.id] = [];
-      data.players[i].unit_counts[u.id] = [];
-
-      // Generate unit lifetimes 
-      for (let j = 0; j < numberBetween(1, 200); j++) {
-        data.players[i].unit_lifetimes[u.id].push(generateRange(0, duration))
-      }
-
-      // Generate unit counts from unit_lifetimes
-      for (let j = 0; j < duration; j++) {
-        data.players[i].unit_counts[u.id].push(
-          data.players[i].unit_lifetimes[u.id].filter(u => u[0] <= j && u[1] >= j).length
-        )
-      }
-    })
-  }
-
-  return data;
 }
 
 /** Capitalize */
@@ -821,9 +767,9 @@ function generateRange(a, b) {
   return [a_, b_]
 }
 
-function getUnitFormNode(node) {
+function getUnitFormNode(data, node) {
   let unitId = d3.select(node).node()[0].parentNode.parentNode.parentNode.getAttribute('data-unit-id');
-  return data.units.filter(u => u.id === unitId)[0]
+  return data.units.filter(u => u.id == unitId)[0];
 }
 
 function uniq(a) {
