@@ -5,6 +5,7 @@
   const filePath = "/data/actionstats/realdata.json";
 
   d3.json(filePath).then(function (data) {
+    //console.log("data:", data);
 
     /*
     |--------------------------------------------------------------------------
@@ -69,6 +70,7 @@
       });
     });
 
+    // TODO: Set plot heights dynamically?
     let subPlotHeight = d3.max(maxPerCategory);
     //console.log("subPlotHeight:", subPlotHeight);
 
@@ -169,6 +171,24 @@
       categoryOffset += nodeWidth(this) + 15;
       return `translate(${x},0)`
     });
+
+    /*
+    |--------------------------------------------------------------------------
+    | Rows Creation
+    |--------------------------------------------------------------------------
+    */
+
+    /*
+    let rows = g
+    .append("g")
+    .selectAll(".row")
+    .data(data.categories)
+    .enter()
+    .append("g")
+    .attr("data-event-id", d => console.log("event:", d));
+    */
+
+    //console.log(data.p1.apms);
   
     /*
     |--------------------------------------------------------------------------
@@ -421,6 +441,11 @@
         .attr("class", "");
       }
     }
+
+
+    // TODO: Remove data print at the end
+    console.log("data:", data);
+
   });
 
 })();
