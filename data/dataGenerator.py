@@ -35,6 +35,36 @@ def generate_unitcounts(**kwargs):
     # pp.pprint(unit_counts)
     return unit_counts
 
+def lifetime_list_to_unit_counts(lifetime_list, duration):
+
+    born_time = 0
+    died_time = 1
+    counts = []
+    for i in range(duration):
+        count = 0
+        for u in lifetime_list:
+            if u[born_time] <= i < u[died_time]:
+                count += 1;
+        counts.append(count)
+
+    return counts
+
+
+
+def unit_lifetimes_to_unit_counts(unit_lifetimes, duration):
+    unit_counts = {}
+    for unit in unit_lifetimes:
+        lifetime_list = unit_lifetimes[unit]
+        counts = lifetime_list_to_unit_counts(lifetime_list, duration)
+        unit_counts[unit] = counts
+
+    # return unit_counts
+
+    return {unit: lifetime_list_to_unit_counts(unit_lifetimes[unit], duration)
+            for unit in unit_lifetimes}
+
+
+
 def add_empties_for_missing_units_quick_fix(data):
     unit_list = [
         'Adept',
@@ -97,15 +127,13 @@ def generate_unit_composition_data(**kwargs):
 
     unit_composition = pysc2.prepare_data_for_visualisation(processed_data)
 
-    print(unit_composition)
-    for player in unit_composition['players']:
-        player['unit_counts'] = {}
-
-    # for key, value in unit_composition.items():
-    #     unit_lifetimes = value['unit_lifetimes']
-    #     value['unit_counts'] = generate_unitcounts(lifetime_dict=unit_lifetimes)
-
     unit_composition['duration'] = 1800
+
+    for player in unit_composition['players']:
+        player_unit_lifetimes = player['unit_lifetimes']
+        player['unit_counts'] = unit_lifetimes_to_unit_counts(player_unit_lifetimes, unit_composition['duration'])
+
+
     add_empties_for_missing_units_quick_fix(unit_composition)
 
     with open(OUTPUT_PATH + kwargs.get('output'), 'w+') as f:
