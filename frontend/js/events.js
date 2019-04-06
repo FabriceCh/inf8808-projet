@@ -100,7 +100,7 @@
 
     // x scales : for the two player columns
     let x = d3.scaleLinear()
-    .domain([0, data.game_length])
+    .domain([0, data.duration])
     .range([0, width/2 - column.gap/2]);
 
     /*
@@ -211,7 +211,7 @@
       content.append("rect")
       .attr("x", 0)
       .attr("y", 0)
-      .attr("width", x(data.game_length) + column.gap)
+      .attr("width", x(data.duration) + column.gap)
       .attr("height", fullHeight)
       .attr("fill", "#fff");
 
@@ -233,7 +233,7 @@
       player.append("rect")
       .attr("x", 0)
       .attr("y", 0)
-      .attr("width", x(data.game_length))
+      .attr("width", x(data.duration))
       .attr("height", contentHeight)
       .attr("fill", "#f1f1f1");
 
@@ -396,7 +396,7 @@
         .attr("class", "");
       }
 
-      if (time > data.game_length) {
+      if (time > data.duration) {
         // Hide tooltip
         d3.select("#tooltip")
         .attr("class", "");
