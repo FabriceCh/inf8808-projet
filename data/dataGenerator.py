@@ -35,6 +35,39 @@ def generate_unitcounts(**kwargs):
     # pp.pprint(unit_counts)
     return unit_counts
 
+def add_empties_for_missing_units_quick_fix(data):
+    unit_list = [
+        'Adept',
+        'Archon',
+        'Carrier',
+        'Colossus',
+        'DarkTemplar',
+        'Disruptor',
+        'HighTemplar',
+        'Immortal',
+        'Mothership',
+        'Observer',
+        'Phoenix',
+        'Probe',
+        'Sentry',
+        'Stalker',
+        'VoidRay',
+        'WarpPrism',
+        'Zealot',
+        'tempest'
+    ]
+
+
+    for player_data in data['players']:
+        unit_lifetimes = player_data['unit_lifetimes']
+        unit_counts = player_data['unit_counts']
+        for unit_name in unit_list:
+            if unit_name not in unit_lifetimes:
+                unit_lifetimes[unit_name] = []
+            if unit_name not in unit_counts:
+                unit_counts[unit_name] = [0] * data['duration']
+
+
 
 def generate_unit_composition_data(**kwargs):
     """
@@ -73,6 +106,7 @@ def generate_unit_composition_data(**kwargs):
     #     value['unit_counts'] = generate_unitcounts(lifetime_dict=unit_lifetimes)
 
     unit_composition['duration'] = 1800
+    add_empties_for_missing_units_quick_fix(unit_composition)
 
     with open(OUTPUT_PATH + kwargs.get('output'), 'w+') as f:
         f.write(json.dumps(unit_composition, indent=2))

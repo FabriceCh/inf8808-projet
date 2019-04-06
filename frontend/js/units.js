@@ -65,7 +65,7 @@
     console.log("fake data:");
     console.log(fake);
 
-    const USE_FAKE_DATA = true;
+    const USE_FAKE_DATA = false;
     if (USE_FAKE_DATA) data = fake;
 
 
