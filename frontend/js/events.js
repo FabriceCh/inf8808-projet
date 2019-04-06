@@ -5,6 +5,7 @@
   const filePath = "/data/actionstats/realdata.json";
 
   d3.json(filePath).then(function (data) {
+    //console.log("data:", data);
 
     /*
     |--------------------------------------------------------------------------
@@ -20,6 +21,12 @@
     };
 
     let width = 1344 - margin.left - margin.right;
+
+    // Tooltip settings
+    let tooltip = {
+      width: 250,
+      spacing: 10
+    };
 
     let row = {
       // Margin between rows
@@ -40,18 +47,26 @@
       gap: 1
     };
 
+    // Image section attributes
+    let image = {
+      width: 400,
+      height: 316
+    };
+
     /*
     |--------------------------------------------------------------------------
     | Preprocessing
     |--------------------------------------------------------------------------
     |
-    | Once the data is received, metadata is added for layout/styling purposes
+    | Once the data is received, data is restructured and metadata is added
+    | for layout/styling purposes
     |
     */
 
     // For each event category, the height and vertical offset is calculated
     // to correctly position the rows on the graph.
     let players = [data.p1, data.p2];
+    let player1 = players[0];
 
     let maxPerCategory = [];
     players.forEach(player => {
@@ -61,15 +76,17 @@
       });
     });
 
-    let subPlotHeight = d3.max(maxPerCategory);
+    // TODO: Set plot heights dynamically?
+    let subPlotHeightConst = 15;
+    let subPlotHeight = d3.max(maxPerCategory) * subPlotHeightConst;
     //console.log("subPlotHeight:", subPlotHeight);
 
-    let numEventCategories = Object.keys(player1.apms).length;
+    let numEventCategories = Object.keys(players[0].apms).length;
     //console.log("numEventCategories:", numEventCategories);
 
     // Add event category information section
     data.categories = [];
-    Object.keys(player1.apms).forEach((eventCategory, i) => {
+    Object.keys(players[0].apms).forEach((eventCategory, i) => {
       let categoryInfo = {};
       categoryInfo.id = eventCategory;
       categoryInfo.name = eventCategory.capitalize();
@@ -77,6 +94,18 @@
       categoryInfo.height = subPlotHeight;
       data.categories.push(categoryInfo);
     });
+
+    // Organize player data as array
+    data.players = [];
+    players.forEach(playerData => data.players.push(playerData));
+    delete data.p1;
+    delete data.p2;
+
+    // Change game_length name to duration
+    data.duration = data.game_length;
+    delete data.game_length;
+
+    console.log(data);
 
     /*
     |--------------------------------------------------------------------------
@@ -86,6 +115,7 @@
 
     let height = subPlotHeight * numEventCategories;
     let fullHeight = height + margin.top + margin.bottom;
+    console.log(fullHeight);
 
     /*
     |--------------------------------------------------------------------------
@@ -95,13 +125,14 @@
 
     // Color scale (based on the event category)
     let color = d3.scaleOrdinal()
-    .domain(Object.keys(data.p1.apms))
-    .range(d3.schemeSet1);
+    .domain(data.categories.map(c => c.id))
+    .range(["#FF0000", "#009933" , "#FFFF00"]);
 
     // x scales : for the two player columns
     let x = d3.scaleLinear()
     .domain([0, data.duration])
     .range([0, width/2 - column.gap/2]);
+    //console.log("duration:", data.duration)
 
     /*
     |--------------------------------------------------------------------------
@@ -109,48 +140,129 @@
     |--------------------------------------------------------------------------
     */
 
-    let svg = d3.select("#viz").attr("height", fullHeight);
+    let svg = d3.select("#viz").attr("height", fullHeight
+    //remove the + x here
+    + 600
+    );
 
     let g = svg
       .append("g")
       .attr("transform", `translate(${margin.left} ${margin.top})`);
 
+    
     /*
     |--------------------------------------------------------------------------
-    | Top Legend
+    | Images group
     |--------------------------------------------------------------------------
     */
 
-    // TODO: Remove legend if not required in final design
+    const circleOpacity = 0.4;
 
-    let categories = g
+    const mapGroup1 = svg
+    .append("g");
+    
+    const mapGroup2 = svg
+    .append("g");
+
+    renderMapGroup(mapGroup1, 0, 0);
+    renderMapGroup(mapGroup2, 1, 650);
+
+    function renderMapGroup(mapgroup, playerId, offset) {
+      mapgroup
+      .attr("transform", `translate(${margin.left + offset} ${margin.top})`);
+
+      mapgroup
+      .append('image')
+      .attr('xlink:href','/data/maps/50percentBandW.png')
+      .attr('height', image.height)
+      .attr('width', image.width);
+      
+      mapgroup.selectAll("circle")
+          .data(data.players[playerId].events)
+          .enter()
+        .append("circle")
+          .attr("cx", function (d) { return d.location[0]*3.2 - 70; })
+          .attr("cy", function (d) { return d.location[1]*2 - 15; })
+          .attr("r", 1.5)
+          .attr("opacity", circleOpacity)
+          .attr("fill", function(d) {
+            return color(generalType(d.type));
+          });
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Rows Creation
+    |--------------------------------------------------------------------------
+    */
+
+    let rows = g
     .append("g")
-    .attr('transform', (d,i) => `translate(${i * 100},${-margin.top + 20})`)
-    .selectAll(".event")
-    .data(Object.keys(data.p1.apms))
+    .selectAll(".row")
+    .data(data.categories)
     .enter()
     .append("g")
-    .attr('transform', (d,i) => `translate(${i * 100},0)`);
+    .attr("data-event-id", d => console.log("event:", d))
+    .attr("transform", d => `translate(0, ${image.height + d.offset})`);
 
-    categories.append("circle")
-    .attr("cx", 7)
-    .attr("cy", 0)
-    .attr("r", 7)
-    .attr("fill", d => color(d));
+    /*
+    |--------------------------------------------------------------------------
+    | Row : Left Text
+    |--------------------------------------------------------------------------
+    */
 
-    categories.append("text")
-    .attr("x", 20)
-    .attr("y", 5)
-    .text(d => d.capitalize());
+    rows.append("text")
+    //.attr("x", -margin.left + 30)
+    //.attr("y", 100)
+    .attr("text-anchor", "end")
+    .attr("x", -10)
+    .attr("y", 100)
+    .attr("style", "font-weight: 600")
+    .text(d => d.name)
+    .attr("fill", d => color(d.id))
+    .attr("alignment-baseline", "hanging");
 
-    let categoryOffset = 0;
-    let nodeWidth = (d) => d.getBBox().width;
-    categories.attr('transform', function(d, i) {
-      let x = categoryOffset;
-      categoryOffset += nodeWidth(this) + 15;
-      return `translate(${x},0)`
-    });
-  
+    /*
+    |--------------------------------------------------------------------------
+    | Generate columns for each player
+    |--------------------------------------------------------------------------
+    */
+
+    for (let i = 0; i < data.players.length; i++) {
+
+      /*
+      |--------------------------------------------------------------------------
+      | Row : Player
+      |--------------------------------------------------------------------------
+      */
+
+      let player = rows.append("g")
+      .attr("transform", d => `translate(${i*(width/2)}, 0)`)
+      .call(hover, x);
+
+      /*
+      |--------------------------------------------------------------------------
+      | Row : Player : Background Rectangles
+      |--------------------------------------------------------------------------
+      */
+
+      player.append("rect")
+          .attr("x", 0)
+          .attr("y", 0)
+          .attr("width", x(data.duration) + column.gap)
+          .attr("height", d => d.height)
+          .attr("fill", "#fff");
+
+      player.append("rect")
+          .attr("x", 0)
+          .attr("y", 0)
+          .attr("width", x(data.duration))
+          .attr("height", d => d.height - row.margin.top - row.margin.bottom)
+          .attr("fill", d => color(d.id))
+          .attr("opacity", "0.1");
+
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Aggregation Graph
@@ -190,7 +302,7 @@
     |--------------------------------------------------------------------------
     */
 
-    for (let i = 1; i <= 2; i++) {
+    for (let i = 0; i < 2; i++) {
 
       /*
       |--------------------------------------------------------------------------
@@ -252,7 +364,7 @@
           .domain([0, MAX_UNIT_N]);
 
       // set the ranges
-      x.domain([0, data[`p${i}`].apms.camera.length]);
+      x.domain([0, data.duration]);
 
       /*
       |--------------------------------------------------------------------------
@@ -280,7 +392,7 @@
 
     let tooltipRows = d3.select("#tooltip")
     .selectAll(".row")
-    .data(uniq(data.categories.map(u => u.category)))
+    .data(uniq(data.categories.map(u => u.id)))
     .enter()
     .append("div")
     .attr("class", "row");
@@ -295,11 +407,11 @@
     tooltipTitle.append("span").text(d => d.capitalize());
 
     let tooltipUnits = tooltipRows
-    .selectAll(".unit")
-    .data(d => data.units.filter(u => u.category === d))
+    .selectAll(".category")
+    .data(d => data.categories.filter(u => u.id === d))
     .enter()
     .append("div")
-    .attr("class", "unit");
+    .attr("class", "category");
 
     tooltipUnits = tooltipUnits.append("div")
     .attr("class", "level");
@@ -311,9 +423,9 @@
     let counts = tooltipUnits.append("div")
     .attr("class", "count");
 
-    counts.append("span").attr("id", d => `tooltip-${d.id}-0`).text(d => data.players[0].unit_counts[d.id][1000]);
+    counts.append("span").attr("id", d => `tooltip-${d.id}-0`).text(d => data.players[0].apms[d.id][0]);
     counts.append("span").text("-");
-    counts.append("span").attr("id", d => `tooltip-${d.id}-1`).text(d => data.players[1].unit_counts[d.id][1000]);
+    counts.append("span").attr("id", d => `tooltip-${d.id}-1`).text(d => data.players[1].apms[d.id][0]);
 
     /**
      * React to mouse actions over a graph
@@ -381,9 +493,9 @@
         tooltipNode.attr("style", `transform: translate(${xTranslation}px,${yTranslation}px)`);
 
         // Update data displayed in tooltip
-        data.units.forEach(u => {
-          d3.select(`#tooltip-${u.id}-0`).text(d => data.players[0].unit_counts[d.id][time]);
-          d3.select(`#tooltip-${u.id}-1`).text(d => data.players[1].unit_counts[d.id][time])
+        data.categories.forEach(u => {
+          d3.select(`#tooltip-${u.id}-0`).text(d => data.players[0].apms[d.id][time]);
+          d3.select(`#tooltip-${u.id}-1`).text(d => data.players[1].apms[d.id][time])
         })
 
       } else {
@@ -402,67 +514,35 @@
         .attr("class", "");
       }
     }
-  
-  
+
+
+    // TODO: Remove data print at the end
+    console.log("data:", data);
+
   });
-
-
-
-  /*
-  let svg = d3.select("#events-viz").append("svg");
-
-  svg.attr("height", "200%")
-    .attr("width", "100%");
-
-  var promises = [];
-  console.log("test");
-
-  d3.json("../data/datafiles/actionstats/mock_data.json").then(function (data) {
-    var player1Events = data.events.player1;
-    var player2Events = data.events.player2;
-    var player1Apms   = data.apms.player1;
-    var player2Apms   = data.apms.player2;
-
-    let g = svg.append("g");
-
-    g.selectAll("circle")
-        .data(player1Events)
-        .enter()
-      .append("circle")
-        .attr("cx", function (d) { return d.location[0]; })
-        .attr("cy", function (d) { return d.location[1]; })
-        .attr("r", 2)
-        .attr("fill", function(d) {
-          if(d.event_type === "SelectionEvent") {
-            return "red";
-          } else if(d.event_type === "CommandEvent") {
-            return "blue";
-          } else {
-            return "green";
-          }
-        });
-
-    console.log(player1Events);
-    console.log(player1Events[0].location)
-  });
-  
-
-    
- */
-
-
-
-  //svg.style("background", "../data/maps/Catalyst_Iso.jpg");
-  /*
-    .attr("xlink:href", "../data/maps/Catalyst_Iso.jpg")
-    .attr("width", "100%")
-    .attr("height", "100%")
-    .attr("x", 100)
-    .attr("y", 100);*/
-
 
 })();
 
+/** Get general type of fine event type (like from TargetPointEvent to command event)*/
+function generalType(type) {
+  if(
+      type === "GetControlGroupEvent"
+        || type === "SelectionEvent"
+        || type === "SetControlGroupEvent"
+        || type === "AddToControlGroupEvent"
+    ) {
+      return "selection";
+  } else if(
+    type === "TargetPointCommandEvent"
+      || type === "TargetUnitCommandEvent"
+      || type === "BasicCommandEvent"
+      || type === "DataCommandEvent"
+  ) {
+    return "commands";
+  }
+  return "camera";
+  
+}
 /** Capitalize */
 String.prototype.capitalize = function () {
   return this.charAt(0).toUpperCase() + this.slice(1)
