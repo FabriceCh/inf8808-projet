@@ -178,7 +178,10 @@ def assemble_apmviz_data(replay_wrapper):
 
     apm_viz_data['game_length'] = max_length
 
-    return apm_viz_data
+    return {
+        'players': [apm_viz_data['p1'], apm_viz_data['p2']],
+        'game_length': max_length
+    }
 
 
 if __name__ == '__main__':
