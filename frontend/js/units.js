@@ -717,6 +717,7 @@
  */
 function units() {
 
+<<<<<<< Updated upstream
   return [
     { id: 'Probe', name: 'Probe', category: 'resource' },
     { id: 'Adept', name: 'Adept', category: 'resource' },
@@ -732,10 +733,26 @@ function units() {
     { id: 'Phoenix', name: 'Phoenix', category: 'flying' },
     { id: 'Sentry', name: 'Sentry', category: 'flying' },
     { id: 'Stalker', name: 'Stalker', category: 'flying' },
+=======
+    { id: 'Adept', name: 'Adept', category: 'basic ground' },
+    { id: 'Archon', name: 'Archon', category: 'advanced' },
+    { id: 'Carrier', name: 'Carrier', category: 'advanced' },
+    { id: 'Colossus', name: 'Colossus', category: 'advanced' },
+    { id: 'DarkTemplar', name: 'Dark Templar', category: 'advanced' },
+    { id: 'Disruptor', name: 'Disruptor', category: 'advanced' },
+    { id: 'HighTemplar', name: 'High Templar', category: 'advanced' },
+    { id: 'Immortal', name: 'Immortal', category: 'advanced' },
+    { id: 'Mothership', name: 'Mothership', category: 'advanced' },
+    { id: 'Observer', name: 'Observer', category: 'flying' },
+    { id: 'Phoenix', name: 'Phoenix', category: 'flying' },
+    { id: 'Probe', name: 'Probe', category: 'resource' },
+    { id: 'Sentry', name: 'Sentry', category: 'basic ground' },
+    { id: 'Stalker', name: 'Stalker', category: 'basic ground' },
+>>>>>>> Stashed changes
     { id: 'tempest', name: 'Tempest', category: 'flying' },
-    { id: 'VoidRay', name: 'Void Ray', category: 'offensive' },
-    { id: 'WarpPrism', name: 'Warp Prism', category: 'offensive' },
-    { id: 'Zealot', name: 'Zealot', category: 'offensive' },
+    { id: 'VoidRay', name: 'Void Ray', category: 'flying' },
+    { id: 'WarpPrism', name: 'Warp Prism', category: 'flying' },
+    { id: 'Zealot', name: 'Zealot', category: 'basic ground' },
   ];
 }
 

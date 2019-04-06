@@ -64,12 +64,12 @@
     let subPlotHeight = d3.max(maxPerCategory);
     //console.log("subPlotHeight:", subPlotHeight);
 
-    let numEventCategories = Object.keys(player1.apms).length;
+    let numEventCategories = Object.keys(players[0].apms).length;
     //console.log("numEventCategories:", numEventCategories);
 
     // Add event category information section
     data.categories = [];
-    Object.keys(player1.apms).forEach((eventCategory, i) => {
+    Object.keys(players[0].apms).forEach((eventCategory, i) => {
       let categoryInfo = {};
       categoryInfo.id = eventCategory;
       categoryInfo.name = eventCategory.capitalize();
@@ -86,6 +86,7 @@
 
     let height = subPlotHeight * numEventCategories;
     let fullHeight = height + margin.top + margin.bottom;
+    console.log(fullHeight);
 
     /*
     |--------------------------------------------------------------------------
@@ -109,11 +110,39 @@
     |--------------------------------------------------------------------------
     */
 
-    let svg = d3.select("#viz").attr("height", fullHeight);
+    let svg = d3.select("#viz").attr("height", fullHeight
+    //remove the + x here
+    + 600
+    );
 
     let g = svg
       .append("g")
       .attr("transform", `translate(${margin.left} ${margin.top})`);
+
+    
+    /*
+    |--------------------------------------------------------------------------
+    | Images group
+    |--------------------------------------------------------------------------
+    */
+
+    g
+    .append('image')
+    .attr('xlink:href','/data/maps/New_Repugnancy_Map_High_Res.jpg')
+    .attr('height', '316')
+    .attr('width', '400');
+    
+    g.selectAll("circle")
+        .data(data.p1.events)
+        .enter()
+      .append("circle")
+        .attr("cx", function (d) { return d.location[0]*3.4 - 70; })
+        .attr("cy", function (d) { return d.location[1]*2 - 15; })
+        .attr("r", 1.5)
+        .attr("fill", function(d) {
+          return color(generalType(d.type));
+        });
+
 
     /*
     |--------------------------------------------------------------------------
@@ -463,6 +492,26 @@
 
 })();
 
+/** Get general type of fine event type (like from TargetPointEvent to command event)*/
+function generalType(type) {
+  if(
+      type === "GetControlGroupEvent"
+        || type === "SelectionEvent"
+        || type === "SetControlGroupEvent"
+        || type === "AddToControlGroupEvent"
+    ) {
+      return "selection";
+  } else if(
+    type === "TargetPointCommandEvent"
+      || type === "TargetUnitCommandEvent"
+      || type === "BasicCommandEvent"
+      || type === "DataCommandEvent"
+  ) {
+    return "commands";
+  }
+  return "camera";
+  
+}
 /** Capitalize */
 String.prototype.capitalize = function () {
   return this.charAt(0).toUpperCase() + this.slice(1)
