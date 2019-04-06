@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  const filePath = "/data/unitcomposition/mockdata.json";
+  const filePath = "/datafiles/data.json";
 
   d3.json(filePath).then(function (data) {
 
@@ -56,8 +56,18 @@
     |--------------------------------------------------------------------------
     */
 
-    data = generateRandomData(game.duration);
+    const fake = generateRandomData(game.duration);
+    data.units = fake.units;
+
+    // DEBUG
+    console.log("real data:");
     console.log(data);
+    console.log("fake data:");
+    console.log(fake);
+
+    const USE_FAKE_DATA = true;
+    if (USE_FAKE_DATA) data = fake;
+
 
     /*
     |--------------------------------------------------------------------------
@@ -68,20 +78,29 @@
     |
     */
     
-    // For each unit, the height and vertial offset is calculated 
+    // For each unit, the height and vertical offset is calculated
     // to correctly position the rows on the graph.
     let offset = 0;
 
     data.units = data.units.map(u => {
       u.offset = offset;
-      u.height = Math.max(d3.max(data.players, p =>p.unit_lifetimes[u.id].length) * (line.height+line.gap) + row.margin.top + row.margin.bottom, 50);
+      u.height = Math.max(
+          d3.max(data.players, p => {
+            // console.log(u.id);
+            // console.log(p);
+            return p.unit_lifetimes[u.id] && p.unit_lifetimes[u.id].length || 0;
+          }) * (line.height+line.gap) + row.margin.top + row.margin.bottom,
+          50);
       offset += u.height;
       return u;
     });
 
-    // Sort unit_lifetimes 
+    // Sort unit_lifetimes
+    // console.log(data);
     data.players.forEach(p => {
       Object.keys(p.unit_lifetimes).forEach(key => {
+        // if (!p.unit_lifetimes[key])
+        // console.log(p.unit_lifetimes);
         p.unit_lifetimes[key] = p.unit_lifetimes[key].sort((a,b) => {
           return (a[0] > b[0]) ? 1 : -1;
         })
@@ -119,7 +138,10 @@
     |--------------------------------------------------------------------------
     */
 
-    let svg = d3.select("#viz").attr("height", fullHeight);
+    let svg = d3
+    .select("#viz")
+    .attr("height", fullHeight)
+    .attr("class", "tutorial");
 
     let g = svg
       .append("g")
@@ -374,7 +396,7 @@
           .domain([0, MAX_UNIT_N]);
 
       // set the ranges
-      x.domain([0, data.players[i].unit_counts.probe.length]);
+      x.domain([0, data.players[i].unit_counts[Object.keys(data.players[i].unit_counts)[0]].length]);
 
       // List of groups = header of the csv files
       const unitsNames     = Object.keys(data.players[i].unit_counts);
@@ -430,8 +452,19 @@
       .attr("y2", contentHeight)
       .attr("stroke", "#000")
       .attr("display", "none")
-  }
+    }
 
+    /*
+    |--------------------------------------------------------------------------
+    | Generate Tutorial Elements
+    |--------------------------------------------------------------------------
+    */
+    console.log(svg);
+    svg.append("rect")
+    .class("tutorial-box")
+    .attr("height", 50)
+    .attr("width", 100)
+    .attr("fill", "#000");
 
     /*
     |--------------------------------------------------------------------------
@@ -537,8 +570,6 @@
           xTranslation = event.x + tooltip.spacing;
         }
 
-        console.log(window.innerHeight - event.y);
-
         if (window.innerHeight - event.y < tooltipHeight) {
           yTranslation = event.y - tooltipHeight;
         }
@@ -580,29 +611,48 @@
 function generateRandomData(duration) {
 
   let units = [
-    { id: 'adept', name: 'Adept', category: 'resource' },
-    { id: 'archon', name: 'Archon', category: 'resource' },
-    { id: 'carrier', name: 'Carrier', category: 'resource' },
-    { id: 'colossus', name: 'Colossus', category: 'offensive' },
-    { id: 'dark-templar', name: 'Dark Templar', category: 'offensive' },
-    { id: 'disruptor', name: 'Disruptor', category: 'offensive' },
-    { id: 'high-templar', name: 'High Templar', category: 'offensive' },
-    { id: 'immortal', name: 'Immortal', category: 'offensive' },
-    { id: 'mothership', name: 'Mothership', category: 'scout' },
-    { id: 'observer', name: 'Observer', category: 'scout' },
-    { id: 'phoenix', name: 'Phoenix', category: 'flying' },
-    { id: 'probe', name: 'Probe', category: 'resource' },
-    { id: 'sentry', name: 'Sentry', category: 'flying' },
-    { id: 'stalker', name: 'Stalker', category: 'flying' },
+    // { id: 'adept', name: 'Adept', category: 'resource' },
+    // { id: 'archon', name: 'Archon', category: 'resource' },
+    // { id: 'carrier', name: 'Carrier', category: 'resource' },
+    // { id: 'colossus', name: 'Colossus', category: 'offensive' },
+    // { id: 'dark-templar', name: 'Dark Templar', category: 'offensive' },
+    // { id: 'disruptor', name: 'Disruptor', category: 'offensive' },
+    // { id: 'high-templar', name: 'High Templar', category: 'offensive' },
+    // { id: 'immortal', name: 'Immortal', category: 'offensive' },
+    // { id: 'mothership', name: 'Mothership', category: 'scout' },
+    // { id: 'observer', name: 'Observer', category: 'scout' },
+    // { id: 'phoenix', name: 'Phoenix', category: 'flying' },
+    // { id: 'probe', name: 'Probe', category: 'resource' },
+    // { id: 'sentry', name: 'Sentry', category: 'flying' },
+    // { id: 'stalker', name: 'Stalker', category: 'flying' },
+    // { id: 'tempest', name: 'Tempest', category: 'flying' },
+    // { id: 'void-ray', name: 'Void Ray', category: 'offensive' },
+    // { id: 'warp-prism', name: 'Warp Prism', category: 'offensive' },
+    // { id: 'zealot', name: 'Zealot', category: 'offensive' },
+
+    { id: 'Adept', name: 'Adept', category: 'resource' },
+    { id: 'Archon', name: 'Archon', category: 'resource' },
+    { id: 'Carrier', name: 'Carrier', category: 'resource' },
+    { id: 'Colossus', name: 'Colossus', category: 'offensive' },
+    { id: 'DarkTemplar', name: 'Dark Templar', category: 'offensive' },
+    { id: 'Disruptor', name: 'Disruptor', category: 'offensive' },
+    { id: 'HighTemplar', name: 'High Templar', category: 'offensive' },
+    { id: 'Immortal', name: 'Immortal', category: 'offensive' },
+    { id: 'Mothership', name: 'Mothership', category: 'scout' },
+    { id: 'Observer', name: 'Observer', category: 'scout' },
+    { id: 'Phoenix', name: 'Phoenix', category: 'flying' },
+    { id: 'Probe', name: 'Probe', category: 'resource' },
+    { id: 'Sentry', name: 'Sentry', category: 'flying' },
+    { id: 'Stalker', name: 'Stalker', category: 'flying' },
     { id: 'tempest', name: 'Tempest', category: 'flying' },
-    { id: 'void-ray', name: 'Void Ray', category: 'offensive' },
-    { id: 'warp-prism', name: 'Warp Prism', category: 'offensive' },
-    { id: 'zealot', name: 'Zealot', category: 'offensive' },
+    { id: 'VoidRay', name: 'Void Ray', category: 'offensive' },
+    { id: 'WarpPrism', name: 'Warp Prism', category: 'offensive' },
+    { id: 'Zealot', name: 'Zealot', category: 'offensive' },
   ];
 
   units = units.sort((a,b) => {
     return (a.category > b.category) ? 1 : -1
-  })
+  });
 
   data = {
     units: units,
@@ -634,7 +684,7 @@ function generateRandomData(duration) {
     })
   }
 
-  return data
+  return data;
 }
 
 /** Capitalize */

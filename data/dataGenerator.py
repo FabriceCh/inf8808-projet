@@ -37,6 +37,26 @@ def generate_unitcounts(**kwargs):
 
 
 def generate_unit_composition_data(**kwargs):
+    """
+    Generates a json with this format:
+    {
+        "players": [
+            {
+                "unit_lifetimes": {...}
+                "unit_counts": {...}
+            },
+            {
+                "unit_lifetimes": {...}
+                "unit_counts": {...}
+            }
+        ],
+        "units": [
+            { "id": "Probe", name: "Probe", ... },
+            ...
+        ]
+        "duration": 42
+    }
+    """
     replay = pysc2.SC2ReplayWrapper(kwargs.get('replay'))
     replay.categorize_unit_lifetime_events()
     categories = replay.categorize_unit_lifetime_events()
@@ -44,10 +64,15 @@ def generate_unit_composition_data(**kwargs):
 
     unit_composition = pysc2.prepare_data_for_visualisation(processed_data)
 
-    for key, value in unit_composition.items():
-        unit_lifetimes = value['unit_lifetimes']
-        unit_counts = generate_unitcounts(lifetime_dict=unit_lifetimes)
-        value['unit_counts'] = unit_counts
+    print(unit_composition)
+    for player in unit_composition['players']:
+        player['unit_counts'] = {}
+
+    # for key, value in unit_composition.items():
+    #     unit_lifetimes = value['unit_lifetimes']
+    #     value['unit_counts'] = generate_unitcounts(lifetime_dict=unit_lifetimes)
+
+    unit_composition['duration'] = 1800
 
     with open(OUTPUT_PATH + kwargs.get('output'), 'w+') as f:
         f.write(json.dumps(unit_composition, indent=2))
