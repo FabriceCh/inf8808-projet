@@ -180,46 +180,6 @@
             return color(generalType(d.type));
           });
     }
-    
-      
-    
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | Top Legend
-    |--------------------------------------------------------------------------
-    */
-
-    // TODO: Remove legend if not required in final design
-
-    let categories = g
-    .append("g")
-    .attr('transform', (d,i) => `translate(${i * 100},${-margin.top + 20})`)
-    .selectAll(".event")
-    .data(data.categories.map(c => c.id))
-    .enter()
-    .append("g")
-    .attr('transform', (d,i) => `translate(${i * 100},0)`);
-
-    categories.append("circle")
-    .attr("cx", 7)
-    .attr("cy", 0)
-    .attr("r", 7)
-    .attr("fill", d => color(d));
-
-    categories.append("text")
-    .attr("x", 20)
-    .attr("y", 5)
-    .text(d => d.capitalize());
-
-    let categoryOffset = 0;
-    let nodeWidth = (d) => d.getBBox().width;
-    categories.attr('transform', function(d, i) {
-      let x = categoryOffset;
-      categoryOffset += nodeWidth(this) + 15;
-      return `translate(${x},0)`
-    });
 
     /*
     |--------------------------------------------------------------------------
