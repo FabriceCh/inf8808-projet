@@ -5,6 +5,7 @@
   const filePath = "/data/actionstats/realdata.json";
 
   d3.json(filePath).then(function (data) {
+    //console.log("data:", data);
 
     /*
     |--------------------------------------------------------------------------
@@ -20,6 +21,12 @@
     };
 
     let width = 1344 - margin.left - margin.right;
+
+    // Tooltip settings
+    let tooltip = {
+      width: 250,
+      spacing: 10
+    };
 
     let row = {
       // Margin between rows
@@ -45,13 +52,15 @@
     | Preprocessing
     |--------------------------------------------------------------------------
     |
-    | Once the data is received, metadata is added for layout/styling purposes
+    | Once the data is received, data is restructured and metadata is added
+    | for layout/styling purposes
     |
     */
 
     // For each event category, the height and vertical offset is calculated
     // to correctly position the rows on the graph.
     let players = [data.p1, data.p2];
+    let player1 = players[0];
 
     let maxPerCategory = [];
     players.forEach(player => {
@@ -61,6 +70,7 @@
       });
     });
 
+    // TODO: Set plot heights dynamically?
     let subPlotHeight = d3.max(maxPerCategory);
     //console.log("subPlotHeight:", subPlotHeight);
 
@@ -77,6 +87,16 @@
       categoryInfo.height = subPlotHeight;
       data.categories.push(categoryInfo);
     });
+
+    // Organize player data as array
+    data.players = [];
+    players.forEach(playerData => data.players.push(playerData));
+    delete data.p1;
+    delete data.p2;
+
+    // Change game_length name to duration
+    data.duration = data.game_length;
+    delete data.game_length;
 
     /*
     |--------------------------------------------------------------------------
@@ -96,13 +116,14 @@
 
     // Color scale (based on the event category)
     let color = d3.scaleOrdinal()
-    .domain(Object.keys(data.p1.apms))
+    .domain(data.categories.map(c => c.id))
     .range(d3.schemeSet1);
 
     // x scales : for the two player columns
     let x = d3.scaleLinear()
     .domain([0, data.duration])
     .range([0, width/2 - column.gap/2]);
+    //console.log("duration:", data.duration)
 
     /*
     |--------------------------------------------------------------------------
@@ -156,7 +177,7 @@
     .append("g")
     .attr('transform', (d,i) => `translate(${i * 100},${-margin.top + 20})`)
     .selectAll(".event")
-    .data(Object.keys(data.p1.apms))
+    .data(data.categories.map(c => c.id))
     .enter()
     .append("g")
     .attr('transform', (d,i) => `translate(${i * 100},0)`);
@@ -179,6 +200,24 @@
       categoryOffset += nodeWidth(this) + 15;
       return `translate(${x},0)`
     });
+
+    /*
+    |--------------------------------------------------------------------------
+    | Rows Creation
+    |--------------------------------------------------------------------------
+    */
+
+    /*
+    let rows = g
+    .append("g")
+    .selectAll(".row")
+    .data(data.categories)
+    .enter()
+    .append("g")
+    .attr("data-event-id", d => console.log("event:", d));
+    */
+
+    //console.log(data.p1.apms);
   
     /*
     |--------------------------------------------------------------------------
@@ -219,7 +258,7 @@
     |--------------------------------------------------------------------------
     */
 
-    for (let i = 1; i <= 2; i++) {
+    for (let i = 0; i < 2; i++) {
 
       /*
       |--------------------------------------------------------------------------
@@ -281,7 +320,7 @@
           .domain([0, MAX_UNIT_N]);
 
       // set the ranges
-      x.domain([0, data[`p${i}`].apms.camera.length]);
+      x.domain([0, data.duration]);
 
       /*
       |--------------------------------------------------------------------------
@@ -309,7 +348,7 @@
 
     let tooltipRows = d3.select("#tooltip")
     .selectAll(".row")
-    .data(uniq(data.categories.map(u => u.category)))
+    .data(uniq(data.categories.map(u => u.id)))
     .enter()
     .append("div")
     .attr("class", "row");
@@ -324,11 +363,11 @@
     tooltipTitle.append("span").text(d => d.capitalize());
 
     let tooltipUnits = tooltipRows
-    .selectAll(".unit")
-    .data(d => data.units.filter(u => u.category === d))
+    .selectAll(".category")
+    .data(d => data.categories.filter(u => u.id === d))
     .enter()
     .append("div")
-    .attr("class", "unit");
+    .attr("class", "category");
 
     tooltipUnits = tooltipUnits.append("div")
     .attr("class", "level");
@@ -340,9 +379,9 @@
     let counts = tooltipUnits.append("div")
     .attr("class", "count");
 
-    counts.append("span").attr("id", d => `tooltip-${d.id}-0`).text(d => data.players[0].unit_counts[d.id][1000]);
+    counts.append("span").attr("id", d => `tooltip-${d.id}-0`).text(d => data.players[0].apms[d.id][0]);
     counts.append("span").text("-");
-    counts.append("span").attr("id", d => `tooltip-${d.id}-1`).text(d => data.players[1].unit_counts[d.id][1000]);
+    counts.append("span").attr("id", d => `tooltip-${d.id}-1`).text(d => data.players[1].apms[d.id][0]);
 
     /**
      * React to mouse actions over a graph
@@ -410,9 +449,9 @@
         tooltipNode.attr("style", `transform: translate(${xTranslation}px,${yTranslation}px)`);
 
         // Update data displayed in tooltip
-        data.units.forEach(u => {
-          d3.select(`#tooltip-${u.id}-0`).text(d => data.players[0].unit_counts[d.id][time]);
-          d3.select(`#tooltip-${u.id}-1`).text(d => data.players[1].unit_counts[d.id][time])
+        data.categories.forEach(u => {
+          d3.select(`#tooltip-${u.id}-0`).text(d => data.players[0].apms[d.id][time]);
+          d3.select(`#tooltip-${u.id}-1`).text(d => data.players[1].apms[d.id][time])
         })
 
       } else {
@@ -431,64 +470,12 @@
         .attr("class", "");
       }
     }
-  
-  
+
+
+    // TODO: Remove data print at the end
+    console.log("data:", data);
+
   });
-
-
-
-  /*
-  let svg = d3.select("#events-viz").append("svg");
-
-  svg.attr("height", "200%")
-    .attr("width", "100%");
-
-  var promises = [];
-  console.log("test");
-
-  d3.json("../data/datafiles/actionstats/mock_data.json").then(function (data) {
-    var player1Events = data.events.player1;
-    var player2Events = data.events.player2;
-    var player1Apms   = data.apms.player1;
-    var player2Apms   = data.apms.player2;
-
-    let g = svg.append("g");
-
-    g.selectAll("circle")
-        .data(player1Events)
-        .enter()
-      .append("circle")
-        .attr("cx", function (d) { return d.location[0]; })
-        .attr("cy", function (d) { return d.location[1]; })
-        .attr("r", 2)
-        .attr("fill", function(d) {
-          if(d.event_type === "SelectionEvent") {
-            return "red";
-          } else if(d.event_type === "CommandEvent") {
-            return "blue";
-          } else {
-            return "green";
-          }
-        });
-
-    console.log(player1Events);
-    console.log(player1Events[0].location)
-  });
-  
-
-    
- */
-
-
-
-  //svg.style("background", "../data/maps/Catalyst_Iso.jpg");
-  /*
-    .attr("xlink:href", "../data/maps/Catalyst_Iso.jpg")
-    .attr("width", "100%")
-    .attr("height", "100%")
-    .attr("x", 100)
-    .attr("y", 100);*/
-
 
 })();
 
