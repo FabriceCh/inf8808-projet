@@ -86,6 +86,10 @@
     data.p1 = undefined;
     data.p2 = undefined;
 
+    // Change game_length name to duration
+    data.duration = data.game_length;
+    data.game_length = undefined;
+
     /*
     |--------------------------------------------------------------------------
     | Dynamically set the height of the SVG with the calculated offset
@@ -108,8 +112,9 @@
 
     // x scales : for the two player columns
     let x = d3.scaleLinear()
-    .domain([0, data.game_length])
+    .domain([0, data.duration])
     .range([0, width/2 - column.gap/2]);
+    //console.log("duration:", data.duration)
 
     /*
     |--------------------------------------------------------------------------
