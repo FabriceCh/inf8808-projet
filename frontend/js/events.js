@@ -45,13 +45,15 @@
     | Preprocessing
     |--------------------------------------------------------------------------
     |
-    | Once the data is received, metadata is added for layout/styling purposes
+    | Once the data is received, data is restructured and metadata is added
+    | for layout/styling purposes
     |
     */
 
     // For each event category, the height and vertical offset is calculated
     // to correctly position the rows on the graph.
     let players = [data.p1, data.p2];
+    let player1 = players[0];
 
     let maxPerCategory = [];
     players.forEach(player => {
@@ -78,6 +80,12 @@
       data.categories.push(categoryInfo);
     });
 
+    // Organize player data as array
+    data.players = [];
+    players.forEach(playerData => data.players.push(playerData));
+    data.p1 = undefined;
+    data.p2 = undefined;
+
     /*
     |--------------------------------------------------------------------------
     | Dynamically set the height of the SVG with the calculated offset
@@ -95,7 +103,7 @@
 
     // Color scale (based on the event category)
     let color = d3.scaleOrdinal()
-    .domain(Object.keys(data.p1.apms))
+    .domain(data.categories.map(c => c.id))
     .range(d3.schemeSet1);
 
     // x scales : for the two player columns
@@ -127,12 +135,11 @@
     .append("g")
     .attr('transform', (d,i) => `translate(${i * 100},${-margin.top + 20})`)
     .selectAll(".event")
-    .data(Object.keys(data.p1.apms))
+    .data(data.categories.map(c => c.id))
     .enter()
     .append("g")
     .attr('transform', (d,i) => `translate(${i * 100},0)`);
-    console.log(Object.keys(data.p1.apms));
-    console.log(categories);
+    //console.log(categories);
 
     categories.append("circle")
     .attr("cx", 7)
