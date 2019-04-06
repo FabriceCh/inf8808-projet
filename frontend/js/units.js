@@ -50,6 +50,8 @@
       duration: 30 * 60 // duration of the game in seconds
     };
 
+    let activeTutorial = true;
+
     /*
     |--------------------------------------------------------------------------
     | Generate random data (TEMP)
@@ -508,6 +510,7 @@
       .attr("opacity", 1);
       tuto.transition()
       .style("opacity", 0);
+      activeTutorial = false;
     });
 
     tuto.append("text")
@@ -616,7 +619,7 @@
      */
     function interaction(time, event) {
 
-      if (time != null) {
+      if (time != null && !activeTutorial) {
         // Show line
         d3.selectAll(".interaction-line")
         .attr("display", "inline")
