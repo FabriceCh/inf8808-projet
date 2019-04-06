@@ -47,6 +47,12 @@
       gap: 1
     };
 
+    // Image section attributes
+    let image = {
+      width: 400,
+      height: 316
+    };
+
     /*
     |--------------------------------------------------------------------------
     | Preprocessing
@@ -166,8 +172,8 @@
       mapgroup
       .append('image')
       .attr('xlink:href','/data/maps/New_Repugnancy_Map_High_Res.jpg')
-      .attr('height', '316')
-      .attr('width', '400');
+      .attr('height', image.height)
+      .attr('width', image.width);
       
       mapgroup.selectAll("circle")
           .data(data.players[playerId].events)
@@ -194,7 +200,7 @@
     .enter()
     .append("g")
     .attr("data-event-id", d => console.log("event:", d))
-    .attr("transform", d => `translate(0,${d.offset})`);
+    .attr("transform", d => `translate(0, ${image.height + d.offset})`);
 
     /*
     |--------------------------------------------------------------------------
