@@ -77,6 +77,7 @@ def add_empties_for_missing_units_quick_fix(data):
         'Immortal',
         'Mothership',
         'Observer',
+        'Oracle',
         'Phoenix',
         'Probe',
         'Sentry',
@@ -84,7 +85,7 @@ def add_empties_for_missing_units_quick_fix(data):
         'VoidRay',
         'WarpPrism',
         'Zealot',
-        'tempest'
+        'Tempest'
     ]
 
 
