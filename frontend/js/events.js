@@ -71,7 +71,8 @@
     });
 
     // TODO: Set plot heights dynamically?
-    let subPlotHeight = d3.max(maxPerCategory);
+    let subPlotHeightConst = 15;
+    let subPlotHeight = d3.max(maxPerCategory) * subPlotHeightConst;
     //console.log("subPlotHeight:", subPlotHeight);
 
     let numEventCategories = Object.keys(player1.apms).length;
@@ -178,18 +179,73 @@
     |--------------------------------------------------------------------------
     */
 
-    /*
     let rows = g
     .append("g")
     .selectAll(".row")
     .data(data.categories)
     .enter()
     .append("g")
-    .attr("data-event-id", d => console.log("event:", d));
+    .attr("data-event-id", d => console.log("event:", d))
+    .attr("transform", d => `translate(0,${d.offset})`);
+
+    /*
+    |--------------------------------------------------------------------------
+    | Row : Left Text
+    |--------------------------------------------------------------------------
     */
 
-    //console.log(data.p1.apms);
-  
+    rows.append("text")
+    //.attr("x", -margin.left + 30)
+    //.attr("y", 100)
+    .attr("text-anchor", "end")
+    .attr("x", -10)
+    .attr("y", 100)
+    .attr("style", "font-weight: 600")
+    .text(d => d.name)
+    .attr("fill", d => color(d.id))
+    .attr("alignment-baseline", "hanging");
+
+    /*
+    |--------------------------------------------------------------------------
+    | Generate columns for each player
+    |--------------------------------------------------------------------------
+    */
+
+    for (let i = 0; i < data.players.length; i++) {
+
+      /*
+      |--------------------------------------------------------------------------
+      | Row : Player
+      |--------------------------------------------------------------------------
+      */
+
+      let player = rows.append("g")
+      .attr("transform", d => `translate(${i*(width/2)}, 0)`)
+      .call(hover, x);
+
+      /*
+      |--------------------------------------------------------------------------
+      | Row : Player : Background Rectangles
+      |--------------------------------------------------------------------------
+      */
+
+      player.append("rect")
+          .attr("x", 0)
+          .attr("y", 0)
+          .attr("width", x(data.duration) + column.gap)
+          .attr("height", d => d.height)
+          .attr("fill", "#fff");
+
+      player.append("rect")
+          .attr("x", 0)
+          .attr("y", 0)
+          .attr("width", x(data.duration))
+          .attr("height", d => d.height - row.margin.top - row.margin.bottom)
+          .attr("fill", d => color(d.id))
+          .attr("opacity", "0.1");
+
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Aggregation Graph
