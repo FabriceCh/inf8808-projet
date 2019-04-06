@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  const filePath = "/datafiles/data.json";
+  const filePath = "/datafiles/unit_data.json";
 
   d3.json(filePath).then(function (data) {
 

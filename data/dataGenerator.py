@@ -9,7 +9,7 @@ from functools import reduce
 
 REPLAY_FILE = 'replays/Harstem-vs-ShoWTimE-time1652.SC2Replay'
 OUTPUT_PATH = '../frontend/datafiles/'
-OUTPUT_FILE = 'data.json'
+UNIT_OUTPUT_FILE = 'unit_data.json'
 APM_OUTPUT_FILE = OUTPUT_PATH + 'action_stats_data.json'
 
 pp = pprint.PrettyPrinter(indent=4)
@@ -90,7 +90,7 @@ def generate_apm_data(**kwargs):
 if __name__ == "__main__":
     generate_unit_composition_data(
         replay=REPLAY_FILE,
-        output=OUTPUT_FILE)
+        output=UNIT_OUTPUT_FILE)
 
     generate_apm_data(
         replay=REPLAY_FILE,
