@@ -66,9 +66,11 @@
       });
     });
 
-    // TODO: Need to add this metadata to both categories but calculate the max of both because want rows to lineup
-    // TODO: Data preprocessing
-    offset = 920;
+    let subPlotHeight = d3.max(maxPerCategory);
+    //console.log("subPlotHeight:", subPlotHeight);
+
+    let numEventCategories = Object.keys(players[0].apms).length;
+    //console.log("numEventCategories:", numEventCategories);
 
     /*
     |--------------------------------------------------------------------------
@@ -76,8 +78,8 @@
     |--------------------------------------------------------------------------
     */
 
-    let fullHeight = offset;
-    let height = fullHeight - margin.top - margin.bottom;
+    let height = subPlotHeight * numEventCategories;
+    let fullHeight = height + margin.top + margin.bottom;
 
     /*
     |--------------------------------------------------------------------------
