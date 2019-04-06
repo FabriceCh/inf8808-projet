@@ -149,22 +149,39 @@
     |--------------------------------------------------------------------------
     */
 
-    g
-    .append('image')
-    .attr('xlink:href','/data/maps/New_Repugnancy_Map_High_Res.jpg')
-    .attr('height', '316')
-    .attr('width', '400');
+    let mapGroup1 = svg
+    .append("g");
     
-    g.selectAll("circle")
-        .data(data.players[0].events)
-        .enter()
-      .append("circle")
-        .attr("cx", function (d) { return d.location[0]*3.4 - 70; })
-        .attr("cy", function (d) { return d.location[1]*2 - 15; })
-        .attr("r", 1.5)
-        .attr("fill", function(d) {
-          return color(generalType(d.type));
-        });
+    let mapGroup2 = svg
+    .append("g");
+
+    renderMapGroup(mapGroup1, 0, 0);
+    renderMapGroup(mapGroup2, 1, 650);
+
+    function renderMapGroup(mapgroup, playerId, offset) {
+      mapgroup
+      .attr("transform", `translate(${margin.left + offset} ${margin.top})`);
+
+      mapgroup
+      .append('image')
+      .attr('xlink:href','/data/maps/New_Repugnancy_Map_High_Res.jpg')
+      .attr('height', '316')
+      .attr('width', '400');
+      
+      mapgroup.selectAll("circle")
+          .data(data.players[playerId].events)
+          .enter()
+        .append("circle")
+          .attr("cx", function (d) { return d.location[0]*3.2 - 70; })
+          .attr("cy", function (d) { return d.location[1]*2 - 15; })
+          .attr("r", 1.5)
+          .attr("fill", function(d) {
+            return color(generalType(d.type));
+          });
+    }
+    
+      
+    
 
 
     /*
