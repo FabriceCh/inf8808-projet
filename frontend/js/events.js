@@ -119,7 +119,7 @@
     // Color scale (based on the event category)
     let color = d3.scaleOrdinal()
     .domain(data.categories.map(c => c.id))
-    .range(d3.schemeSet1);
+    .range(["#FF0000", "#009933" , "#FFFF00"]);
 
     // x scales : for the two player columns
     let x = d3.scaleLinear()
