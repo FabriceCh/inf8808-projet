@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  const filePath = "/datafiles/data.json";
+  const filePath = "/datafiles/unit_data.json";
 
   d3.json(filePath).then(function (data) {
 
@@ -65,7 +65,7 @@
     console.log("fake data:");
     console.log(fake);
 
-    const USE_FAKE_DATA = true;
+    const USE_FAKE_DATA = false;
     if (USE_FAKE_DATA) data = fake;
 
 
