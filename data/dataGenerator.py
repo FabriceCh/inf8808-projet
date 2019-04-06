@@ -9,7 +9,7 @@ from functools import reduce
 
 REPLAY_FILE = 'replays/Harstem-vs-ShoWTimE-time1652.SC2Replay'
 OUTPUT_PATH = '../frontend/datafiles/'
-OUTPUT_FILE = 'data.json'
+UNIT_OUTPUT_FILE = 'unit_data.json'
 APM_OUTPUT_FILE = OUTPUT_PATH + 'action_stats_data.json'
 
 pp = pprint.PrettyPrinter(indent=4)
@@ -34,6 +34,69 @@ def generate_unitcounts(**kwargs):
 
     # pp.pprint(unit_counts)
     return unit_counts
+
+def lifetime_list_to_unit_counts(lifetime_list, duration):
+
+    born_time = 0
+    died_time = 1
+    counts = []
+    for i in range(duration):
+        count = 0
+        for u in lifetime_list:
+            if u[born_time] <= i < u[died_time]:
+                count += 1;
+        counts.append(count)
+
+    return counts
+
+
+
+def unit_lifetimes_to_unit_counts(unit_lifetimes, duration):
+    unit_counts = {}
+    for unit in unit_lifetimes:
+        lifetime_list = unit_lifetimes[unit]
+        counts = lifetime_list_to_unit_counts(lifetime_list, duration)
+        unit_counts[unit] = counts
+
+    # return unit_counts
+
+    return {unit: lifetime_list_to_unit_counts(unit_lifetimes[unit], duration)
+            for unit in unit_lifetimes}
+
+
+
+def add_empties_for_missing_units_quick_fix(data):
+    unit_list = [
+        'Adept',
+        'Archon',
+        'Carrier',
+        'Colossus',
+        'DarkTemplar',
+        'Disruptor',
+        'HighTemplar',
+        'Immortal',
+        'Mothership',
+        'Observer',
+        'Phoenix',
+        'Probe',
+        'Sentry',
+        'Stalker',
+        'VoidRay',
+        'WarpPrism',
+        'Zealot',
+        'tempest'
+    ]
+
+
+    for player_data in data['players']:
+        unit_lifetimes = player_data['unit_lifetimes']
+        unit_counts = player_data['unit_counts']
+        for unit_name in unit_list:
+            if unit_name not in unit_lifetimes:
+                unit_lifetimes[unit_name] = []
+            if unit_name not in unit_counts:
+                unit_counts[unit_name] = [0] * data['duration']
+
 
 
 def generate_unit_composition_data(**kwargs):
@@ -64,15 +127,14 @@ def generate_unit_composition_data(**kwargs):
 
     unit_composition = pysc2.prepare_data_for_visualisation(processed_data)
 
-    print(unit_composition)
+    unit_composition['duration'] = replay._replay.events[-1].second
+
     for player in unit_composition['players']:
-        player['unit_counts'] = {}
+        player_unit_lifetimes = player['unit_lifetimes']
+        player['unit_counts'] = unit_lifetimes_to_unit_counts(player_unit_lifetimes, unit_composition['duration'])
 
-    # for key, value in unit_composition.items():
-    #     unit_lifetimes = value['unit_lifetimes']
-    #     value['unit_counts'] = generate_unitcounts(lifetime_dict=unit_lifetimes)
 
-    unit_composition['duration'] = 1800
+    add_empties_for_missing_units_quick_fix(unit_composition)
 
     with open(OUTPUT_PATH + kwargs.get('output'), 'w+') as f:
         f.write(json.dumps(unit_composition, indent=2))
@@ -90,7 +152,7 @@ def generate_apm_data(**kwargs):
 if __name__ == "__main__":
     generate_unit_composition_data(
         replay=REPLAY_FILE,
-        output=OUTPUT_FILE)
+        output=UNIT_OUTPUT_FILE)
 
     generate_apm_data(
         replay=REPLAY_FILE,

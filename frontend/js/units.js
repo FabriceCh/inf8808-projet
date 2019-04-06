@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  const filePath = "/datafiles/data.json";
+  const filePath = "/datafiles/unit_data.json";
 
   d3.json(filePath).then(function (data) {
 
@@ -59,13 +59,7 @@
     const fake = generateRandomData(game.duration);
     data.units = fake.units;
 
-    // DEBUG
-    console.log("real data:");
-    console.log(data);
-    console.log("fake data:");
-    console.log(fake);
-
-    const USE_FAKE_DATA = true;
+    const USE_FAKE_DATA = false;
     if (USE_FAKE_DATA) data = fake;
 
 
@@ -86,8 +80,6 @@
       u.offset = offset;
       u.height = Math.max(
           d3.max(data.players, p => {
-            // console.log(u.id);
-            // console.log(p);
             return p.unit_lifetimes[u.id] && p.unit_lifetimes[u.id].length || 0;
           }) * (line.height+line.gap) + row.margin.top + row.margin.bottom,
           50);
@@ -96,11 +88,8 @@
     });
 
     // Sort unit_lifetimes
-    // console.log(data);
     data.players.forEach(p => {
       Object.keys(p.unit_lifetimes).forEach(key => {
-        // if (!p.unit_lifetimes[key])
-        // console.log(p.unit_lifetimes);
         p.unit_lifetimes[key] = p.unit_lifetimes[key].sort((a,b) => {
           return (a[0] > b[0]) ? 1 : -1;
         })
@@ -146,6 +135,8 @@
     let g = svg
       .append("g")
       .attr("transform", `translate(${margin.left} ${margin.top})`);
+
+    createDefs(svg);
 
     /*
     |--------------------------------------------------------------------------
@@ -193,6 +184,7 @@
     .data(data.units)
     .enter()
     .append("g")
+    .attr("class", (d,i) => `group group-${i}`)
     .attr("data-unit-id", d => d.id)
     .attr("transform", d => `translate(0,${d.offset})`);
 
@@ -268,10 +260,12 @@
       */
 
       player.append("g")
+      .attr("class", `player-row-${i}`)
       .selectAll(".line")
       .data(d => data.players[i].unit_lifetimes[d.id])
       .enter()
       .append("line")
+      .attr("class", (d,i) => `lifetime lifetime-${i}`)
       .attr("x1", d => d[0] / game.duration * (width/2 - column.gap/2))
       .attr("x2", d => d[1] / game.duration * (width/2 - column.gap/2))
       .attr("y1", (d,i) => i*(line.height+line.gap))
@@ -322,10 +316,10 @@
     let contentHeight = height - padding.top - padding.bottom;
 
     // Select new SVG
-    svg = d3.select("#aggregation").attr("height", fullHeight);
+    let svg2 = d3.select("#aggregation").attr("height", fullHeight);
 
     // Create base group
-    g = svg
+    let g2 = svg2
     .append("g")
     .attr("transform", `translate(${margin.left} ${margin.top})`);
 
@@ -343,7 +337,7 @@
       |--------------------------------------------------------------------------
       */
 
-      let content = g.append("g")
+      let content = g2.append("g")
       .attr("transform", d => `translate(${i*(width/2)},0)`)
       .call(hover, x);
 
@@ -405,6 +399,7 @@
       let stackedChartDataset = [];
       const maxTimeUnit = d3.max(unitQuantities.map(x => x.length));
       let timeUnit = 0;
+
       while (timeUnit < maxTimeUnit) {
         stackedChartDataset.push({});
         timeUnit++;
@@ -459,12 +454,83 @@
     | Generate Tutorial Elements
     |--------------------------------------------------------------------------
     */
-    console.log(svg);
-    svg.append("rect")
-    .class("tutorial-box")
-    .attr("height", 50)
-    .attr("width", 100)
-    .attr("fill", "#000");
+
+    let numberOfLines = g.selectAll(".group-0 .player-row-0 .lifetime")._groups[0].length;
+    let highlightedLine = g.select(`.group-0 .player-row-0 .lifetime-${parseInt(numberOfLines/2)}`);
+
+    let tuto = g.append("g")
+    .attr("class", "tutorial")
+    .attr("transform", `translate(${highlightedLine.attr("x1")},${parseInt(highlightedLine.attr("y1")) + 30})`)
+    .style("opacity", "0");
+
+    let tutoHeight = 142;
+    let tutoWidth = 300;
+    let tutoMargin = {
+      top: 25,
+      left: 20,
+      right: 20,
+      bottom: 25
+    }
+    let tutoTextHeight = 60
+
+    tuto.append("svg:image")
+    .attr("x", tutoWidth / 2)
+    .attr("y", -tutoMargin.top)
+    .attr("width", 20)
+    .attr("xlink:href", d => `/img/pointer.svg`);
+
+    tuto.append("rect")
+    .attr("class", "tutorial-box")
+    .attr("height", tutoHeight)
+    .attr("width", tutoWidth)
+    .attr("fill", "#fff")
+    .attr("rx", 4)
+    .attr("ry", 4)
+    .style("filter", "url(#drop-shadow)");
+
+    tuto.append("text")
+    .attr("y", tutoMargin.top)
+    .attr("x", tutoMargin.left)
+    .attr("style", "font-size: 0.9rem")
+    .text(`One line represents the lifetime of a single unit in a game. This line shows the lifetime a of a ${data.units[0].name} from creation to death.`)
+    .call(wrap, tutoWidth - tutoMargin.left - tutoMargin.right);
+
+    tuto.append("rect")
+    .attr("y", tutoTextHeight + 30)
+    .attr("x", 20)
+    .attr("width", 105)
+    .attr("height", 35)
+    .attr("rx", 4)
+    .attr("ry", 4)
+    .attr("style", "cursor: pointer;")
+    .on("click", function(){
+      g.selectAll(".lifetime")
+      .attr("opacity", 1);
+      tuto.transition()
+      .style("opacity", 0);
+    });
+
+    tuto.append("text")
+    .attr("y", tutoTextHeight + 53)
+    .attr("x", 35)
+    .attr("fill", "#fff")
+    .attr("style", "font-size: 0.9rem; font-weight: 500; pointer-events: none;")
+    .text("Ok, got it!");
+
+    // Transitions
+
+    tuto.transition()
+    .delay(800)
+    .duration(400)
+    .style("opacity", "1");
+
+    g.selectAll(".lifetime")
+    .attr("opacity", "0.2");
+
+    highlightedLine
+    .transition()
+    .delay(100)
+    .attr("opacity", "1");
 
     /*
     |--------------------------------------------------------------------------
@@ -598,6 +664,44 @@
         .attr("class", "");
       }
     }
+
+    /**
+     * Wrap Text
+     * @param {*} text 
+     * @param {*} width 
+     */
+    function wrap(text, width) {
+      text.each(function () {
+        var text = d3.select(this),
+          words = text.text().split(/\s+/).reverse(),
+          word,
+          line = [],
+          lineNumber = 0,
+          lineHeight = 1.1, // ems
+          x = text.attr("x"),
+          y = text.attr("y"),
+          dy = 0, //parseFloat(text.attr("dy")),
+          tspan = text.text(null)
+                      .append("tspan")
+                      .attr("x", x)
+                      .attr("y", y)
+                      .attr("dy", dy + "em");
+        while (word = words.pop()) {
+          line.push(word);
+          tspan.text(line.join(" "));
+          if (tspan.node().getComputedTextLength() > width) {
+            line.pop();
+            tspan.text(line.join(" "));
+            line = [word];
+            tspan = text.append("tspan")
+                        .attr("x", x)
+                        .attr("y", y)
+                        .attr("dy", ++lineNumber * lineHeight + dy + "em")
+                        .text(word);
+          }
+        }
+    });
+  }
     
   });
 
@@ -630,6 +734,7 @@ function generateRandomData(duration) {
     // { id: 'warp-prism', name: 'Warp Prism', category: 'offensive' },
     // { id: 'zealot', name: 'Zealot', category: 'offensive' },
 
+    { id: 'Probe', name: 'Probe', category: 'resource' },
     { id: 'Adept', name: 'Adept', category: 'resource' },
     { id: 'Archon', name: 'Archon', category: 'resource' },
     { id: 'Carrier', name: 'Carrier', category: 'resource' },
@@ -641,7 +746,6 @@ function generateRandomData(duration) {
     { id: 'Mothership', name: 'Mothership', category: 'scout' },
     { id: 'Observer', name: 'Observer', category: 'scout' },
     { id: 'Phoenix', name: 'Phoenix', category: 'flying' },
-    { id: 'Probe', name: 'Probe', category: 'resource' },
     { id: 'Sentry', name: 'Sentry', category: 'flying' },
     { id: 'Stalker', name: 'Stalker', category: 'flying' },
     { id: 'tempest', name: 'Tempest', category: 'flying' },
@@ -649,10 +753,6 @@ function generateRandomData(duration) {
     { id: 'WarpPrism', name: 'Warp Prism', category: 'offensive' },
     { id: 'Zealot', name: 'Zealot', category: 'offensive' },
   ];
-
-  units = units.sort((a,b) => {
-    return (a.category > b.category) ? 1 : -1
-  });
 
   data = {
     units: units,
@@ -728,4 +828,42 @@ function uniq(a) {
   return a.filter(function(item) {
       return seen.hasOwnProperty(item) ? false : (seen[item] = true);
   })
+}
+
+function createDefs(svg) {
+  // filters go in defs element
+  var defs = svg.append("defs");
+
+  // create filter with id #drop-shadow
+  // height=130% so that the shadow is not clipped
+  var filter = defs.append("filter")
+    .attr("id", "drop-shadow")
+    .attr("height", "130%");
+
+  // SourceAlpha refers to opacity of graphic that this filter will be applied to
+  // convolve that with a Gaussian with standard deviation 3 and store result
+  // in blur
+  filter.append("feGaussianBlur")
+    .attr("in", "SourceAlpha")
+    .attr("stdDeviation", 3);
+
+  // translate output of Gaussian blur to the right and downwards with 2px
+  // store result in offsetBlur
+  filter.append("feOffset")
+    .attr("dx", 3)
+    .attr("dy", 3);
+
+  filter.append("feComponentTransfer")
+    .append("feFuncA")
+    .attr("type", "linear")
+    .attr("slope", 0.2);
+
+  // overlay original SourceGraphic over translated blurred opacity by using
+  // feMerge filter. Order of specifying inputs is important!
+  var feMerge = filter.append("feMerge");
+
+  feMerge.append("feMergeNode")
+    .attr("in", "offsetBlur")
+  feMerge.append("feMergeNode")
+    .attr("in", "SourceGraphic");
 }
