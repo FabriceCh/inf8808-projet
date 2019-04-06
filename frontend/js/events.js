@@ -58,15 +58,13 @@
 
     let players = [data.p1, data.p2];
 
-    let max_per_category = [];
+    let maxPerCategory = [];
     players.forEach(player => {
-      Object.keys(player.apms).forEach(event_category => {
-        //console.log(player.apms[event_category]);
-        max_per_category.push(d3.max(player.apms[event_category]));
+      Object.keys(player.apms).forEach(eventCategory => {
+        //console.log(player.apms[eventCategory]);
+        maxPerCategory.push(d3.max(player.apms[eventCategory]));
       });
     });
-    let max_count = d3.max(max_per_category);
-    //console.log(max_count);
 
     players.forEach(player => {
       Object.keys(player.apms).forEach(event_category => {
