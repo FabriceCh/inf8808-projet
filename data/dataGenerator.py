@@ -127,7 +127,7 @@ def generate_unit_composition_data(**kwargs):
 
     unit_composition = pysc2.prepare_data_for_visualisation(processed_data)
 
-    unit_composition['duration'] = 1800
+    unit_composition['duration'] = replay._replay.events[-1].second
 
     for player in unit_composition['players']:
         player_unit_lifetimes = player['unit_lifetimes']
