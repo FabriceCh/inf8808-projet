@@ -430,10 +430,7 @@
             .enter()
             .append("path")
             .attr("d", area)
-            .style("fill", (d, i) => {
-              console.log(d.key, data.units.filter(u => u.id == d.key)[0])
-              return color(data.units.filter(u => u.id == d.key)[0].category);
-            });
+            .style("fill", d =>color(data.units.filter(u => u.id == d.key)[0].category));
       /*
       |--------------------------------------------------------------------------
       | Row : Column : Interaction Vertical Line
@@ -543,6 +540,20 @@
 
     // Display data in tooltip
 
+    let tooltipHeader = d3.select("#tooltip")
+    .append("h2")
+    .attr("class", "title is-5");
+
+    tooltipHeader
+    .append("span")
+    .text("Time: ");
+
+    tooltipHeader
+    .append("span")
+    .attr("class", "time")
+    .text("0");
+
+
     let tooltipRows = d3.select("#tooltip")
     .selectAll(".row")
     .data(uniq(data.units.map(u => u.category)))
@@ -646,6 +657,7 @@
         tooltipNode.attr("style", `transform: translate(${xTranslation}px,${yTranslation}px)`);
 
         // Update data displayed in tooltip
+        tooltipNode.select("h2 .time").text(time); 
         data.units.forEach(u => {
           d3.select(`#tooltip-${u.id}-0`).text(d => data.players[0].unit_counts[d.id][time]);
           d3.select(`#tooltip-${u.id}-1`).text(d => data.players[1].unit_counts[d.id][time])
@@ -711,9 +723,9 @@
 })();
 
 /**
- * Generate random data (mocking purposes)
+ * Units
  * 
- * @param {*} duration 
+ * @returns array 
  */
 function units() {
 
@@ -729,10 +741,12 @@ function units() {
     { id: 'HighTemplar', name: 'High Templar', category: 'offensive' },
     { id: 'Immortal', name: 'Immortal', category: 'offensive' },
     { id: 'Mothership', name: 'Mothership', category: 'scout' },
+    { id: 'Oracle', name: 'Oracle', category: 'scout' },
     { id: 'Observer', name: 'Observer', category: 'scout' },
     { id: 'Phoenix', name: 'Phoenix', category: 'flying' },
     { id: 'Sentry', name: 'Sentry', category: 'flying' },
     { id: 'Stalker', name: 'Stalker', category: 'flying' },
+<<<<<<< HEAD
 =======
     { id: 'Adept', name: 'Adept', category: 'basic ground' },
     { id: 'Archon', name: 'Archon', category: 'advanced' },
@@ -753,6 +767,12 @@ function units() {
     { id: 'VoidRay', name: 'Void Ray', category: 'flying' },
     { id: 'WarpPrism', name: 'Warp Prism', category: 'flying' },
     { id: 'Zealot', name: 'Zealot', category: 'basic ground' },
+=======
+    { id: 'Tempest', name: 'Tempest', category: 'flying' },
+    { id: 'VoidRay', name: 'Void Ray', category: 'offensive' },
+    { id: 'WarpPrism', name: 'Warp Prism', category: 'offensive' },
+    { id: 'Zealot', name: 'Zealot', category: 'offensive' },
+>>>>>>> 9ffd6c6d726b54c3243cc5503f36053bd75322ca
   ];
 }
 
