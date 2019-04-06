@@ -98,6 +98,8 @@
     data.duration = data.game_length;
     delete data.game_length;
 
+    console.log(data);
+
     /*
     |--------------------------------------------------------------------------
     | Dynamically set the height of the SVG with the calculated offset
@@ -154,7 +156,7 @@
     .attr('width', '400');
     
     g.selectAll("circle")
-        .data(data.p1.events)
+        .data(data.players[0].events)
         .enter()
       .append("circle")
         .attr("cx", function (d) { return d.location[0]*3.4 - 70; })
