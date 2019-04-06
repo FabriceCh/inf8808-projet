@@ -64,8 +64,19 @@
     let subPlotHeight = d3.max(maxPerCategory);
     //console.log("subPlotHeight:", subPlotHeight);
 
-    let numEventCategories = Object.keys(players[0].apms).length;
+    let numEventCategories = Object.keys(player1.apms).length;
     //console.log("numEventCategories:", numEventCategories);
+
+    // Add event category information section
+    data.categories = [];
+    Object.keys(player1.apms).forEach((eventCategory, i) => {
+      let categoryInfo = {};
+      categoryInfo.id = eventCategory;
+      categoryInfo.name = eventCategory.capitalize();
+      categoryInfo.offset = i * subPlotHeight;
+      categoryInfo.height = subPlotHeight;
+      data.categories.push(categoryInfo);
+    });
 
     /*
     |--------------------------------------------------------------------------
