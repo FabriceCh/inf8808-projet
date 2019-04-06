@@ -4,9 +4,6 @@
   // TODO: Change for correct data filepath
   const filePath = "/data/actionstats/realdata.json";
 
-  // TODO: Remove this print statement
-  console.log("Test");
-
   d3.json(filePath).then(function (data) {
 
     /*
@@ -54,8 +51,6 @@
 
     // For each event category, the height and vertical offset is calculated
     // to correctly position the rows on the graph.
-    let offset = 0;
-
     let players = [data.p1, data.p2];
 
     let maxPerCategory = [];
