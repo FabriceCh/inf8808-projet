@@ -730,27 +730,7 @@
 function units() {
 
   return [
-    /*
-    { id: 'Probe', name: 'Probe', category: 'resource' },
-    { id: 'Adept', name: 'Adept', category: 'resource' },
-    { id: 'Archon', name: 'Archon', category: 'resource' },
-    { id: 'Carrier', name: 'Carrier', category: 'resource' },
-    { id: 'Colossus', name: 'Colossus', category: 'offensive' },
-    { id: 'DarkTemplar', name: 'Dark Templar', category: 'offensive' },
-    { id: 'Disruptor', name: 'Disruptor', category: 'offensive' },
-    { id: 'HighTemplar', name: 'High Templar', category: 'offensive' },
-    { id: 'Immortal', name: 'Immortal', category: 'offensive' },
-    { id: 'Mothership', name: 'Mothership', category: 'scout' },
-    { id: 'Oracle', name: 'Oracle', category: 'scout' },
-    { id: 'Observer', name: 'Observer', category: 'scout' },
-    { id: 'Phoenix', name: 'Phoenix', category: 'flying' },
-    { id: 'Sentry', name: 'Sentry', category: 'flying' },
-    { id: 'Stalker', name: 'Stalker', category: 'flying' },
-    { id: 'Tempest', name: 'Tempest', category: 'flying' },
-    { id: 'VoidRay', name: 'Void Ray', category: 'offensive' },
-    { id: 'WarpPrism', name: 'Warp Prism', category: 'offensive' },
-    { id: 'Zealot', name: 'Zealot', category: 'offensive' },
-*/
+    
     { id: 'Probe', name: 'Probe', category: 'resource' },
     { id: 'Zealot', name: 'Zealot', category: 'basic ground' },
     { id: 'Adept', name: 'Adept', category: 'basic ground' },
@@ -765,11 +745,11 @@ function units() {
     { id: 'Observer', name: 'Observer', category: 'flying' },
     { id: 'WarpPrism', name: 'Warp Prism', category: 'flying' },
     { id: 'Phoenix', name: 'Phoenix', category: 'flying' },
-    { id: 'Oracle', name: 'Oracle', category: 'scout' },
+    { id: 'Oracle', name: 'Oracle', category: 'flying' },
     { id: 'VoidRay', name: 'Void Ray', category: 'flying' },
     { id: 'Tempest', name: 'Tempest', category: 'flying' },
     { id: 'Carrier', name: 'Carrier', category: 'flying' },
-    { id: 'Mothership', name: 'Mothership', category: 'advanced' },
+    { id: 'Mothership', name: 'Mothership', category: 'flying' },
 
   ];
 }

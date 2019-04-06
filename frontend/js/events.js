@@ -164,7 +164,7 @@
 
       mapgroup
       .append('image')
-      .attr('xlink:href','/data/maps/New_Repugnancy_Map_High_Res.jpg')
+      .attr('xlink:href','/data/maps/50percentBandW.png')
       .attr('height', '316')
       .attr('width', '400');
       
