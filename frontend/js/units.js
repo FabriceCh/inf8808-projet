@@ -59,12 +59,6 @@
     const fake = generateRandomData(game.duration);
     data.units = fake.units;
 
-    // DEBUG
-    console.log("real data:");
-    console.log(data);
-    console.log("fake data:");
-    console.log(fake);
-
     const USE_FAKE_DATA = false;
     if (USE_FAKE_DATA) data = fake;
 
@@ -86,8 +80,6 @@
       u.offset = offset;
       u.height = Math.max(
           d3.max(data.players, p => {
-            // console.log(u.id);
-            // console.log(p);
             return p.unit_lifetimes[u.id] && p.unit_lifetimes[u.id].length || 0;
           }) * (line.height+line.gap) + row.margin.top + row.margin.bottom,
           50);
@@ -96,11 +88,8 @@
     });
 
     // Sort unit_lifetimes
-    // console.log(data);
     data.players.forEach(p => {
       Object.keys(p.unit_lifetimes).forEach(key => {
-        // if (!p.unit_lifetimes[key])
-        // console.log(p.unit_lifetimes);
         p.unit_lifetimes[key] = p.unit_lifetimes[key].sort((a,b) => {
           return (a[0] > b[0]) ? 1 : -1;
         })
@@ -745,6 +734,7 @@ function generateRandomData(duration) {
     // { id: 'warp-prism', name: 'Warp Prism', category: 'offensive' },
     // { id: 'zealot', name: 'Zealot', category: 'offensive' },
 
+    { id: 'Probe', name: 'Probe', category: 'resource' },
     { id: 'Adept', name: 'Adept', category: 'resource' },
     { id: 'Archon', name: 'Archon', category: 'resource' },
     { id: 'Carrier', name: 'Carrier', category: 'resource' },
@@ -756,7 +746,6 @@ function generateRandomData(duration) {
     { id: 'Mothership', name: 'Mothership', category: 'scout' },
     { id: 'Observer', name: 'Observer', category: 'scout' },
     { id: 'Phoenix', name: 'Phoenix', category: 'flying' },
-    { id: 'Probe', name: 'Probe', category: 'resource' },
     { id: 'Sentry', name: 'Sentry', category: 'flying' },
     { id: 'Stalker', name: 'Stalker', category: 'flying' },
     { id: 'tempest', name: 'Tempest', category: 'flying' },
@@ -764,10 +753,6 @@ function generateRandomData(duration) {
     { id: 'WarpPrism', name: 'Warp Prism', category: 'offensive' },
     { id: 'Zealot', name: 'Zealot', category: 'offensive' },
   ];
-
-  units = units.sort((a,b) => {
-    return (a.category > b.category) ? 1 : -1
-  });
 
   data = {
     units: units,
