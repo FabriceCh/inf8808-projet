@@ -138,7 +138,10 @@
     |--------------------------------------------------------------------------
     */
 
-    let svg = d3.select("#viz").attr("height", fullHeight);
+    let svg = d3
+    .select("#viz")
+    .attr("height", fullHeight)
+    .attr("class", "tutorial");
 
     let g = svg
       .append("g")
@@ -393,7 +396,7 @@
           .domain([0, MAX_UNIT_N]);
 
       // set the ranges
-      x.domain([0, data.players[i].unit_counts.probe.length]);
+      x.domain([0, data.players[i].unit_counts[Object.keys(data.players[i].unit_counts)[0]].length]);
 
       // List of groups = header of the csv files
       const unitsNames     = Object.keys(data.players[i].unit_counts);
@@ -449,8 +452,19 @@
       .attr("y2", contentHeight)
       .attr("stroke", "#000")
       .attr("display", "none")
-  }
+    }
 
+    /*
+    |--------------------------------------------------------------------------
+    | Generate Tutorial Elements
+    |--------------------------------------------------------------------------
+    */
+    console.log(svg);
+    svg.append("rect")
+    .class("tutorial-box")
+    .attr("height", 50)
+    .attr("width", 100)
+    .attr("fill", "#000");
 
     /*
     |--------------------------------------------------------------------------
