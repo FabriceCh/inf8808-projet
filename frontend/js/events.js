@@ -125,7 +125,7 @@
     .enter()
     .append("g")
     .attr('transform', (d,i) => `translate(${i * 100},0)`);
-    console.log(uniq(data.apms.player1.map(u => u.type)));
+    console.log(Object.keys(data.p1.apms));
     console.log(categories);
 
     categories.append("circle")
