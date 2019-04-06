@@ -51,6 +51,8 @@
     };
 
     let activeTutorial = true;
+    let showProbe = true;
+    let probeId = "Probe";
 
     /*
     |--------------------------------------------------------------------------
@@ -302,7 +304,7 @@
     margin.bottom = 0;
 
     let padding = {
-      top: 10,
+      top: 50,
       bottom: 10,
       left: 0,
       right: 0
@@ -321,6 +323,40 @@
     .append("g")
     .attr("transform", `translate(${margin.left} ${margin.top})`);
 
+    let areaHeader = svg2.append("g")
+    .attr("transform", `translate(${margin.left}, 0)`);
+
+    areaHeader.append("rect")
+    .attr("height", 30)
+    .attr("width", 100)
+    .attr("y", 10)
+    .attr("rx", 4)
+    .attr("ry", 4)
+    .style("cursor", "pointer")
+    .attr("fill", "#f1f1f1")
+    .on("click", d => {
+      if (showProbe) {
+        areaHeader.select("text").text("Show Probes");
+        areaHeader.select("rect").attr("width", 105);        
+      } else {
+        areaHeader.select("text").text("Hide Probes");
+        areaHeader.select("rect").attr("width", 100);        
+      }
+
+      showProbe = !showProbe;
+
+      generateStackArea();
+    });
+
+    areaHeader.append("text")
+    .attr("x", 10)
+    .attr("y", 30)
+    .attr("fill", "#333")
+    .style("font-size", "0.9rem")
+    .style("pointer-events", "none")
+    .text("Hide Probes");
+
+  
     /*
     |--------------------------------------------------------------------------
     | Generate each columns for each player
@@ -379,58 +415,9 @@
       | Area Chart for each player
       |--------------------------------------------------------------------------
       */
-      let areaChart = player.append("g").attr("class", "area-chart");
 
-      const MAX_UNIT_N = 60;
-      let y = d3
-          .scaleLinear()
-          .range([contentHeight, 0])
-          .domain([0, MAX_UNIT_N]);
-
-      // set the ranges
-      x.domain([0, data.players[i].unit_counts[Object.keys(data.players[i].unit_counts)[0]].length]);
-
-      // List of groups = header of the csv files
-      const unitsNames     = Object.keys(data.players[i].unit_counts);
-      const unitQuantities = Object.values(data.players[i].unit_counts);
-
-      let stackedChartDataset = [];
-      const maxTimeUnit = d3.max(unitQuantities.map(x => x.length));
-      let timeUnit = 0;
-
-      while (timeUnit < maxTimeUnit) {
-        stackedChartDataset.push({});
-        timeUnit++;
-      }
-      for (let i in stackedChartDataset) {
-        for (let j in unitQuantities) {
-          stackedChartDataset[i][unitsNames[j]] = unitQuantities[j][i];
-        }
-      }
-
-      const series = d3.stack()
-          .keys(unitsNames)
-          (stackedChartDataset);
-
-      const area = d3.area()
-          .curve(d3.curveCardinal)
-          .x( function (d,i) {
-            return x(i);
-          })
-          .y0(function(d) {
-            return y(d[0]);
-          })
-          .y1(function(d) {
-            return y(d[1]);
-          });
-
-        areaChart
-            .selectAll("path")
-            .data(series)
-            .enter()
-            .append("path")
-            .attr("d", area)
-            .style("fill", d =>color(data.units.filter(u => u.id == d.key)[0].category));
+      player.append("g").attr("class", `area-chart-${i}`);
+      
       /*
       |--------------------------------------------------------------------------
       | Row : Column : Interaction Vertical Line
@@ -447,6 +434,8 @@
       .attr("display", "none")
     }
 
+    generateStackArea();
+
     /*
     |--------------------------------------------------------------------------
     | Generate Tutorial Elements
@@ -454,11 +443,12 @@
     */
 
     let numberOfLines = g.selectAll(".group-0 .player-row-0 .lifetime")._groups[0].length;
+
     let highlightedLine = g.select(`.group-0 .player-row-0 .lifetime-${parseInt(numberOfLines/2)}`);
 
     let tuto = g.append("g")
-    .attr("class", "tutorial")
     .attr("transform", `translate(${highlightedLine.attr("x1")},${parseInt(highlightedLine.attr("y1")) + 30})`)
+    .attr("class", "tutorial")
     .style("opacity", "0");
 
     let tutoHeight = 142;
@@ -716,7 +706,82 @@
           }
         }
     });
-  }
+    }
+
+    function generateStackArea() {
+
+      let domainY = d3.max(data.players, p => {
+        let keys = Object.keys(p.unit_counts).filter(k => k != probeId || showProbe);
+
+        let values = keys.map(k => {
+          return p.unit_counts[k]
+        });
+
+        return values.reduce((acc, c) => {
+          return acc += d3.max(c);
+        }, 0);
+      });
+      
+      for (let i = 0; i < data.players.length; i++) {
+
+        let areaChart = d3.select(`.area-chart-${i}`);
+
+        let y = d3
+          .scaleLinear()
+          .range([contentHeight, 0])
+          .domain([0, domainY]);
+
+        // set the ranges
+        x.domain([0, game.duration]);
+
+        // List of groups = header of the csv files
+        const unitsNames     = Object.keys(data.players[i].unit_counts).filter(k => k != probeId || showProbe);
+        const unitQuantities = unitsNames.map(k => {
+          return data.players[i].unit_counts[k];
+        });
+
+        let stackedChartDataset = [];
+        let timeUnit = 0;
+
+        while (timeUnit < game.duration) {
+          stackedChartDataset.push({});
+          timeUnit++;
+        }
+
+        for (let i in stackedChartDataset) {
+          for (let j in unitQuantities) {
+            stackedChartDataset[i][unitsNames[j]] = unitQuantities[j][i];
+          }
+        }
+
+        const series = d3.stack()
+        .keys(unitsNames)
+        (stackedChartDataset);
+
+        const area = d3.area()
+        .curve(d3.curveCardinal)
+        .x( function (d,i) {
+          return x(i);
+        })
+        .y0(function(d) {
+          return y(d[0]);
+        })
+        .y1(function(d) {
+          return y(d[1]);
+        });
+
+        areaChart.selectAll("path").remove();
+
+        areaChart
+        .selectAll("path")
+        .data(series)
+        .enter()
+        .append("path")
+        .attr("d", area)
+        .style("fill", d => color(data.units.filter(u => u.id == d.key)[0].category));
+      }
+    }
+
     
   });
 
