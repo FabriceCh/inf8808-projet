@@ -66,11 +66,6 @@
       });
     });
 
-    players.forEach(player => {
-      Object.keys(player.apms).forEach(event_category => {
-        event_category.height = max_count;
-      });
-    });
     // TODO: Need to add this metadata to both categories but calculate the max of both because want rows to lineup
     // TODO: Data preprocessing
     offset = 920;
