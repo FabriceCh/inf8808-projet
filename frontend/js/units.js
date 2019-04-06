@@ -682,10 +682,10 @@
           y = text.attr("y"),
           dy = 0, //parseFloat(text.attr("dy")),
           tspan = text.text(null)
-                      .append("tspan")
-                      .attr("x", x)
-                      .attr("y", y)
-                      .attr("dy", dy + "em");
+          .append("tspan")
+          .attr("x", x)
+          .attr("y", y)
+          .attr("dy", dy + "em");
         while (word = words.pop()) {
           line.push(word);
           tspan.text(line.join(" "));
@@ -694,10 +694,10 @@
             tspan.text(line.join(" "));
             line = [word];
             tspan = text.append("tspan")
-                        .attr("x", x)
-                        .attr("y", y)
-                        .attr("dy", ++lineNumber * lineHeight + dy + "em")
-                        .text(word);
+            .attr("x", x)
+            .attr("y", y)
+            .attr("dy", ++lineNumber * lineHeight + dy + "em")
+            .text(word);
           }
         }
     });
