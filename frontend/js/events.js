@@ -58,24 +58,19 @@
 
     let players = [data.p1, data.p2];
 
-    let max_per_category = [];
+    let maxPerCategory = [];
     players.forEach(player => {
-      Object.keys(player.apms).forEach(event_category => {
-        //console.log(player.apms[event_category]);
-        max_per_category.push(d3.max(player.apms[event_category]));
+      Object.keys(player.apms).forEach(eventCategory => {
+        //console.log(player.apms[eventCategory]);
+        maxPerCategory.push(d3.max(player.apms[eventCategory]));
       });
     });
-    let max_count = d3.max(max_per_category);
-    //console.log(max_count);
 
-    players.forEach(player => {
-      Object.keys(player.apms).forEach(event_category => {
-        event_category.height = max_count;
-      });
-    });
-    // TODO: Need to add this metadata to both categories but calculate the max of both because want rows to lineup
-    // TODO: Data preprocessing
-    offset = 920;
+    let subPlotHeight = d3.max(maxPerCategory);
+    //console.log("subPlotHeight:", subPlotHeight);
+
+    let numEventCategories = Object.keys(players[0].apms).length;
+    //console.log("numEventCategories:", numEventCategories);
 
     /*
     |--------------------------------------------------------------------------
@@ -83,8 +78,8 @@
     |--------------------------------------------------------------------------
     */
 
-    let fullHeight = offset;
-    let height = fullHeight - margin.top - margin.bottom;
+    let height = subPlotHeight * numEventCategories;
+    let fullHeight = height + margin.top + margin.bottom;
 
     /*
     |--------------------------------------------------------------------------
@@ -130,7 +125,7 @@
     .enter()
     .append("g")
     .attr('transform', (d,i) => `translate(${i * 100},0)`);
-    console.log(uniq(data.apms.player1.map(u => u.type)));
+    console.log(Object.keys(data.p1.apms));
     console.log(categories);
 
     categories.append("circle")
