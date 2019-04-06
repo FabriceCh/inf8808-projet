@@ -97,6 +97,14 @@ def add_empties_for_missing_units_quick_fix(data):
             if unit_name not in unit_counts:
                 unit_counts[unit_name] = [0] * data['duration']
 
+def replace_eog_with_duration(data, duration):
+
+    for player_data in data['players']:
+        for unit in player_data['unit_lifetimes']:
+            lifetimes = player_data['unit_lifetimes'][unit]
+            for lifetime in lifetimes:
+                if lifetime[1] == 'EOG':
+                    lifetime[1] = duration
 
 
 def generate_unit_composition_data(**kwargs):
@@ -127,7 +135,10 @@ def generate_unit_composition_data(**kwargs):
 
     unit_composition = pysc2.prepare_data_for_visualisation(processed_data)
 
-    unit_composition['duration'] = replay._replay.events[-1].second
+    duration = replay._replay.events[-1].second
+    unit_composition['duration'] = duration
+
+    replace_eog_with_duration(unit_composition, duration)
 
     for player in unit_composition['players']:
         player_unit_lifetimes = player['unit_lifetimes']

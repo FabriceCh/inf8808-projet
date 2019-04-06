@@ -131,7 +131,7 @@ def prepare_data_for_visualisation(unit_lifetime_events):
             lifetimes[i][unit['unit_type']].append(
                 [
                     unit['born_time'],
-                    unit['died_time'] if unit['died_time'] != 'EOG' else 1800,
+                    unit['died_time']
                 ]
             )
 
