@@ -6,16 +6,6 @@ import sc2reader.events
 import json
 
 
-def replay_to_apm_data(replay_filename, output_filename):
-    replay_wrapper = pysc2.SC2ReplayWrapper(
-        replay_filename)
-
-    apm_viz_data = assemble_apmviz_data(replay_wrapper)
-
-    with open(output_filename, 'w+') as f:
-        f.write(json.dumps(apm_viz_data, indent=2))
-
-
 # TODO Remove this function from the other file later.
 def event_to_dict(event):
     """ Take an event and return a serializble dictionary """

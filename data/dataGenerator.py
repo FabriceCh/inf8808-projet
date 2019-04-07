@@ -106,6 +106,20 @@ def replace_eog_with_duration(data, duration):
                     lifetime[1] = duration
 
 
+def generate_metadata(replay_wrapper):
+    metadata = {
+        'players' : [
+            { 'name': replay_wrapper._replay.teams[0].players[0].name, },
+            { 'name': replay_wrapper._replay.teams[1].players[0].name, },
+        ],
+        'winner': {
+            'name': replay_wrapper._replay.winner.players[0].name,
+            'id': replay_wrapper._replay.winner.players[0].team_id
+        }
+    }
+    return metadata
+
+
 def generate_unit_composition_data(**kwargs):
     """
     Generates a json with this format:
@@ -146,6 +160,8 @@ def generate_unit_composition_data(**kwargs):
 
     add_empties_for_missing_units_quick_fix(unit_composition)
 
+    unit_composition['metadata'] = generate_metadata(replay_wrapper=replay)
+
     with open(kwargs.get('output'), 'w+') as f:
         f.write(json.dumps(unit_composition, indent=2))
 
@@ -153,10 +169,17 @@ def generate_unit_composition_data(**kwargs):
 
 
 def generate_apm_data(**kwargs):
-    apmviz.replay_to_apm_data(
-        replay_filename=kwargs.get('replay'),
-        output_filename=kwargs.get('output')
-    )
+    replay_filename=kwargs.get('replay')
+    output_filename=kwargs.get('output')
+
+    replay_wrapper = pysc2.SC2ReplayWrapper(replay_filename)
+
+    apm_viz_data = apmviz.assemble_apmviz_data(replay_wrapper)
+    apm_viz_data['metadata'] = generate_metadata(replay_wrapper=replay_wrapper)
+
+    with open(output_filename, 'w+') as f:
+        f.write(json.dumps(apm_viz_data, indent=2))
+
 
 
 def generate_replay_data(**kwargs):
@@ -193,7 +216,6 @@ def generate_all_data(replay_path, output_path):
             replay=replay_file,
             output_path=output_path
         )
-
 
 if __name__ == "__main__":
     generate_all_data(
