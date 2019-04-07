@@ -182,7 +182,7 @@ class StackArea {
                 qty[c] = this.data.units
                 .filter(u => u.category == c)
                 .filter(u => u.id != 'Probe' || this.showProbe)
-                .reduce((acc, u) => acc += this.data.players[i].unit_counts[u.id][j], 0);
+                .reduce((acc, u) => acc += this.data.players[i].unit_supplies[u.id][j], 0);
             })
             dataset.push(qty);
         }
@@ -228,13 +228,13 @@ class StackArea {
 
     updateY() {
         this.domainY = d3.max(this.data.players, p => {
-            let keys = Object.keys(p.unit_counts).filter(k => k != 'Probe' || this.showProbe);
+            let keys = Object.keys(p.unit_supplies).filter(k => k != 'Probe' || this.showProbe);
 
             let values = [];
 
             for (let i = 0; i < this.data.duration; i++) {
                 values.push(
-                    keys.reduce((acc, key) => acc += p.unit_counts[key][i], 0)
+                    keys.reduce((acc, key) => acc += p.unit_supplies[key][i], 0)
                 );
             }
 
