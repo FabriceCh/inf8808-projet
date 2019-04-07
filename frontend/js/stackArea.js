@@ -108,7 +108,7 @@ class StackArea {
             .attr("y", 0)
             .attr("width", this.x(data.duration))
             .attr("height", this.contentHeight)
-            .attr("fill", "#f1f1f1");
+            .attr("fill", "#fff");
 
             /*
             |--------------------------------------------------------------------------
@@ -206,6 +206,7 @@ class StackArea {
             .enter()
             .append("path")
             .attr("d", this.area)
+            .attr("opacity", "0.9")
             .style("fill", d => this.color(d.key));
         });
     }
