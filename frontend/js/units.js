@@ -393,7 +393,7 @@
     tooltipHeader
     .append("span")
     .attr("class", "time")
-    .text("0");
+    .text("0 seconds");
 
 
     let tooltipRows = d3.select("#tooltip")
@@ -499,7 +499,7 @@
         tooltipNode.attr("style", `transform: translate(${xTranslation}px,${yTranslation}px)`);
 
         // Update data displayed in tooltip
-        tooltipNode.select("h2 .time").text(time); 
+        tooltipNode.select("h2 .time").text(`${time} seconds`); 
         data.units.forEach(u => {
           d3.select(`#tooltip-${u.id}-0`).text(d => data.players[0].unit_counts[d.id][time]);
           d3.select(`#tooltip-${u.id}-1`).text(d => data.players[1].unit_counts[d.id][time])
