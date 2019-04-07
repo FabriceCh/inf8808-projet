@@ -176,8 +176,18 @@
     |--------------------------------------------------------------------------
     */
 
-    g.append("text").text(data.metadata.players[0].name).attr("y", -13).style("font-weight", 500).style("font-size", "1.1rem");
-    g.append("text").text(data.metadata.players[1].name).attr("y", -13).attr("x", width/2).style("font-weight", 500).style("font-size", "1.1rem");
+    for (let i = 0; i < 2; i++) {
+      let text = data.metadata.players[i].name;
+      if (data.metadata.winner.name == text) {
+        text += ' 🏆';
+      }
+      g.append("text")
+      .text(text)
+      .attr("y", -13)
+      .attr("x", i*width/2)
+      .style("font-weight", 500)
+      .style("font-size", "1.1rem");
+    }
 
     /*
     |--------------------------------------------------------------------------
