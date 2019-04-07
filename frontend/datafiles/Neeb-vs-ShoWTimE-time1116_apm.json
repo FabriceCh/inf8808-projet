@@ -59270,5 +59270,19 @@
       ]
     }
   },
-  "game_length": 945
+  "game_length": 945,
+  "metadata": {
+    "players": [
+      {
+        "name": "Neeb"
+      },
+      {
+        "name": "ShoWTimE"
+      }
+    ],
+    "winner": {
+      "name": "Neeb",
+      "id": 1
+    }
+  }
 }

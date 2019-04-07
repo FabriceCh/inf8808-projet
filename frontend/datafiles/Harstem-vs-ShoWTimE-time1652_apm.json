@@ -104643,5 +104643,19 @@
       ]
     }
   },
-  "game_length": 1362
+  "game_length": 1362,
+  "metadata": {
+    "players": [
+      {
+        "name": "ShoWTimE"
+      },
+      {
+        "name": "Harstem"
+      }
+    ],
+    "winner": {
+      "name": "Harstem",
+      "id": 2
+    }
+  }
 }

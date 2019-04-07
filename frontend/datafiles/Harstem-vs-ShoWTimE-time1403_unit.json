@@ -45612,5 +45612,19 @@
       }
     }
   ],
-  "duration": 1181
+  "duration": 1181,
+  "metadata": {
+    "players": [
+      {
+        "name": "ShoWTimE"
+      },
+      {
+        "name": "Harstem"
+      }
+    ],
+    "winner": {
+      "name": "ShoWTimE",
+      "id": 1
+    }
+  }
 }

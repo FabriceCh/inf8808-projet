@@ -36508,5 +36508,19 @@
       }
     }
   ],
-  "duration": 947
+  "duration": 947,
+  "metadata": {
+    "players": [
+      {
+        "name": "Neeb"
+      },
+      {
+        "name": "ShoWTimE"
+      }
+    ],
+    "winner": {
+      "name": "Neeb",
+      "id": 1
+    }
+  }
 }

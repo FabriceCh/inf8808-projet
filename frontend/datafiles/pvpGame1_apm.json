@@ -22067,5 +22067,19 @@
       ]
     }
   },
-  "game_length": 332
+  "game_length": 332,
+  "metadata": {
+    "players": [
+      {
+        "name": "Stats"
+      },
+      {
+        "name": "Neeb"
+      }
+    ],
+    "winner": {
+      "name": "Stats",
+      "id": 1
+    }
+  }
 }
