@@ -4,20 +4,21 @@ import apmviz
 import pysc2
 import json
 import pprint
+import os
 from functools import reduce
 
-
-REPLAY_FILE = 'replays/Harstem-vs-ShoWTimE-time1652.SC2Replay'
-OUTPUT_PATH = '../frontend/datafiles/'
-UNIT_OUTPUT_FILE = 'unit_data.json'
-APM_OUTPUT_FILE = OUTPUT_PATH + 'action_stats_data.json'
+THIS_DIR = os.path.dirname(os.path.realpath(__file__))
+REPLAY_PATH = THIS_DIR + '/replays'
+OUTPUT_PATH = THIS_DIR + '/' + '../frontend/datafiles/'
 
 pp = pprint.PrettyPrinter(indent=4)
 
 
 def get_last_death(lifetime_dict):
     death_info_list = list(map(lambda u: u.get('died_time'), lifetime_dict))
-    death_time_list = list(map(lambda x: x.get('second'), filter(lambda x: isinstance(x, dict), death_info_list)))
+    death_time_list = list(map(lambda x: x.get('second'),
+                               filter(lambda x: isinstance(x, dict),
+                                      death_info_list)))
     last_death = reduce(lambda x, y: max(x, y), death_time_list)
     return last_death
 
@@ -35,8 +36,8 @@ def generate_unitcounts(**kwargs):
     # pp.pprint(unit_counts)
     return unit_counts
 
-def lifetime_list_to_unit_counts(lifetime_list, duration):
 
+def lifetime_list_to_unit_counts(lifetime_list, duration):
     born_time = 0
     died_time = 1
     counts = []
@@ -50,7 +51,6 @@ def lifetime_list_to_unit_counts(lifetime_list, duration):
     return counts
 
 
-
 def unit_lifetimes_to_unit_counts(unit_lifetimes, duration):
     unit_counts = {}
     for unit in unit_lifetimes:
@@ -62,7 +62,6 @@ def unit_lifetimes_to_unit_counts(unit_lifetimes, duration):
 
     return {unit: lifetime_list_to_unit_counts(unit_lifetimes[unit], duration)
             for unit in unit_lifetimes}
-
 
 
 def add_empties_for_missing_units_quick_fix(data):
@@ -88,7 +87,6 @@ def add_empties_for_missing_units_quick_fix(data):
         'Tempest'
     ]
 
-
     for player_data in data['players']:
         unit_lifetimes = player_data['unit_lifetimes']
         unit_counts = player_data['unit_counts']
@@ -98,8 +96,8 @@ def add_empties_for_missing_units_quick_fix(data):
             if unit_name not in unit_counts:
                 unit_counts[unit_name] = [0] * data['duration']
 
-def replace_eog_with_duration(data, duration):
 
+def replace_eog_with_duration(data, duration):
     for player_data in data['players']:
         for unit in player_data['unit_lifetimes']:
             lifetimes = player_data['unit_lifetimes'][unit]
@@ -143,12 +141,12 @@ def generate_unit_composition_data(**kwargs):
 
     for player in unit_composition['players']:
         player_unit_lifetimes = player['unit_lifetimes']
-        player['unit_counts'] = unit_lifetimes_to_unit_counts(player_unit_lifetimes, unit_composition['duration'])
-
+        player['unit_counts'] = unit_lifetimes_to_unit_counts(
+            player_unit_lifetimes, unit_composition['duration'])
 
     add_empties_for_missing_units_quick_fix(unit_composition)
 
-    with open(OUTPUT_PATH + kwargs.get('output'), 'w+') as f:
+    with open(kwargs.get('output'), 'w+') as f:
         f.write(json.dumps(unit_composition, indent=2))
 
     # pp.pprint(unit_composition['p1']['unit_counts'])
@@ -161,12 +159,44 @@ def generate_apm_data(**kwargs):
     )
 
 
-if __name__ == "__main__":
+def generate_replay_data(**kwargs):
+    replay = kwargs.get('replay')
+    output_path = kwargs.get('output_path')
+    replay_file = os.path.basename(replay)
+    output_prefix = os.path.join(output_path, replay_file.split('.')[0])
+
     generate_unit_composition_data(
-        replay=REPLAY_FILE,
-        output=UNIT_OUTPUT_FILE)
+        replay=replay,
+        output=output_prefix + '_unit.json'
+    )
 
     generate_apm_data(
-        replay=REPLAY_FILE,
-        output=APM_OUTPUT_FILE
+        replay=replay,
+        output=output_prefix + '_apm.json'
+    )
+
+
+def _replays_from_dir(replay_dir):
+    for filename in os.listdir(replay_dir):
+        assert (isinstance(filename, str))
+        if filename.lower().endswith('.sc2replay'):
+            yield replay_dir + '/' + filename
+
+
+def replays_from_dir(replay_dir):
+    return list(_replays_from_dir(replay_dir))
+
+
+def generate_all_data(replay_path, output_path):
+    for replay_file in replays_from_dir(replay_path):
+        generate_replay_data(
+            replay=replay_file,
+            output_path=output_path
+        )
+
+
+if __name__ == "__main__":
+    generate_all_data(
+        replay_path=REPLAY_PATH,
+        output_path=OUTPUT_PATH
     )
