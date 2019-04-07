@@ -13,6 +13,27 @@ OUTPUT_PATH = os.path.normpath(THIS_DIR + '/' + '../frontend/datafiles/')
 
 pp = pprint.PrettyPrinter(indent=4)
 
+supply_per_unit = {
+    'Adept': 2,
+    'Archon': 4,
+    'Carrier': 6,
+    'Colossus': 6,
+    'DarkTemplar': 2,
+    'Disruptor': 3,
+    'HighTemplar': 2,
+    'Immortal': 4,
+    'Mothership': 8,
+    'Observer': 1,
+    'Oracle': 3,
+    'Phoenix': 2,
+    'Probe': 1,
+    'Sentry': 2,
+    'Stalker': 2,
+    'VoidRay': 4,
+    'WarpPrism': 2,
+    'Zealot': 2,
+    'Tempest': 5
+}
 
 def get_last_death(lifetime_dict):
     death_info_list = list(map(lambda u: u.get('died_time'), lifetime_dict))
@@ -49,6 +70,9 @@ def lifetime_list_to_unit_counts(lifetime_list, duration):
         counts.append(count)
 
     return counts
+
+def unit_count_to_unit_supply(unit_counts, supply_per_unit):
+    return [ c * supply_per_unit for c in unit_counts]
 
 
 def unit_lifetimes_to_unit_counts(unit_lifetimes, duration):
@@ -90,11 +114,14 @@ def add_empties_for_missing_units_quick_fix(data):
     for player_data in data['players']:
         unit_lifetimes = player_data['unit_lifetimes']
         unit_counts = player_data['unit_counts']
+        unit_supplies = player_data['unit_supplies']
         for unit_name in unit_list:
             if unit_name not in unit_lifetimes:
                 unit_lifetimes[unit_name] = []
             if unit_name not in unit_counts:
                 unit_counts[unit_name] = [0] * data['duration']
+            if unit_name not in unit_supplies:
+                unit_supplies[unit_name] = [0] * data['duration']
 
 
 def replace_eog_with_duration(data, duration):
@@ -155,8 +182,14 @@ def generate_unit_composition_data(**kwargs):
 
     for player in unit_composition['players']:
         player_unit_lifetimes = player['unit_lifetimes']
-        player['unit_counts'] = unit_lifetimes_to_unit_counts(
-            player_unit_lifetimes, unit_composition['duration'])
+        unit_counts = unit_lifetimes_to_unit_counts(
+            player_unit_lifetimes,
+            unit_composition['duration']
+        )
+        unit_supplies = { unit: unit_count_to_unit_supply(unit_counts[unit], supply_per_unit[unit])
+                          for unit in unit_counts}
+        player['unit_supplies'] = unit_supplies
+        player['unit_counts'] = unit_counts
 
     add_empties_for_missing_units_quick_fix(unit_composition)
 
@@ -237,4 +270,14 @@ if __name__ == "__main__":
     generate_all_data(
         replay_path=REPLAY_PATH,
         output_path=OUTPUT_PATH
+    )
+    replay = REPLAY_PATH + '/Neeb-vs-ShoWTimE-time1116.SC2Replay'
+    generate_unit_composition_data(
+        replay=replay,
+        output=OUTPUT_PATH + '/unit_data.json'
+    )
+
+    generate_apm_data(
+        replay=replay,
+        output=OUTPUT_PATH + '/apm_data.json'
     )
