@@ -294,150 +294,6 @@
 
     /*
     |--------------------------------------------------------------------------
-    | Aggregation Graph
-    |--------------------------------------------------------------------------
-    */
-
-    // Modifiy margins
-    margin.top = 0;
-    margin.right = 0;
-    margin.bottom = 0;
-
-    let padding = {
-      top: 50,
-      bottom: 10,
-      left: 0,
-      right: 0
-    };
-
-    // Modify height
-    fullHeight = 300;
-    height = fullHeight - margin.top - margin.bottom;
-    let contentHeight = height - padding.top - padding.bottom;
-
-    // Select new SVG
-    let svg2 = d3.select("#aggregation").attr("height", fullHeight);
-
-    // Create base group
-    let g2 = svg2
-    .append("g")
-    .attr("transform", `translate(${margin.left} ${margin.top})`);
-
-    let areaHeader = svg2.append("g")
-    .attr("transform", `translate(${margin.left}, 0)`);
-
-    areaHeader.append("rect")
-    .attr("height", 30)
-    .attr("width", 100)
-    .attr("y", 10)
-    .attr("rx", 4)
-    .attr("ry", 4)
-    .style("cursor", "pointer")
-    .attr("fill", "#f1f1f1")
-    .on("click", d => {
-      if (showProbe) {
-        areaHeader.select("text").text("Show Probes");
-        areaHeader.select("rect").attr("width", 105);        
-      } else {
-        areaHeader.select("text").text("Hide Probes");
-        areaHeader.select("rect").attr("width", 100);        
-      }
-
-      showProbe = !showProbe;
-
-      generateStackArea();
-    });
-
-    areaHeader.append("text")
-    .attr("x", 10)
-    .attr("y", 30)
-    .attr("fill", "#333")
-    .style("font-size", "0.9rem")
-    .style("pointer-events", "none")
-    .text("Hide Probes");
-
-  
-    /*
-    |--------------------------------------------------------------------------
-    | Generate each columns for each player
-    |--------------------------------------------------------------------------
-    */
-
-    for (let i = 0; i < data.players.length; i++) {
-
-      /*
-      |--------------------------------------------------------------------------
-      | Row : Player : Group for each player
-      |--------------------------------------------------------------------------
-      */
-
-      let content = g2.append("g")
-      .attr("transform", d => `translate(${i*(width/2)},0)`)
-      .call(hover, x);
-
-      /*
-      |--------------------------------------------------------------------------
-      | Row : Player : White Rectangle for interaction
-      |--------------------------------------------------------------------------
-      */
-
-      content.append("rect")
-      .attr("x", 0)
-      .attr("y", 0)
-      .attr("width", x(game.duration) + column.gap)
-      .attr("height", fullHeight)
-      .attr("fill", "#fff");
-
-      /*
-      |--------------------------------------------------------------------------
-      | Row : Player : Group for drawing
-      |--------------------------------------------------------------------------
-      */
-
-      let player = content.append("g")
-      .attr("transform", d => `translate(0,${padding.top})`);
-
-      /*
-      |--------------------------------------------------------------------------
-      | Row : Player : Background Rectangles
-      |--------------------------------------------------------------------------
-      */
-
-      player.append("rect")
-      .attr("x", 0)
-      .attr("y", 0)
-      .attr("width", x(game.duration))
-      .attr("height", contentHeight)
-      .attr("fill", "#f1f1f1");
-
-      /*
-      |--------------------------------------------------------------------------
-      | Area Chart for each player
-      |--------------------------------------------------------------------------
-      */
-
-      player.append("g").attr("class", `area-chart-${i}`);
-      
-      /*
-      |--------------------------------------------------------------------------
-      | Row : Column : Interaction Vertical Line
-      |--------------------------------------------------------------------------
-      */
-
-      player.append("line")
-      .attr("class", "interaction-line")
-      .attr("x1", 0)
-      .attr("x2", 0)
-      .attr("y1", 0)
-      .attr("y2", contentHeight)
-      .attr("stroke", "#000")
-      .attr("display", "none")
-    }
-
-    generateStackArea();
-
-    /*
-    |--------------------------------------------------------------------------
     | Generate Tutorial Elements
     |--------------------------------------------------------------------------
     */
@@ -510,8 +366,8 @@
     // Transitions
 
     tuto.transition()
-    .delay(800)
-    .duration(400)
+    .delay(100)
+    .duration(600)
     .style("opacity", "1");
 
     g.selectAll(".lifetime")
@@ -708,81 +564,14 @@
     });
     }
 
-    function generateStackArea() {
+    /*
+    |--------------------------------------------------------------------------
+    | Aggregation Graph
+    |--------------------------------------------------------------------------
+    */
 
-      let domainY = d3.max(data.players, p => {
-        let keys = Object.keys(p.unit_counts).filter(k => k != probeId || showProbe);
-
-        let values = keys.map(k => {
-          return p.unit_counts[k]
-        });
-
-        return values.reduce((acc, c) => {
-          return acc += d3.max(c);
-        }, 0);
-      });
-      
-      for (let i = 0; i < data.players.length; i++) {
-
-        let areaChart = d3.select(`.area-chart-${i}`);
-
-        let y = d3
-          .scaleLinear()
-          .range([contentHeight, 0])
-          .domain([0, domainY]);
-
-        // set the ranges
-        x.domain([0, game.duration]);
-
-        // List of groups = header of the csv files
-        const unitsNames     = Object.keys(data.players[i].unit_counts).filter(k => k != probeId || showProbe);
-        const unitQuantities = unitsNames.map(k => {
-          return data.players[i].unit_counts[k];
-        });
-
-        let stackedChartDataset = [];
-        let timeUnit = 0;
-
-        while (timeUnit < game.duration) {
-          stackedChartDataset.push({});
-          timeUnit++;
-        }
-
-        for (let i in stackedChartDataset) {
-          for (let j in unitQuantities) {
-            stackedChartDataset[i][unitsNames[j]] = unitQuantities[j][i];
-          }
-        }
-
-        const series = d3.stack()
-        .keys(unitsNames)
-        (stackedChartDataset);
-
-        const area = d3.area()
-        .curve(d3.curveCardinal)
-        .x( function (d,i) {
-          return x(i);
-        })
-        .y0(function(d) {
-          return y(d[0]);
-        })
-        .y1(function(d) {
-          return y(d[1]);
-        });
-
-        areaChart.selectAll("path").remove();
-
-        areaChart
-        .selectAll("path")
-        .data(series)
-        .enter()
-        .append("path")
-        .attr("d", area)
-        .style("fill", d => color(data.units.filter(u => u.id == d.key)[0].category));
-      }
-    }
-
-    
+    new StackArea(data, width, color, hover, x);
+  
   });
 
 })();
@@ -819,47 +608,9 @@ function units() {
   ];
 }
 
-/** Capitalize */
-String.prototype.capitalize = function () {
-  return this.charAt(0).toUpperCase() + this.slice(1)
-};
-
-/**
- * Generate a number between a and b
- * 
- * @param {*} a 
- * @param {*} b 
- */
-function numberBetween(a, b) {
-  return Math.floor(Math.random() * b) + a
-}
-
-/**
- * Generate a tupple of ordered numbers between a and b
- * 
- * @param {*} a 
- * @param {*} b 
- */
-function generateRange(a, b) {
-  let a_ = numberBetween(a, b);
-  let b_ = numberBetween(a, b);
-
-  if (a_ >= b_) {
-    return [b_, a_]
-  }
-  return [a_, b_]
-}
-
 function getUnitFormNode(data, node) {
   let unitId = d3.select(node).node()[0].parentNode.parentNode.parentNode.getAttribute('data-unit-id');
   return data.units.filter(u => u.id == unitId)[0];
-}
-
-function uniq(a) {
-  let seen = {};
-  return a.filter(function(item) {
-      return seen.hasOwnProperty(item) ? false : (seen[item] = true);
-  })
 }
 
 function createDefs(svg) {
