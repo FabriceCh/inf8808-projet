@@ -1,0 +1,24 @@
+{
+  "replays": [
+    {
+      "replay_file": "/Users/pcarphin/Documents/GitHub/inf8808-projet/data/replays/Neeb-vs-ShoWTimE-time1116.SC2Replay",
+      "unit_data_file": "/Users/pcarphin/Documents/GitHub/inf8808-projet/frontend/datafiles/Neeb-vs-ShoWTimE-time1116_unit.json",
+      "apm_data_file": "/Users/pcarphin/Documents/GitHub/inf8808-projet/frontend/datafiles/Neeb-vs-ShoWTimE-time1116_apm.json"
+    },
+    {
+      "replay_file": "/Users/pcarphin/Documents/GitHub/inf8808-projet/data/replays/Harstem-vs-ShoWTimE-time1403.SC2Replay",
+      "unit_data_file": "/Users/pcarphin/Documents/GitHub/inf8808-projet/frontend/datafiles/Harstem-vs-ShoWTimE-time1403_unit.json",
+      "apm_data_file": "/Users/pcarphin/Documents/GitHub/inf8808-projet/frontend/datafiles/Harstem-vs-ShoWTimE-time1403_apm.json"
+    },
+    {
+      "replay_file": "/Users/pcarphin/Documents/GitHub/inf8808-projet/data/replays/Harstem-vs-ShoWTimE-time1652.SC2Replay",
+      "unit_data_file": "/Users/pcarphin/Documents/GitHub/inf8808-projet/frontend/datafiles/Harstem-vs-ShoWTimE-time1652_unit.json",
+      "apm_data_file": "/Users/pcarphin/Documents/GitHub/inf8808-projet/frontend/datafiles/Harstem-vs-ShoWTimE-time1652_apm.json"
+    },
+    {
+      "replay_file": "/Users/pcarphin/Documents/GitHub/inf8808-projet/data/replays/pvpGame1.SC2Replay",
+      "unit_data_file": "/Users/pcarphin/Documents/GitHub/inf8808-projet/frontend/datafiles/pvpGame1_unit.json",
+      "apm_data_file": "/Users/pcarphin/Documents/GitHub/inf8808-projet/frontend/datafiles/pvpGame1_apm.json"
+    }
+  ]
+}

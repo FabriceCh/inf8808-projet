@@ -9,7 +9,7 @@ from functools import reduce
 
 THIS_DIR = os.path.dirname(os.path.realpath(__file__))
 REPLAY_PATH = THIS_DIR + '/replays'
-OUTPUT_PATH = THIS_DIR + '/' + '../frontend/datafiles/'
+OUTPUT_PATH = os.path.normpath(THIS_DIR + '/' + '../frontend/datafiles/')
 
 pp = pprint.PrettyPrinter(indent=4)
 
@@ -185,17 +185,27 @@ def generate_apm_data(**kwargs):
 def generate_replay_data(**kwargs):
     replay = kwargs.get('replay')
     output_path = kwargs.get('output_path')
+    data_manifest = kwargs.get('data_manifest')
     replay_file = os.path.basename(replay)
     output_prefix = os.path.join(output_path, replay_file.split('.')[0])
 
+    unit_output_file = output_prefix + '_unit.json'
+    apm_output_file = output_prefix + '_apm.json'
+
+    data_manifest['replays'].append({
+        'replay_file': replay,
+        'unit_data_file': unit_output_file,
+        'apm_data_file': apm_output_file
+    })
+
     generate_unit_composition_data(
         replay=replay,
-        output=output_prefix + '_unit.json'
+        output=unit_output_file
     )
 
     generate_apm_data(
         replay=replay,
-        output=output_prefix + '_apm.json'
+        output=apm_output_file
     )
 
 
@@ -211,11 +221,17 @@ def replays_from_dir(replay_dir):
 
 
 def generate_all_data(replay_path, output_path):
+    data_manifest = {}
+    data_manifest['replays'] = []
     for replay_file in replays_from_dir(replay_path):
         generate_replay_data(
             replay=replay_file,
-            output_path=output_path
+            output_path=output_path,
+            data_manifest=data_manifest
         )
+    with open(output_path + '/data_manifest.json', 'w+') as f:
+        f.write(json.dumps(data_manifest, indent=2))
+
 
 if __name__ == "__main__":
     generate_all_data(
