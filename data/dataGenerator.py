@@ -9,7 +9,7 @@ from functools import reduce
 
 THIS_DIR = os.path.dirname(os.path.realpath(__file__))
 REPLAY_PATH = THIS_DIR + '/replays'
-OUTPUT_PATH = THIS_DIR + '/' + '../frontend/datafiles/'
+OUTPUT_PATH = os.path.normpath(THIS_DIR + '/' + '../frontend/datafiles/')
 
 pp = pprint.PrettyPrinter(indent=4)
 
