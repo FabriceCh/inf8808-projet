@@ -54,14 +54,6 @@
     let showProbe = true;
     let probeId = "Probe";
 
-    /*
-    |--------------------------------------------------------------------------
-    | Adding units to data
-    |--------------------------------------------------------------------------
-    */
-
-    data.units = units();
-    console.log(data);
 
     /*
     |--------------------------------------------------------------------------
@@ -76,7 +68,10 @@
     // to correctly position the rows on the graph.
     let offset = 0;
 
-    data.units = data.units.map(u => {
+    let filteredUnits = units().filter(u => data.players[0].unit_counts[u.id].reduce((acc,i) => acc += i, 0) > 0 || data.players[1].unit_counts[u.id].reduce((acc,i) => acc += i, 0) > 0)
+    //let filteredUnits = units();
+
+    data.units = filteredUnits.map(u => {
       u.offset = offset;
       u.height = Math.max(
           d3.max(data.players, p => {
@@ -266,6 +261,7 @@
       .enter()
       .append("line")
       .attr("class", (d,i) => `lifetime lifetime-${i}`)
+      .attr("stroke-width", 2)
       .attr("x1", d => x(d[0]))
       .attr("x2", d => x(d[1]))
       .attr("y1", (d,i) => i*(line.height+line.gap))

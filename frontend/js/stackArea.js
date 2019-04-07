@@ -206,7 +206,6 @@ class StackArea {
             .enter()
             .append("path")
             .attr("d", this.area)
-            .attr("opacity", "0.9")
             .style("fill", d => this.color(d.key));
         });
     }
