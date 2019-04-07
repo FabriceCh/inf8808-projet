@@ -600,9 +600,29 @@
  * @returns array 
  */
 function units() {
+  supply_per_unit = {
+    'Adept': 2,
+    'Archon': 4,
+    'Carrier': 6,
+    'Colossus': 6,
+    'DarkTemplar': 2,
+    'Disruptor': 3,
+    'HighTemplar': 2,
+    'Immortal': 4,
+    'Mothership': 8,
+    'Observer': 1,
+    'Oracle': 3,
+    'Phoenix': 2,
+    'Probe': 1,
+    'Sentry': 2,
+    'Stalker': 2,
+    'VoidRay': 4,
+    'WarpPrism': 2,
+    'Zealot': 2,
+    'Tempest': 5
+  };
 
-  return [
-    
+  let unit_metadata = [
     { id: 'Probe', name: 'Probe', category: 'resource' },
     { id: 'Zealot', name: 'Zealot', category: 'basic ground' },
     { id: 'Adept', name: 'Adept', category: 'basic ground' },
@@ -624,6 +644,13 @@ function units() {
     { id: 'Mothership', name: 'Mothership', category: 'flying' },
 
   ];
+
+  unit_metadata.forEach(d => {
+    d['supply_per_unit'] = supply_per_unit[d.id]
+  });
+
+  console.log('unit_metadata', unit_metadata);
+  return unit_metadata;
 }
 
 function getUnitFormNode(data, node) {
