@@ -12,6 +12,7 @@ REPLAY_FILE = 'replays/Harstem-vs-ShoWTimE-time1652.SC2Replay'
 OUTPUT_PATH = '../frontend/datafiles/'
 UNIT_OUTPUT_FILE = 'unit_data.json'
 APM_OUTPUT_FILE = OUTPUT_PATH + 'action_stats_data.json'
+THIS_DIR = os.path.dirname(os.path.realpath(__file__))
 
 pp = pprint.PrettyPrinter(indent=4)
 
@@ -162,7 +163,7 @@ def generate_apm_data(**kwargs):
     )
 
 
-def generate_data(**kwargs):
+def generate_replay_data(**kwargs):
     replay = kwargs.get('replay')
     output_path = kwargs.get('output_path')
     replay_file = os.path.basename(replay)
@@ -179,9 +180,28 @@ def generate_data(**kwargs):
         output=output_prefix + '_apm.json'
     )
 
+def _replays_from_dir(replay_dir):
+    for filename in os.listdir(replay_dir):
+        assert(isinstance(filename, str))
+        if filename.lower().endswith('.sc2replay'):
+            yield filename
+
+def replays_from_dir(replay_dir):
+    return list(_replays_from_dir(replay_dir))
+
+def generate_all_data(replay_dir, output_dir):
+    for replay_file in replays_from_dir(replay_dir):
+        generate_replay_data(
+            replay=replay_file,
+            output_path=output_dir
+        )
 
 if __name__ == "__main__":
-    generate_data(
+    print(replays_from_dir(THIS_DIR + '/replays'))
+    absolute_output_path = THIS_DIR + '/' + OUTPUT_PATH
+    generate_replay_data(
         replay=REPLAY_FILE,
-        output_path=OUTPUT_PATH
+        output_path=absolute_output_path
     )
+
+    pass
