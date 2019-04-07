@@ -54612,5 +54612,19 @@
       }
     }
   ],
-  "duration": 1417
+  "duration": 1417,
+  "metadata": {
+    "players": [
+      {
+        "name": "Stats"
+      },
+      {
+        "name": "Neeb"
+      }
+    ],
+    "winner": {
+      "name": "Stats",
+      "id": 1
+    }
+  }
 }
