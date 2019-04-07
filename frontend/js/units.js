@@ -264,8 +264,8 @@
       .attr("stroke-width", 2)
       .attr("x1", d => x(d[0]))
       .attr("x2", d => x(d[1]))
-      .attr("y1", (d,i) => i*(line.height+line.gap))
-      .attr("y2", (d,i) => i*(line.height+line.gap))
+      .attr("y1", (d,i) => i*(line.height+line.gap) + 1)
+      .attr("y2", (d,i) => i*(line.height+line.gap) + 1)
       .attr("stroke", (d,i,node) => {
         let unit = getUnitFormNode(data, node);
         return color(unit.category)
