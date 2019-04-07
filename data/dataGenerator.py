@@ -4,6 +4,7 @@ import apmviz
 import pysc2
 import json
 import pprint
+import os
 from functools import reduce
 
 
@@ -148,7 +149,7 @@ def generate_unit_composition_data(**kwargs):
 
     add_empties_for_missing_units_quick_fix(unit_composition)
 
-    with open(OUTPUT_PATH + kwargs.get('output'), 'w+') as f:
+    with open(kwargs.get('output'), 'w+') as f:
         f.write(json.dumps(unit_composition, indent=2))
 
     # pp.pprint(unit_composition['p1']['unit_counts'])
@@ -161,12 +162,26 @@ def generate_apm_data(**kwargs):
     )
 
 
-if __name__ == "__main__":
+def generate_data(**kwargs):
+    replay = kwargs.get('replay')
+    output_path = kwargs.get('output_path')
+    replay_file = os.path.basename(replay)
+    output_prefix = os.path.join(output_path, replay_file.split('.')[0])
+
+
     generate_unit_composition_data(
-        replay=REPLAY_FILE,
-        output=UNIT_OUTPUT_FILE)
+        replay=replay,
+        output=output_prefix + '_unit.json'
+    )
 
     generate_apm_data(
+        replay=replay,
+        output=output_prefix + '_apm.json'
+    )
+
+
+if __name__ == "__main__":
+    generate_data(
         replay=REPLAY_FILE,
-        output=APM_OUTPUT_FILE
+        output_path=OUTPUT_PATH
     )
