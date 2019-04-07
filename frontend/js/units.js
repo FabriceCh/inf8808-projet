@@ -1,7 +1,10 @@
 (function () {
   "use strict";
 
-  const filePath = "/datafiles/unit_data.json";
+  let url_string = window.location.href;
+  let url = new URL(url_string);
+
+  const filePath = "/datafiles/" + url.searchParams.get("data") + '.json';
 
   d3.json(filePath).then(function (data) {
 
@@ -12,7 +15,7 @@
     */
 
     let margin = {
-      top: 50,
+      top: 110,
       left: 150,
       right: 0,
       bottom: 0
@@ -141,7 +144,7 @@
 
     let categories = g
     .append("g")
-    .attr('transform', (d,i) => `translate(${i * 100},${-margin.top + 20})`)
+    .attr('transform', (d,i) => `translate(${i * 100 + 100},${-margin.top + 33})`)
     .selectAll(".unit")
     .data(uniq(data.units.map(u => u.category)))
     .enter()
@@ -166,6 +169,15 @@
         categoryOffset += nodeWidth(this) + 15;
         return `translate(${x},0)`
     });
+
+    /*
+    |--------------------------------------------------------------------------
+    | Players' names
+    |--------------------------------------------------------------------------
+    */
+
+    g.append("text").text(data.metadata.players[0].name).attr("y", -13).style("font-weight", 500).style("font-size", "1.1rem");
+    g.append("text").text(data.metadata.players[1].name).attr("y", -13).attr("x", width/2).style("font-weight", 500).style("font-size", "1.1rem");
 
     /*
     |--------------------------------------------------------------------------

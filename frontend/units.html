@@ -20,6 +20,19 @@
           <h1 class="title">Comparison of the distribution of units between an elite player and AlphaStar</h1>
 
           <p class="subtitle">Consectetur Lorem dolore excepteur ullamco dolore culpa velit laboris veniam qui laborum aliquip excepteur aute. Elit commodo mollit anim adipisicing irure laborum fugiat est ut. Proident cupidatat ex laborum incididunt cillum labore culpa consectetur officia anim mollit consectetur. Dolor ullamco dolore ea consequat excepteur enim minim sunt ut irure.</p>
+          
+          <div class="field select-game">
+            <label for="" class="label">Select a game</label>
+            <div class="select " onchange="changeGame(this.value)">
+                <select name="" id="change-game">
+                  <option value="unit_data">Stats VS Neeb</option>
+                  <option value="pvpGame1_unit">Stats VS Neeb</option>
+                  <option value="Neeb-vs-ShoWTimE-time1116_unit">Stats VS ShoWTimE</option>
+                  <option value="Harstem-vs-ShoWTimE-time1652_unit">Harstem VS ShoWTimE</option>
+                  <option value="Harstem-vs-ShoWTimE-time1403_unit">Harstem VS ShoWTimE 2</option>
+                </select>
+              </div>
+          </div>
 
           <svg id="viz" width="1344"></svg>
 
@@ -41,6 +54,18 @@
     <script type="text/javascript" src="js/helpers.js"></script>
     <script type="text/javascript" src="js/stackArea.js"></script>
     <script type="text/javascript" src="js/units.js"></script>
+
+    <script>
+      let url_string = window.location.href;
+      let url = new URL(url_string);
+      let data = url.searchParams.get("data");
+      document.getElementById("change-game").value = data;
+
+      function changeGame(value) {
+        var x = document.getElementById("change-game").value;
+        window.location.href = '/units.html?data=' + x;
+      }
+    </script>
 
   </body>
 
