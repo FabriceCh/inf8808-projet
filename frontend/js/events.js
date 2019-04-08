@@ -16,7 +16,7 @@
     */
 
     let margin = {
-      top: 50,
+      top: 110,
       left: 120,
       right: 0,
       bottom: 10

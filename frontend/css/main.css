@@ -3,9 +3,11 @@
 }
 
 .select-game {
-    position: absolute;
-    top: 130px;
+    position: relative;
+    float: left;
     left: 0px;
+    top: 64px;
+    margin-top: -64px;
 }
 
 .select-game .label {
