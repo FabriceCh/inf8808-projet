@@ -324,8 +324,6 @@
       | Row : Player : brushing
       |--------------------------------------------------------------------------
       */
-
-
       
       player.append("g")
         .attr("class", "x brush")
@@ -345,6 +343,7 @@
      .attr("y2", d => d.height - row.margin.top - row.margin.bottom)
      .attr("stroke", "#000")
      .attr("display", "none")
+     .style("pointer-events", "none");
       
 
     }
