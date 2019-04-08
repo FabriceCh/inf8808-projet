@@ -335,24 +335,16 @@
 
     function brushUpdate(g1, g2) {
       //d3.selectAll('.brush').remove();
-      // TODO: Redessiner le graphique focus en fonction de la zone sélectionnée dans le graphique contexte.
-      //var brushSelection = d3.event.selection;
-      //var intervalSelection = [x.invert(brushSelection[0]), x.invert(brushSelection[1])];
-      //x.domain(intervalSelection);
-      /*g.select(".x.axis").call(xAxis);
-      g.selectAll(".line")
-        .attr("d", function(d) {
-          return line(d.values);
-      });*/
+
+      //TODO: should hide circles that are not in the selection
+      // or should change a domain that is used to create the circles (not implemented like that right now)
+      //Note: this does nothing...
       g1.selectAll("circles")
       .attr("visibility", "hidden")
       .attr("fill", "#000000");
-      g2.append.append("rect")
-      .attr("x", 0)
-      .attr("y", 0)
-      .attr("width", x(data.duration))
-      .attr("height", 100)
-      .attr("fill", "#ff0000");
+      g2.selectAll("circles")
+      .attr("visibility", "hidden")
+      .attr("fill", "#000000");
     }
 
   
