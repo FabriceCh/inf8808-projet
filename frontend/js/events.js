@@ -163,11 +163,13 @@
 
     const circleOpacity = 0.4;
 
-    const mapGroup1 = svg
+    let mapGroup1 = svg
     .append("g");
     
-    const mapGroup2 = svg
+    let mapGroup2 = svg
     .append("g");
+
+    let maps = [mapGroup1, mapGroup2];
 
     renderMapGroup(mapGroup1, 0, 0);
     renderMapGroup(mapGroup2, 1, width/2);
@@ -227,6 +229,15 @@
     .text(d => d.name)
     .attr("fill", d => color(d.id))
     .attr("alignment-baseline", "hanging");
+
+    /*
+     * brushes
+     */
+    var brush = d3.brushX()
+    .extent([[0, 0], [x(data.duration), subPlotHeight ]])
+    .on("brush", function () {
+      brushUpdate(mapGroup1, mapGroup2);
+    });
 
     /*
     |--------------------------------------------------------------------------
@@ -312,28 +323,36 @@
       |--------------------------------------------------------------------------
       */
 
-      var brush = d3.brushX()
-      .extent([[0, 0], [x(data.duration), subPlotHeight]])
-      .on("brush", function () {
-        //brushUpdate(brush, focus, lineFocus, xFocus, xContext, xAxisFocus, yAxisFocus);
-      });
+
       
       player.append("g")
         .attr("class", "x brush")
         .call(brush);
       
-      function brushUpdate(brush, g, line, xFocus, xContext, xAxis, yAxis) {
-        // TODO: Redessiner le graphique focus en fonction de la zone sélectionnée dans le graphique contexte.
-        var brushSelection = d3.event.selection;
-        var dateSelection = [xContext.invert(brushSelection[0]), xContext.invert(brushSelection[1])];
-        xFocus.domain(dateSelection);
-        g.select(".x.axis").call(xAxis);
-        g.selectAll(".line")
-          .attr("d", function(d) {
-            return line(d.values);
-        });
-      }
 
+    }
+
+
+    function brushUpdate(g1, g2) {
+      //d3.selectAll('.brush').remove();
+      // TODO: Redessiner le graphique focus en fonction de la zone sélectionnée dans le graphique contexte.
+      //var brushSelection = d3.event.selection;
+      //var intervalSelection = [x.invert(brushSelection[0]), x.invert(brushSelection[1])];
+      //x.domain(intervalSelection);
+      /*g.select(".x.axis").call(xAxis);
+      g.selectAll(".line")
+        .attr("d", function(d) {
+          return line(d.values);
+      });*/
+      g1.selectAll("circles")
+      .attr("visibility", "hidden")
+      .attr("fill", "#000000");
+      g2.append.append("rect")
+      .attr("x", 0)
+      .attr("y", 0)
+      .attr("width", x(data.duration))
+      .attr("height", 100)
+      .attr("fill", "#ff0000");
     }
 
   
