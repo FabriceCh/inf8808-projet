@@ -273,7 +273,8 @@
       | Row : Player : Line Graphs
       |--------------------------------------------------------------------------
       */
-
+     //(Fabrice) I'm not even sure if we actually want axis 
+/*
       player.append("g")
       .attr("class", "x axis")
       //.attr("transform", "translate(0," + heightFocus + ")")
@@ -282,7 +283,7 @@
       player.append("g")
       .attr("class", "y axis")
       .call(y);
-
+*/
       let graphLine = d3.line()
         .x(function(d, i) { 
           return x(i);
@@ -292,52 +293,18 @@
         })
         .curve(d3.curveBasisOpen);
       
-      let apmstestarray = data.players[0].apms["camera"];
-
-
-
       player
-      //.append("g")
-      //.attr("class", `player-row-${i}`)
-      //.selectAll(".line")
-      //.selectAll("path")
-      //.data(d => data.players[0].apms[d.id])
-      //.enter()
       .append("path")
       .attr("class", "line")
-      //.attr("d", createLine(d => data.players[i].apms[d.id]))
-      //.attr("d",d => createLine(d))
-      //.attr("d", function(d) {return graphLine(d);})
       .attr("d", function(d) {return graphLine(data.players[i].apms[d.id]);})
       .attr("stroke", function(d) {
-         return color(generalType(d.type));
-         return "#000000"
+         return color(d.id);
        })
       .attr("stroke-width", function(d) {
-         return 2;
+         return 1;
         })
-       .attr("fill", "#FF000");
-
-     /*
-      player.selectAll("path")
-      .data(data.players[i].events.filter(
-        function(d) {
-          return generalType(d.type) == "camera";
-        }
-      ))
-      .enter()
-      .append("path")
-      .attr("class", "line")
-      .attr("d", function(d) {
-        return line(d.values);
-      })
-      .attr("stroke", function(d) {
-        return color(generalType(d.type) == "camera");
-      })
-      .attr("stroke-width", function(d) {
-        return 2;
-      })
-      .attr("fill", "none");*/
+        .attr("fill", "none")
+        .attr("transform", `translate(0, ${- row.margin.top - row.margin.bottom})`);
 
     }
 
@@ -479,6 +446,19 @@
 
     // Display data in tooltip
 
+    let tooltipHeader = d3.select("#tooltip")
+    .append("h2")
+    .attr("class", "title is-5");
+
+    tooltipHeader
+    .append("span")
+    .text("Time: ");
+
+    tooltipHeader
+    .append("span")
+    .attr("class", "time")
+    .text("0 seconds");
+
     let tooltipRows = d3.select("#tooltip")
     .selectAll(".row")
     .data(uniq(data.categories.map(u => u.id)))
@@ -493,7 +473,7 @@
     .attr("class", "dot")
     .attr("style", d => `background-color: ${color(d)}`);
 
-    tooltipTitle.append("span").text(d => d.capitalize());
+   tooltipTitle.append("span").text(d => d.capitalize());
 
     let tooltipUnits = tooltipRows
     .selectAll(".category")
@@ -505,9 +485,7 @@
     tooltipUnits = tooltipUnits.append("div")
     .attr("class", "level");
 
-    tooltipUnits.append("div")
-    .attr("class", "name")
-    .text(d => d.name);
+
 
     let counts = tooltipUnits.append("div")
     .attr("class", "count");
@@ -582,6 +560,7 @@
         tooltipNode.attr("style", `transform: translate(${xTranslation}px,${yTranslation}px)`);
 
         // Update data displayed in tooltip
+        tooltipNode.select("h2 .time").text(`${time} seconds`); 
         data.categories.forEach(u => {
           d3.select(`#tooltip-${u.id}-0`).text(d => data.players[0].apms[d.id][time]);
           d3.select(`#tooltip-${u.id}-1`).text(d => data.players[1].apms[d.id][time])
