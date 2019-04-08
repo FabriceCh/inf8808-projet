@@ -296,7 +296,6 @@
       .attr("x2", d => x(d[1]))
       .attr("y1", lineHeight)
       .attr("y2", lineHeight)
-      // .attr("height", (d, i) => {console.log("d in the height callback", d); return 4;})
       .attr("stroke", (d,i,node) => {
         let unit = getUnitFormNode(data, node);
         return color(unit.category)
@@ -658,7 +657,6 @@ function units() {
     d['supply_per_unit'] = supply_per_unit[d.id]
   });
 
-  console.log('unit_metadata', unit_metadata);
   return unit_metadata;
 }
 
