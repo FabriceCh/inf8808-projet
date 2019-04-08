@@ -126,7 +126,7 @@
     // Color scale (based on the event category)
     let color = d3.scaleOrdinal()
     .domain(data.categories.map(c => c.id))
-    .range(["#FF0000", "#009933" , "#FFFF00"]);
+    .range(["#FF0000", "#009933" , "#f49542"]);
 
     // x scales : for the two player columns
     let x = d3.scaleLinear()
@@ -165,11 +165,12 @@
     .append("g");
 
     renderMapGroup(mapGroup1, 0, 0);
-    renderMapGroup(mapGroup2, 1, 650);
+    renderMapGroup(mapGroup2, 1, width/2);
 
     function renderMapGroup(mapgroup, playerId, offset) {
+      let centerOffset = (x(data.duration) - image.width)/2;
       mapgroup
-      .attr("transform", `translate(${margin.left + offset} ${margin.top})`);
+      .attr("transform", `translate(${margin.left + offset + centerOffset} ${margin.top})`);
 
       mapgroup
       .append('image')
@@ -203,7 +204,7 @@
     .enter()
     .append("g")
     .attr("data-event-id", d => console.log("event:", d))
-    .attr("transform", d => `translate(0, ${image.height + d.offset})`);
+    .attr("transform", d => `translate(0, ${image.height + d.offset + margin.bottom})`);
 
     /*
     |--------------------------------------------------------------------------
@@ -260,6 +261,7 @@
           .attr("height", d => d.height - row.margin.top - row.margin.bottom)
           .attr("fill", d => color(d.id))
           .attr("opacity", "0.1");
+      
 
     }
 
@@ -349,6 +351,8 @@
       .attr("height", contentHeight)
       .attr("fill", "#f1f1f1");
 
+
+
       /*
       |--------------------------------------------------------------------------
       | Area Chart for each player
@@ -365,6 +369,13 @@
 
       // set the ranges
       x.domain([0, data.duration]);
+
+      
+
+
+
+
+      
 
       /*
       |--------------------------------------------------------------------------
