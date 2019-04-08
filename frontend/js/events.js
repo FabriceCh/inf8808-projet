@@ -235,7 +235,7 @@
     var brush = d3.brushX()
     .extent([[0, 0], [x(data.duration), subPlotHeight ]])
     .on("brush", function () {
-      brushUpdate(mapGroup1, mapGroup2);
+      brushUpdate(brush, mapGroup1, mapGroup2);
     });
 
     /*
@@ -323,7 +323,7 @@
       */
       
       player.append("g")
-        .attr("class", "x brush")
+        .attr("class", "xbrush")
         .call(brush);
 
       /*
@@ -346,9 +346,8 @@
     }
 
 
-    function brushUpdate(g1, g2) {
+    function brushUpdate(brush, g1, g2) {
       //d3.selectAll('.brush').remove();
-
 
       var brushSelection = d3.event.selection;
       let min = x.invert(brushSelection[0]);

@@ -88,3 +88,7 @@
     color: initial;
     float: right;
 }
+
+.selection {
+    fill: red;
+}
