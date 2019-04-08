@@ -2,7 +2,7 @@
   "use strict";
 
   // TODO: Change for correct data filepath
-  const filePath = "/data/actionstats/realdata.json";
+  const filePath = "/datafiles/apm_data.json";
 
   d3.json(filePath).then(function (data) {
     //console.log("data:", data);
@@ -132,6 +132,11 @@
     let x = d3.scaleLinear()
     .domain([0, data.duration])
     .range([0, width/2 - column.gap/2]);
+
+    let y = d3.scaleLinear()
+    .domain([0, d3.max(maxPerCategory)])
+    .range([subPlotHeight, 0]);
+
     //console.log("duration:", data.duration)
 
     /*
@@ -246,7 +251,7 @@
       | Row : Player : Background Rectangles
       |--------------------------------------------------------------------------
       */
-
+/*
       player.append("rect")
           .attr("x", 0)
           .attr("y", 0)
@@ -254,6 +259,7 @@
           .attr("height", d => d.height)
           .attr("fill", "#fff");
 
+*/
       player.append("rect")
           .attr("x", 0)
           .attr("y", 0)
@@ -261,9 +267,81 @@
           .attr("height", d => d.height - row.margin.top - row.margin.bottom)
           .attr("fill", d => color(d.id))
           .attr("opacity", "0.1");
+
+      /*
+      |--------------------------------------------------------------------------
+      | Row : Player : Line Graphs
+      |--------------------------------------------------------------------------
+      */
+
+      player.append("g")
+      .attr("class", "x axis")
+      //.attr("transform", "translate(0," + heightFocus + ")")
+      .call(x);
+
+      player.append("g")
+      .attr("class", "y axis")
+      .call(y);
+
+      let graphLine = d3.line()
+        .x(function(d, i) { 
+          return x(i);
+        })
+        .y(function(d) { 
+          return y(d);
+        })
+        .curve(d3.curveBasisOpen);
       
+      let apmstestarray = data.players[0].apms["camera"];
+
+
+
+      player
+      //.append("g")
+      //.attr("class", `player-row-${i}`)
+      //.selectAll(".line")
+      //.selectAll("path")
+      //.data(d => data.players[0].apms[d.id])
+      //.enter()
+      .append("path")
+      .attr("class", "line")
+      //.attr("d", createLine(d => data.players[i].apms[d.id]))
+      //.attr("d",d => createLine(d))
+      //.attr("d", function(d) {return graphLine(d);})
+      .attr("d", function(d) {return graphLine(data.players[i].apms[d.id]);})
+      .attr("stroke", function(d) {
+         return color(generalType(d.type));
+         return "#000000"
+       })
+      .attr("stroke-width", function(d) {
+         return 2;
+        })
+       .attr("fill", "#FF000");
+
+     /*
+      player.selectAll("path")
+      .data(data.players[i].events.filter(
+        function(d) {
+          return generalType(d.type) == "camera";
+        }
+      ))
+      .enter()
+      .append("path")
+      .attr("class", "line")
+      .attr("d", function(d) {
+        return line(d.values);
+      })
+      .attr("stroke", function(d) {
+        return color(generalType(d.type) == "camera");
+      })
+      .attr("stroke-width", function(d) {
+        return 2;
+      })
+      .attr("fill", "none");*/
 
     }
+
+    
 
     /*
     |--------------------------------------------------------------------------
