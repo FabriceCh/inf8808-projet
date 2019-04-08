@@ -1,8 +1,10 @@
 (function () {
   "use strict";
 
-  // TODO: Change for correct data filepath
-  const filePath = "/datafiles/apm_data.json";
+  let url_string = window.location.href;
+  let url = new URL(url_string);
+
+  const filePath = "/datafiles/" + url.searchParams.get("data") + '.json';
 
   d3.json(filePath).then(function (data) {
     //console.log("data:", data);
