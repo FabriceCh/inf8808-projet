@@ -107,8 +107,6 @@
     data.duration = data.game_length;
     delete data.game_length;
 
-    console.log(data);
-
     /*
     |--------------------------------------------------------------------------
     | Dynamically set the height of the SVG with the calculated offset
@@ -117,7 +115,6 @@
 
     let height = subPlotHeight * numEventCategories;
     let fullHeight = height + margin.top + margin.bottom;
-    console.log(fullHeight);
 
     /*
     |--------------------------------------------------------------------------
@@ -212,7 +209,7 @@
     .data(data.categories)
     .enter()
     .append("g")
-    .attr("data-event-id", d => console.log("event:", d))
+    //.attr("data-event-id", d => console.log("event:", d))
     .attr("transform", d => `translate(0, ${image.height + d.offset + margin.bottom})`);
 
     /*
@@ -286,7 +283,7 @@
       | Row : Player : Line Graphs
       |--------------------------------------------------------------------------
       */
-     //(Fabrice) I'm not even sure if we actually want axis 
+    
 /*
       player.append("g")
       .attr("class", "x axis")
@@ -352,15 +349,30 @@
     function brushUpdate(g1, g2) {
       //d3.selectAll('.brush').remove();
 
-      //TODO: should hide circles that are not in the selection
-      // or should change a domain that is used to create the circles (not implemented like that right now)
-      //Note: this does nothing...
-      g1.selectAll("circles")
-      .attr("visibility", "hidden")
-      .attr("fill", "#000000");
-      g2.selectAll("circles")
-      .attr("visibility", "hidden")
-      .attr("fill", "#000000");
+
+      var brushSelection = d3.event.selection;
+      let min = x.invert(brushSelection[0]);
+      let max = x.invert(brushSelection[1])
+
+      console.log(x.invert(brushSelection[0]), x.invert(brushSelection[1]));
+      g1.selectAll("circle")
+      .attr("visibility", function(d) {
+        console.log(d.second);
+        if(d.second > min && d.second < max) {
+          return "visible";
+        } else {
+          return "hidden";
+        }
+      })
+      g2.selectAll("circle")
+      .attr("visibility", function(d) {
+        console.log(d.second);
+        if(d.second > min && d.second < max) {
+          return "visible";
+        } else {
+          return "hidden";
+        }
+      })
     }
 
   
@@ -389,8 +401,6 @@
     fullHeight = 300;
     height = fullHeight - margin.top - margin.bottom;
     let contentHeight = height - padding.top - padding.bottom;
-
-    console.log(data);
 
     // Select new SVG
     let svg2 = d3.select("#aggregation").attr("height", fullHeight);
@@ -640,9 +650,6 @@
       }
     }
 
-
-    // TODO: Remove data print at the end
-    console.log("data:", data);
 
   });
 
