@@ -276,6 +276,14 @@
       |--------------------------------------------------------------------------
       */
 
+      const lineHeight = (d, i, node) => {
+        let unit = getUnitFormNode(data, node);
+        return unit.supply_per_unit * (i*(line.height) + 1) + i*line.gap;
+      };
+      const lineWidth = (d, i, node) => {
+        let unit = getUnitFormNode(data, node);
+        return unit.supply_per_unit * 2;
+      };
       player.append("g")
       .attr("class", `player-row-${i}`)
       .selectAll(".line")
@@ -283,11 +291,12 @@
       .enter()
       .append("line")
       .attr("class", (d,i) => `lifetime lifetime-${i}`)
-      .attr("stroke-width", 2)
+      .attr("stroke-width", lineWidth)
       .attr("x1", d => x(d[0]))
       .attr("x2", d => x(d[1]))
-      .attr("y1", (d,i) => i*(line.height+line.gap) + 1)
-      .attr("y2", (d,i) => i*(line.height+line.gap) + 1)
+      .attr("y1", lineHeight)
+      .attr("y2", lineHeight)
+      // .attr("height", (d, i) => {console.log("d in the height callback", d); return 4;})
       .attr("stroke", (d,i,node) => {
         let unit = getUnitFormNode(data, node);
         return color(unit.category)
