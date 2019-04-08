@@ -354,10 +354,8 @@
       let min = x.invert(brushSelection[0]);
       let max = x.invert(brushSelection[1])
 
-      console.log(x.invert(brushSelection[0]), x.invert(brushSelection[1]));
       g1.selectAll("circle")
       .attr("visibility", function(d) {
-        console.log(d.second);
         if(d.second > min && d.second < max) {
           return "visible";
         } else {
@@ -366,7 +364,6 @@
       })
       g2.selectAll("circle")
       .attr("visibility", function(d) {
-        console.log(d.second);
         if(d.second > min && d.second < max) {
           return "visible";
         } else {
