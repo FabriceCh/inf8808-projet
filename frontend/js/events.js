@@ -330,6 +330,21 @@
       player.append("g")
         .attr("class", "x brush")
         .call(brush);
+
+      /*
+      |--------------------------------------------------------------------------
+      | Row : Player : Interaction Vertical Line
+      |--------------------------------------------------------------------------
+      */
+
+     player.append("line")
+     .attr("class", "interaction-line")
+     .attr("x1", 0)
+     .attr("x2", 0)
+     .attr("y1", 0)
+     .attr("y2", d => d.height - row.margin.top - row.margin.bottom)
+     .attr("stroke", "#000")
+     .attr("display", "none")
       
 
     }
