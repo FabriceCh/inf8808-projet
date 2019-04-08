@@ -355,11 +355,11 @@
       //TODO: should hide circles that are not in the selection
       // or should change a domain that is used to create the circles (not implemented like that right now)
       //Note: this does nothing...
-      g1.selectAll("circles")
-      .attr("visibility", "hidden")
+      g1.selectAll("circle")
+      .attr("opacity", 0)
       .attr("fill", "#000000");
-      g2.selectAll("circles")
-      .attr("visibility", "hidden")
+      g2.selectAll("circle")
+      .attr("opacity", 0)
       .attr("fill", "#000000");
     }
 
