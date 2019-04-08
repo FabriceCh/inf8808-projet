@@ -306,7 +306,37 @@
         .attr("fill", "none")
         .attr("transform", `translate(0, ${- row.margin.top - row.margin.bottom})`);
 
+      /*
+      |--------------------------------------------------------------------------
+      | Row : Player : brushing
+      |--------------------------------------------------------------------------
+      */
+
+      var brush = d3.brushX()
+      .extent([[0, 0], [x(data.duration), subPlotHeight]])
+      .on("brush", function () {
+        //brushUpdate(brush, focus, lineFocus, xFocus, xContext, xAxisFocus, yAxisFocus);
+      });
+      
+      player.append("g")
+        .attr("class", "x brush")
+        .call(brush);
+      
+      function brushUpdate(brush, g, line, xFocus, xContext, xAxis, yAxis) {
+        // TODO: Redessiner le graphique focus en fonction de la zone sélectionnée dans le graphique contexte.
+        var brushSelection = d3.event.selection;
+        var dateSelection = [xContext.invert(brushSelection[0]), xContext.invert(brushSelection[1])];
+        xFocus.domain(dateSelection);
+        g.select(".x.axis").call(xAxis);
+        g.selectAll(".line")
+          .attr("d", function(d) {
+            return line(d.values);
+        });
+      }
+
     }
+
+  
 
     
 
