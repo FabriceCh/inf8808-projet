@@ -40,21 +40,26 @@ def match_events_to_units(categories):
     born_events = categories[sc2reader.events.tracker.UnitBornEvent]
     died_events = categories[sc2reader.events.tracker.UnitDiedEvent]
 
-    for born in born_events:
+    for born in born_events :
         id = get_unit_from_event(born)
 
-        unit_init_events = select_events_related_to_unit(init_events, id)
-        unit_done_events = select_events_related_to_unit(done_events, id)
         unit_died_events = select_events_related_to_unit(died_events, id)
 
         processed_data.append({
-            'init': unit_init_events[0] if unit_init_events else None,
-            'done': unit_done_events[0] if unit_done_events else None,
             'born': born,
             'died': unit_died_events[0] if unit_died_events else None,
         })
 
-    return processed_data
+    for done in done_events:
+        id = get_unit_from_event(done)
+
+        unit_died_events = select_events_related_to_unit(died_events, id)
+        processed_data.append({
+            'born': done,
+            'died': unit_died_events[0] if unit_died_events else None,
+        })
+
+    return sorted(processed_data, key=lambda u: u['born'].second)
 
 
 def get_event_time(e: sc2reader.events.tracker.Event):
@@ -82,7 +87,7 @@ def prepare_signle_unit_for_visualisation(unit_lifetime_events):
     #  game or a special value to indicate that the unit was never killed.
     died_time = get_event_time(unit_lifetime_events['died'])['second'] if unit_lifetime_events['died'] else 'EOG'
     prepared_datum['died_time'] = died_time
-    prepared_datum['player'] = unit_lifetime_events['born'].control_pid
+    prepared_datum['player'] = unit_lifetime_events['born'].unit.owner.team_id
 
     # Redundant data or other secondary stuff to add for whatever practical purposes
     prepared_datum['lifetime'] = {
@@ -289,13 +294,15 @@ class SC2ReplayWrapper:
             'Mothership'
         ]
         def selector(e):
+            if hasattr(e, 'unit') and e.unit.name not in valid_unit_names:
+                return False
             return (
                         (isinstance(e, sc2reader.events.UnitBornEvent)
                          and (e.control_pid == 1 or e.control_pid == 2)
                              # TODO Remove the true when we are sure that all the
                              #  names are good.  Leave it though so that the output
                              #  can show what the good and bad names are.
-                         and (e.unit.name in valid_unit_names))
+                         )
                         or isinstance(e, sc2reader.events.UnitInitEvent)
                         or isinstance(e, sc2reader.events.UnitDiedEvent)
                         or isinstance(e, sc2reader.events.UnitDoneEvent)
