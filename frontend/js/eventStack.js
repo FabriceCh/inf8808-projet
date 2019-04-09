@@ -50,6 +50,7 @@ class EventStack {
 
     // Select new SVG
     this.svg = d3.select("#aggregation").attr("height", this.fullHeight);
+    this.createDefs(this.svg);
 
     // Create base group
     this.g = this.svg
@@ -120,7 +121,8 @@ class EventStack {
       .attr("y", 0)
       .attr("width", this.x(data.duration/this.aggr))
       .attr("height", this.contentHeight)
-      .attr("fill", "#fff");
+      .attr("fill", "#fff")
+      .style("filter", "url(#drop-shadow)");
 
       /*
       |--------------------------------------------------------------------------
@@ -251,5 +253,43 @@ class EventStack {
       })
     );
     this.y = this.y.domain([0, this.domainY]);
+  }
+
+  createDefs(svg) {
+    // filters go in defs element
+    var defs = svg.append("defs");
+  
+    // create filter with id #drop-shadow
+    // height=130% so that the shadow is not clipped
+    var filter = defs.append("filter")
+      .attr("id", "drop-shadow")
+      .attr("height", "130%");
+  
+    // SourceAlpha refers to opacity of graphic that this filter will be applied to
+    // convolve that with a Gaussian with standard deviation 3 and store result
+    // in blur
+    filter.append("feGaussianBlur")
+      .attr("in", "SourceAlpha")
+      .attr("stdDeviation", 3);
+  
+    // translate output of Gaussian blur to the right and downwards with 2px
+    // store result in offsetBlur
+    filter.append("feOffset")
+      .attr("dx", 1)
+      .attr("dy", 1);
+  
+    filter.append("feComponentTransfer")
+      .append("feFuncA")
+      .attr("type", "linear")
+      .attr("slope", 0.1);
+  
+    // overlay original SourceGraphic over translated blurred opacity by using
+    // feMerge filter. Order of specifying inputs is important!
+    var feMerge = filter.append("feMerge");
+  
+    feMerge.append("feMergeNode")
+      .attr("in", "offsetBlur")
+    feMerge.append("feMergeNode")
+      .attr("in", "SourceGraphic");
   }
 }
