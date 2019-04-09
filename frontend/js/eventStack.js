@@ -36,6 +36,7 @@ class EventStack {
     .range([this.contentHeight, 10]);
 
     this.area = d3.area()
+    .curve(d3.curveCatmullRom.alpha(0.5))
     .x((d, i) => {
       return this.x(i)
     })
@@ -138,13 +139,20 @@ class EventStack {
   }
 
   series(i) {
+    let aggr = 10;
     let dataset = [];
-    for (let j = 0; j < this.data.duration; j++) {
+    for (let j = 0; j < this.data.duration / aggr; j++) {
       let qty = {};
       this.categories.forEach(c => {
-        qty[c] = this.data.players[i].apms[c][j]
+        qty[c] = 0
+        for (let k = 0; k < aggr; k++) {
+          qty[c] += this.data.players[i].apms[c][k * j]
+        }
       });
-      dataset.push(qty);
+
+      for (let k = 0; k < aggr; k++) {
+        dataset.push(qty);
+      }
     }
     console.log(dataset);
     return d3.stack()

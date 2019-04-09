@@ -243,11 +243,16 @@
     /*
      * brushes
      */
-    var brush = d3.brushX()
-    .extent([[0, 0], [x(data.duration), subPlotHeight ]])
-    .on("brush", function () {
-      brushUpdate(mapGroup1, mapGroup2);
-    });
+
+    var currentBrush = null;
+
+    var brush = d3.brushX().extent([[0, 0], [x(data.duration), subPlotHeight]])
+    .on("start", function(d, i, nodes) {
+      currentBrush = nodes[0];
+    })
+    .on("brush", brushUpdate);
+
+    var brush_ = d3.brushX().extent([[0, 0], [x(data.duration), subPlotHeight]]);
 
     /*
     |--------------------------------------------------------------------------
@@ -329,16 +334,6 @@
 
       /*
       |--------------------------------------------------------------------------
-      | Row : Player : brushing
-      |--------------------------------------------------------------------------
-      */
-      
-      player.append("g")
-        .attr("class", "x brush")
-        .call(brush);
-
-      /*
-      |--------------------------------------------------------------------------
       | Row : Player : Interaction Vertical Line
       |--------------------------------------------------------------------------
       */
@@ -352,9 +347,20 @@
       .attr("stroke", "#000")
       .attr("display", "none")
       .style("pointer-events", "none");
+
+      /*
+      |--------------------------------------------------------------------------
+      | Row : Player : brushing
+      |--------------------------------------------------------------------------
+      */
+      
+      player.append("g")
+      .attr("id", d => `brush_${i}_${d.id}`)
+      .attr("class", "x brush")
+      .call(brush);
     }
-    
-    function brushUpdate(g1, g2) {
+
+    function brushUpdate() {
 
       let brushSelection = d3.event.selection;
       let min = x.invert(brushSelection[0]);
@@ -367,7 +373,10 @@
         } else {
           return "hidden";
         }
-      })
+      });
+
+
+
     }  
 
     /*
