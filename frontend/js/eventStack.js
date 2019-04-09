@@ -214,26 +214,25 @@ class EventStack {
 
   updateY() {
     this.domainY = d3.max(
-        this.data.players.map(player => {
-            let aggr = 12;
-            let max = 0;
+      this.data.players.map(player => {
+        let aggr = 12;
+        let max = 0;
 
-            for (let j = 0; j < this.data.duration / aggr; j++) {
-              let qty = 0;
-              this.categories.forEach(c => {
-                for (let k = 0; k < aggr; k++) {
-                  qty += player.apms[c][k * j];
-                }
-
-                if (qty > max) {
-                  max = qty;
-                }
-              });
+        for (let j = 0; j < this.data.duration / aggr; j++) {
+          let qty = 0;
+          this.categories.forEach(c => {
+            for (let k = 0; k < aggr; k++) {
+              qty += player.apms[c][k * j];
             }
-            
-            return max;
-          }
-        )
+
+            if (qty > max) {
+              max = qty;
+            }
+          });
+        }
+          
+        return max;
+      })
     );
     this.y = this.y.domain([0, this.domainY]);
   }

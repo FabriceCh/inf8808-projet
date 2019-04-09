@@ -249,7 +249,6 @@
     .attr("fill", d => color(d.id))
     .attr("alignment-baseline", "center");
 
-
     /*
     |--------------------------------------------------------------------------
     | Generate columns for each player
@@ -266,7 +265,7 @@
 
       let player = rows.append("g")
       .attr("transform", d => `translate(${i*(width/2)}, 0)`)
-      .call(hover, x);
+      //.call(hover, x);
 
       /*
       |--------------------------------------------------------------------------
@@ -326,7 +325,7 @@
       |--------------------------------------------------------------------------
       */
 
-      player.append("line")
+      /* player.append("line")
       .attr("class", "interaction-line")
       .attr("x1", 0)
       .attr("x2", 0)
@@ -334,7 +333,7 @@
       .attr("y2", d => d.height - row.margin.top - row.margin.bottom)
       .attr("stroke", "#000")
       .attr("display", "none")
-      .style("pointer-events", "none");
+      .style("pointer-events", "none"); */
     }
 
     function brushUpdate() {
