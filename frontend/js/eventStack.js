@@ -44,7 +44,7 @@ class EventStack {
     .y0((d) => this.y(d[0]))
     .y1((d) => this.y(d[1]));
 
-    this.categories = ['commands', 'selection', 'camera'];
+    this.categories = ['camera', 'selection', 'commands'];
 
     // Select new SVG
     this.svg = d3.select("#aggregation").attr("height", this.fullHeight);
