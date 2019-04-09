@@ -1,6 +1,6 @@
 class EventStack {
 
-  constructor(data, width, color, hover, x) {
+  constructor(data, width, color, hover, x, brushUpdate) {
     this.hover = hover;
     this.data = data;
 
@@ -53,6 +53,17 @@ class EventStack {
     this.g = this.svg
     .append("g")
     .attr("transform", `translate(${this.margin.left} ${this.margin.top})`);
+
+    /*
+     * brushes
+     */
+    let currentBrush = null;
+    let brush = d3.brushX().extent([[0, 0], [x(data.duration), this.height]])
+    .on("start", function(d, i, nodes) {
+      currentBrush = nodes[0];
+    })
+    .on("end", brushUpdate)
+    .on("brush", brushUpdate);
 
     // Array containing stack area paths for each player
     this.areaCharts = [];
@@ -133,6 +144,17 @@ class EventStack {
       .attr("y2", this.contentHeight)
       .attr("stroke", "#000")
       .attr("display", "none");
+
+      /*
+      |--------------------------------------------------------------------------
+      | Row : Player : brushing
+      |--------------------------------------------------------------------------
+      */
+      
+      player.append("g")
+      .attr("id", `brush_${i}`)
+      .attr("class", "x brush")
+      .call(brush);
     }
 
     this.draw();
