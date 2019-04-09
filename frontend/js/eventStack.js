@@ -134,7 +134,6 @@ class EventStack {
       .attr("stroke", "#000")
       .attr("display", "none");
     }
-
     this.draw();
   }
 
@@ -146,9 +145,7 @@ class EventStack {
         qty[c] = this.data.players[i].apms[c][j]
       });
       dataset.push(qty);
-
     }
-
     console.log(dataset);
     return d3.stack()
     .keys(this.categories)
