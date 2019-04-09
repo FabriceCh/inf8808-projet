@@ -7,7 +7,6 @@
   const filePath = "/datafiles/" + url.searchParams.get("data") + '.json';
 
   d3.json(filePath).then(function (data) {
-    //console.log("data:", data);
 
     /*
     |--------------------------------------------------------------------------
@@ -73,7 +72,6 @@
     let maxPerCategory = [];
     players.forEach(player => {
       Object.keys(player.apms).forEach(eventCategory => {
-        //console.log(player.apms[eventCategory]);
         maxPerCategory.push(d3.max(player.apms[eventCategory]));
       });
     });
@@ -81,10 +79,8 @@
     // TODO: Set plot heights dynamically?
     let subPlotHeightConst = 15;
     let subPlotHeight = d3.max(maxPerCategory) * subPlotHeightConst;
-    //console.log("subPlotHeight:", subPlotHeight);
 
     let numEventCategories = Object.keys(players[0].apms).length;
-    //console.log("numEventCategories:", numEventCategories);
 
     // Add event category information section
     data.categories = [];
@@ -136,7 +132,6 @@
     .domain([0, d3.max(maxPerCategory)])
     .range([subPlotHeight, 0]);
 
-    //console.log("duration:", data.duration)
 
     /*
     |--------------------------------------------------------------------------
@@ -145,7 +140,6 @@
     */
 
     let svg = d3.select("#viz").attr("height", fullHeight
-    //remove the + x here
     + 600
     );
 
@@ -229,7 +223,6 @@
     .data(data.categories)
     .enter()
     .append("g")
-    //.attr("data-event-id", d => console.log("event:", d))
     .attr("transform", d => `translate(0, ${image.height + d.offset + margin.bottom})`);
 
     /*
@@ -239,8 +232,6 @@
     */
 
     rows.append("text")
-    //.attr("x", -margin.left + 30)
-    //.attr("y", 100)
     .attr("text-anchor", "end")
     .attr("x", -10)
     .attr("y", 100)
@@ -364,9 +355,10 @@
     }
     
     function brushUpdate(g1, g2) {
-      var brushSelection = d3.event.selection;
+
+      let brushSelection = d3.event.selection;
       let min = x.invert(brushSelection[0]);
-      let max = x.invert(brushSelection[1])
+      let max = x.invert(brushSelection[1]);
 
       svg.selectAll("circle")
       .attr("visibility", function(d) {
@@ -384,125 +376,7 @@
     |--------------------------------------------------------------------------
     */
 
-    // Modifiy margins
-    margin.top = 0;
-    margin.right = 0;
-    margin.bottom = 0;
-
-    let padding = {
-      top: 10,
-      bottom: 10,
-      left: 0,
-      right: 0
-    };
-
-    // Modify height
-    fullHeight = 300;
-    height = fullHeight - margin.top - margin.bottom;
-    let contentHeight = height - padding.top - padding.bottom;
-
-    // Select new SVG
-    let svg2 = d3.select("#aggregation").attr("height", fullHeight);
-
-    // Create base group
-    let g2 = svg2
-    .append("g")
-    .attr("transform", `translate(${margin.left} ${margin.top})`);
-
-    /*
-    |--------------------------------------------------------------------------
-    | Generate each columns for each player
-    |--------------------------------------------------------------------------
-    */
-
-    for (let i = 0; i < 2; i++) {
-
-      /*
-      |--------------------------------------------------------------------------
-      | Row : Player : Group for each player
-      |--------------------------------------------------------------------------
-      */
-
-      let content = g2.append("g")
-      .attr("transform", d => `translate(${i*(width/2)},0)`)
-      .call(hover, x);
-
-      /*
-      |--------------------------------------------------------------------------
-      | Row : Player : White Rectangle for interaction
-      |--------------------------------------------------------------------------
-      */
-
-      content.append("rect")
-      .attr("x", 0)
-      .attr("y", 0)
-      .attr("width", x(data.duration) + column.gap)
-      .attr("height", fullHeight)
-      .attr("fill", "#fff");
-
-      /*
-      |--------------------------------------------------------------------------
-      | Row : Player : Group for drawing
-      |--------------------------------------------------------------------------
-      */
-
-      let player = content.append("g")
-      .attr("transform", d => `translate(0,${padding.top})`);
-
-      /*
-      |--------------------------------------------------------------------------
-      | Row : Player : Background Rectangles
-      |--------------------------------------------------------------------------
-      */
-
-      player.append("rect")
-      .attr("x", 0)
-      .attr("y", 0)
-      .attr("width", x(data.duration))
-      .attr("height", contentHeight)
-      .attr("fill", "#f1f1f1");
-
-
-
-      /*
-      |--------------------------------------------------------------------------
-      | Area Chart for each player
-      |--------------------------------------------------------------------------
-      */
-     
-      let areaChart = player.append("g").attr("class", "area-chart");
-
-      const MAX_UNIT_N = 120;
-      let y = d3
-          .scaleLinear()
-          .range([contentHeight, 0])
-          .domain([0, MAX_UNIT_N]);
-
-      // set the ranges
-      x.domain([0, data.duration]);
-
-      
-
-
-
-
-      
-
-      /*
-      |--------------------------------------------------------------------------
-      | Row : Column : Interaction Vertical Line
-      |--------------------------------------------------------------------------
-      */
-
-      player.append("line")
-      .attr("class", "interaction-line")
-      .attr("x1", 0)
-      .attr("x2", 0)
-      .attr("y1", 0)
-      .attr("y2", contentHeight)
-      .attr("stroke", "#000")
-      .attr("display", "none")
-    }
+    new EventStack(data, width, color, hover, x);
 
     /*
     |--------------------------------------------------------------------------
@@ -511,8 +385,8 @@
     */
 
     // Display data in tooltip
-
     let tooltipHeader = d3.select("#tooltip")
+    .style("min-width", "160px")
     .append("h2")
     .attr("class", "title is-5");
 
@@ -530,35 +404,21 @@
     .data(uniq(data.categories.map(u => u.id)))
     .enter()
     .append("div")
-    .attr("class", "row");
+    .attr("class", "row")
+    .style("margin-bottom", "12px");
 
     let tooltipTitle = tooltipRows.append("h3")
-    .attr("class", "title is-6");
+    .attr("class", "title is-6")
+    .style("margin-bottom", "0px");
 
     tooltipTitle.append("span")
     .attr("class", "dot")
-    .attr("style", d => `background-color: ${color(d)}`);
+    .attr("style", d => `background-color: ${color(d)}`)
 
-   tooltipTitle.append("span").text(d => d.capitalize());
-
-    let tooltipUnits = tooltipRows
-    .selectAll(".category")
-    .data(d => data.categories.filter(u => u.id === d))
-    .enter()
-    .append("div")
-    .attr("class", "category");
-
-    tooltipUnits = tooltipUnits.append("div")
-    .attr("class", "level");
-
-
-
-    let counts = tooltipUnits.append("div")
-    .attr("class", "count");
-
-    counts.append("span").attr("id", d => `tooltip-${d.id}-0`).text(d => data.players[0].apms[d.id][0]);
-    counts.append("span").text("-");
-    counts.append("span").attr("id", d => `tooltip-${d.id}-1`).text(d => data.players[1].apms[d.id][0]);
+    tooltipTitle.append("span").attr("class", "is-capitalized").text(d => d).style('padding-right', '4px');
+    tooltipTitle.append("span").attr("class", "tag is-pulled-right").attr("id", d => `tooltip-${d}-1`).text(d => data.players[1].apms[d][0]);
+    tooltipTitle.append("span").attr("class", "is-pulled-right").text(" ");
+    tooltipTitle.append("span").attr("class", "tag is-pulled-right").attr("id", d => `tooltip-${d}-0`).text(d => data.players[0].apms[d][0]);
 
     /**
      * React to mouse actions over a graph
@@ -628,8 +488,8 @@
         // Update data displayed in tooltip
         tooltipNode.select("h2 .time").text(`${time} seconds`); 
         data.categories.forEach(u => {
-          d3.select(`#tooltip-${u.id}-0`).text(d => data.players[0].apms[d.id][time]);
-          d3.select(`#tooltip-${u.id}-1`).text(d => data.players[1].apms[d.id][time])
+          d3.select(`#tooltip-${u.id}-0`).text(data.players[0].apms[u.id][time]);
+          d3.select(`#tooltip-${u.id}-1`).text(data.players[1].apms[u.id][time])
         })
 
       } else {
@@ -648,8 +508,6 @@
         .attr("class", "");
       }
     }
-
-
   });
 
 })();

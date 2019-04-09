@@ -1,6 +1,6 @@
 class StackArea {
 
-    constructor (data, width, color, hover, x) {
+    constructor(data, width, color, hover, x) {
 
         this.probeId = 'Probe';
         this.showProbe = true;
@@ -24,7 +24,7 @@ class StackArea {
 
         this.column = {
             gap: 10
-        }
+        };
 
         this.width = width;
         this.fullHeight = 300;
@@ -40,7 +40,7 @@ class StackArea {
         .range([this.contentHeight, 10]);
 
         this.area = d3.area()
-        .x((d,i) => this.x(i))
+        .x((d, i) => this.x(i))
         .y0((d) => this.y(d[0]))
         .y1((d) => this.y(d[1]));
 
@@ -56,7 +56,7 @@ class StackArea {
 
         // Array containing stack area paths for each player
         this.areaCharts = [];
-    
+
         /*
         |--------------------------------------------------------------------------
         | Generate each columns for each player
@@ -72,7 +72,7 @@ class StackArea {
             */
 
             let content = this.g.append("g")
-            .attr("transform", d => `translate(${i*(this.width/2)},0)`)
+            .attr("transform", d => `translate(${i * (this.width / 2)},0)`)
             .call(this.hover, this.x);
 
             /*
@@ -119,7 +119,7 @@ class StackArea {
             this.areaCharts.push(
                 player.append("g").attr("class", `area-chart-${i}`)
             );
-            
+
             /*
             |--------------------------------------------------------------------------
             | Row : Column : Interaction Vertical Line
@@ -153,10 +153,10 @@ class StackArea {
         .on("click", d => {
             if (this.showProbe) {
                 header.select("text").text("Show Probes");
-                header.select("rect").attr("width", 105);        
+                header.select("rect").attr("width", 105);
             } else {
                 header.select("text").text("Hide Probes");
-                header.select("rect").attr("width", 100);        
+                header.select("rect").attr("width", 100);
             }
 
             this.showProbe = !this.showProbe;
@@ -173,20 +173,21 @@ class StackArea {
         .text("Hide Probes");
     }
 
-    series (i) {
+    series(i) {
         let dataset = [];
 
         for (let j = 0; j < this.data.duration; j++) {
             let qty = {};
             this.categories.forEach(c => {
                 qty[c] = this.data.units
-                .filter(u => u.category == c)
-                .filter(u => u.id != 'Probe' || this.showProbe)
+                .filter(u => u.category === c)
+                .filter(u => u.id !== 'Probe' || this.showProbe)
                 .reduce((acc, u) => acc += this.data.players[i].unit_supplies[u.id][j], 0);
-            })
+            });
             dataset.push(qty);
         }
-        
+
+        console.log(dataset);
         return d3.stack()
         .keys(this.categories)
         (dataset);
@@ -195,9 +196,8 @@ class StackArea {
     draw() {
 
         this.updateY();
-        
+
         this.areaCharts.forEach((areaChart, i) => {
-            
             let series = this.series(i);
 
             areaChart
@@ -215,7 +215,7 @@ class StackArea {
         this.updateY();
 
         this.areaCharts.forEach((areaChart, i) => {
-            
+
             let series = this.series(i);
 
             areaChart
