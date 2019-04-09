@@ -7,7 +7,7 @@ class EventStack {
     this.aggr = 2;
 
     this.margin = {
-      top: 0,
+      top: 26,
       left: 0,
       right: 0,
       bottom: 0
@@ -32,7 +32,7 @@ class EventStack {
     this.color = color;
 
     this.x = x.copy();
-    this.x.domain([0, data.duration/this.aggr]);
+    this.x.domain([0, data.duration/this.aggr]).range([0,this.width/2 - this.column.gap/2]);
 
     this.y = d3
     .scaleLinear()
@@ -86,7 +86,7 @@ class EventStack {
       let content = this.g.append("g")
       .attr("transform", () => `translate(${i * (this.width / 2)},0)`)
       .call(this.hover, this.x);
-      
+        
       /*
       |--------------------------------------------------------------------------
       | Row : Player : White Rectangle for interaction
@@ -96,9 +96,9 @@ class EventStack {
       content.append("rect")
       .attr("x", 0)
       .attr("y", 0)
-      .attr("width", this.x(data.duration + this.column.gap))
+      .attr("width", this.x(data.duration/this.aggr + this.column.gap))
       .attr("height", this.fullHeight)
-      .attr("fill", "#fff");
+      .attr("fill", "none");
 
       /*
       |--------------------------------------------------------------------------
@@ -118,7 +118,7 @@ class EventStack {
       player.append("rect")
       .attr("x", 0)
       .attr("y", 0)
-      .attr("width", this.x(data.duration))
+      .attr("width", this.x(data.duration/this.aggr))
       .attr("height", this.contentHeight)
       .attr("fill", "#fff");
 
@@ -146,6 +146,21 @@ class EventStack {
       .attr("y2", this.contentHeight)
       .attr("stroke", "#000")
       .attr("display", "none");
+
+      /*
+        |--------------------------------------------------------------------------
+        | Row : Left Text
+        |--------------------------------------------------------------------------
+        */
+
+       content.append("text")
+       .attr("text-anchor", "start")
+       .attr("x", 10)
+       .attr("y", -this.margin.top + 10)
+       .attr("style", "font-weight: 600")
+       .text("All events")
+       .attr("fill", "#333")
+       .attr("alignment-baseline", "hanging");
 
       /*
       |--------------------------------------------------------------------------
