@@ -16,7 +16,7 @@
     */
 
     let margin = {
-      top: 110,
+      top: 100,
       left: 120,
       right: 0,
       bottom: 10
@@ -152,6 +152,26 @@
     let g = svg
       .append("g")
       .attr("transform", `translate(${margin.left} ${margin.top})`);
+
+    /*
+    |--------------------------------------------------------------------------
+    | Players' names
+    |--------------------------------------------------------------------------
+    */
+
+    for (let i = 0; i < 2; i++) {
+      let text = data.metadata.players[i].name;
+      if (data.metadata.winner.name == text) {
+        text += ' 🏆';
+      }
+      g.append("text")
+      .text(text)
+      .attr("y", -13)
+      .attr("x", i*width/2 + width/4)
+      .attr("text-anchor", "middle")
+      .style("font-weight", 500)
+      .style("font-size", "1.1rem");
+    }
 
     
     /*
