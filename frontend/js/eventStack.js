@@ -37,14 +37,13 @@ class EventStack {
     .domain([0, 30]);
 
     this.area = d3.area()
-    .curve(d3.curveCatmullRom.alpha(0.5))
     .x((d, i) => {
       return this.x(i)
     })
     .y0((d) => this.y(d[0]))
     .y1((d) => this.y(d[1]));
 
-    this.categories = ['camera', 'commands', 'selection'];
+    this.categories = ['commands', 'selection', 'camera'];
 
     // Select new SVG
     this.svg = d3.select("#aggregation").attr("height", this.fullHeight);
