@@ -29,13 +29,15 @@ class EventStack {
 
     this.color = color;
 
-    this.x = x.domain([0, data.duration]);
+    this.x = x.copy();
+    this.x.domain([0, data.duration/12]);
 
     this.y = d3
     .scaleLinear()
     .range([this.contentHeight, 10]);
 
     this.area = d3.area()
+    .curve(d3.curveCatmullRom.alpha(0.5))
     .x((d, i) => {
       return this.x(i)
     })
@@ -171,9 +173,7 @@ class EventStack {
         }
       });
 
-      for (let k = 0; k < aggr; k++) {
-        dataset.push(qty);
-      }
+      dataset.push(qty);
     }
     
     return d3.stack()

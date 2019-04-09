@@ -335,15 +335,15 @@
     .attr("class", "tutorial")
     .style("opacity", "0");
 
-    let tutoHeight = 142;
-    let tutoWidth = 300;
+    let tutoHeight = 152;
+    let tutoWidth = 370;
     let tutoMargin = {
       top: 25,
       left: 20,
       right: 20,
       bottom: 25
     }
-    let tutoTextHeight = 60
+    let tutoTextHeight = 70
 
     tuto.append("svg:image")
     .attr("x", tutoWidth / 2)
@@ -364,7 +364,7 @@
     .attr("y", tutoMargin.top)
     .attr("x", tutoMargin.left)
     .attr("style", "font-size: 0.9rem")
-    .text(`One line represents the lifetime of a single unit in a game. This line shows the lifetime a of a ${data.units[0].name} from creation to death.`)
+    .text(`One line represents the lifetime of a single unit in a game. Its thickness represent the cost of the unit: a thicker line means a more expensive unit. This line shows the lifetime a of a ${data.units[0].name} from creation to death.`)
     .call(wrap, tutoWidth - tutoMargin.left - tutoMargin.right);
 
     tuto.append("rect")
