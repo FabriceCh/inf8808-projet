@@ -25,7 +25,7 @@ class EventStack {
     };
 
     this.width = width;
-    this.fullHeight = 300;
+    this.fullHeight = 200;
     this.height = this.fullHeight - this.margin.top - this.margin.bottom;
     this.contentHeight = this.height - this.padding.top - this.padding.bottom;
 
