@@ -33,8 +33,7 @@ class EventStack {
 
     this.y = d3
     .scaleLinear()
-    .range([this.contentHeight, 10])
-    .domain([0, 30]);
+    .range([this.contentHeight, 10]);
 
     this.area = d3.area()
     .x((d, i) => {
@@ -168,7 +167,7 @@ class EventStack {
       this.categories.forEach(c => {
         qty[c] = 0;
         for (let k = 0; k < aggr; k++) {
-          qty[c] += this.data.players[i].apms[c][k * j] / aggr;
+          qty[c] += this.data.players[i].apms[c][k * j] ;
         }
       });
 
@@ -215,11 +214,25 @@ class EventStack {
 
   updateY() {
     this.domainY = d3.max(
-        this.data.players.map(
-            player => d3.max(
-                Object.values(player.apms).reduce( (acc, val) => acc + val)
-            )
-        )
+      this.data.players.map(player => {
+        let aggr = 12;
+        let max = 0;
+
+        for (let j = 0; j < this.data.duration / aggr; j++) {
+          let qty = 0;
+          this.categories.forEach(c => {
+            for (let k = 0; k < aggr; k++) {
+              qty += player.apms[c][k * j];
+            }
+
+            if (qty > max) {
+              max = qty;
+            }
+          });
+        }
+          
+        return max;
+      })
     );
     this.y = this.y.domain([0, this.domainY]);
   }
