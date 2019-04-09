@@ -186,7 +186,6 @@ class StackArea {
             dataset.push(qty);
         }
 
-        console.log(dataset);
         return d3.stack()
         .keys(this.categories)
         (dataset);
