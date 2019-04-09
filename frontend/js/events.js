@@ -174,7 +174,7 @@
     |--------------------------------------------------------------------------
     */
 
-    const circleOpacity = 0.4;
+    const circleOpacity = 0.7;
 
     let mapGroup1 = svg
     .append("g");
@@ -194,7 +194,7 @@
 
       mapgroup
       .append('image')
-      .attr('xlink:href','/data/maps/50percentBandW_light.jpg')
+      .attr('xlink:href','/data/maps/50percentBandW.png')
       .attr('height', image.height)
       .attr('width', image.width);
       
