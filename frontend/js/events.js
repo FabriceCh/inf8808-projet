@@ -493,7 +493,7 @@
         tooltipNode.attr("style", `transform: translate(${xTranslation}px,${yTranslation}px)`);
 
         // Update data displayed in tooltip
-        tooltipNode.select("h2 .time").text(`${parseInt(time/60)} minutes`); 
+        tooltipNode.select("h2 .time").text(`${Math.trunc(time/60)}:${time%60} seconds`);
         data.categories.forEach(u => {
           d3.select(`#tooltip-${u.id}-0`).text(data.players[0].apms[u.id][time]);
           d3.select(`#tooltip-${u.id}-1`).text(data.players[1].apms[u.id][time])

@@ -420,7 +420,7 @@
 
     tooltipHeader
     .append("span")
-    .text("Time: ");
+    .text("Time:  ");
 
     tooltipHeader
     .append("span")
@@ -531,7 +531,7 @@
         tooltipNode.attr("style", `transform: translate(${xTranslation}px,${yTranslation}px)`);
 
         // Update data displayed in tooltip
-        tooltipNode.select("h2 .time").text(`${parseInt(time/60)} minutes`); 
+        tooltipNode.select("h2 .time").text(`${Math.trunc(time/60)}:${time%60}`);
         data.units.forEach(u => {
           d3.select(`#tooltip-${u.id}-0`).text(d => data.players[0].unit_counts[d.id][time]);
           d3.select(`#tooltip-${u.id}-1`).text(d => data.players[1].unit_counts[d.id][time])
