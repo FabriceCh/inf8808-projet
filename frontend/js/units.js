@@ -442,7 +442,7 @@
     .attr("class", "dot")
     .attr("style", d => `background-color: ${color(d)}`);
 
-    tooltipTitle.append("span").text(d => d.capitalize());
+    tooltipTitle.append("span").attr("class", "is-uppercase").text(d => d.capitalize());
 
     let tooltipUnits = tooltipRows
     .selectAll(".unit")

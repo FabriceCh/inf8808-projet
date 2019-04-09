@@ -343,35 +343,24 @@
       |--------------------------------------------------------------------------
       */
 
-     player.append("line")
-     .attr("class", "interaction-line")
-     .attr("x1", 0)
-     .attr("x2", 0)
-     .attr("y1", 0)
-     .attr("y2", d => d.height - row.margin.top - row.margin.bottom)
-     .attr("stroke", "#000")
-     .attr("display", "none")
-     .style("pointer-events", "none");
-      
-
+      player.append("line")
+      .attr("class", "interaction-line")
+      .attr("x1", 0)
+      .attr("x2", 0)
+      .attr("y1", 0)
+      .attr("y2", d => d.height - row.margin.top - row.margin.bottom)
+      .attr("stroke", "#000")
+      .attr("display", "none")
+      .style("pointer-events", "none");
     }
-
-
+    
     function brushUpdate(g1, g2) {
 
       let brushSelection = d3.event.selection;
       let min = x.invert(brushSelection[0]);
       let max = x.invert(brushSelection[1]);
 
-      g1.selectAll("circle")
-      .attr("visibility", function(d) {
-        if(d.second > min && d.second < max) {
-          return "visible";
-        } else {
-          return "hidden";
-        }
-      });
-      g2.selectAll("circle")
+      svg.selectAll("circle")
       .attr("visibility", function(d) {
         if(d.second > min && d.second < max) {
           return "visible";
@@ -379,8 +368,7 @@
           return "hidden";
         }
       })
-    }
-
+    }  
 
     /*
     |--------------------------------------------------------------------------
@@ -398,6 +386,7 @@
 
     // Display data in tooltip
     let tooltipHeader = d3.select("#tooltip")
+    .style("min-width", "160px")
     .append("h2")
     .attr("class", "title is-5");
 
@@ -415,35 +404,21 @@
     .data(uniq(data.categories.map(u => u.id)))
     .enter()
     .append("div")
-    .attr("class", "row");
+    .attr("class", "row")
+    .style("margin-bottom", "12px");
 
     let tooltipTitle = tooltipRows.append("h3")
-    .attr("class", "title is-6");
+    .attr("class", "title is-6")
+    .style("margin-bottom", "0px");
 
     tooltipTitle.append("span")
     .attr("class", "dot")
-    .attr("style", d => `background-color: ${color(d)}`);
+    .attr("style", d => `background-color: ${color(d)}`)
 
-   tooltipTitle.append("span").text(d => d.capitalize());
-
-    let tooltipUnits = tooltipRows
-    .selectAll(".category")
-    .data(d => data.categories.filter(u => u.id === d))
-    .enter()
-    .append("div")
-    .attr("class", "category");
-
-    tooltipUnits = tooltipUnits.append("div")
-    .attr("class", "level");
-
-
-
-    let counts = tooltipUnits.append("div")
-    .attr("class", "count");
-
-    counts.append("span").attr("id", d => `tooltip-${d.id}-0`).text(d => data.players[0].apms[d.id][0]);
-    counts.append("span").text("-");
-    counts.append("span").attr("id", d => `tooltip-${d.id}-1`).text(d => data.players[1].apms[d.id][0]);
+    tooltipTitle.append("span").attr("class", "is-capitalized").text(d => d).style('padding-right', '4px');
+    tooltipTitle.append("span").attr("class", "tag is-pulled-right").attr("id", d => `tooltip-${d}-1`).text(d => data.players[1].apms[d][0]);
+    tooltipTitle.append("span").attr("class", "is-pulled-right").text(" ");
+    tooltipTitle.append("span").attr("class", "tag is-pulled-right").attr("id", d => `tooltip-${d}-0`).text(d => data.players[0].apms[d][0]);
 
     /**
      * React to mouse actions over a graph
@@ -513,8 +488,8 @@
         // Update data displayed in tooltip
         tooltipNode.select("h2 .time").text(`${time} seconds`); 
         data.categories.forEach(u => {
-          d3.select(`#tooltip-${u.id}-0`).text(d => data.players[0].apms[d.id][time]);
-          d3.select(`#tooltip-${u.id}-1`).text(d => data.players[1].apms[d.id][time])
+          d3.select(`#tooltip-${u.id}-0`).text(data.players[0].apms[u.id][time]);
+          d3.select(`#tooltip-${u.id}-1`).text(data.players[1].apms[u.id][time])
         })
 
       } else {
