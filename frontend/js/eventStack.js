@@ -1,24 +1,25 @@
 class EventStack {
 
   constructor(data, width, color, hover, x) {
+    this.hover = hover;
     this.data = data;
 
     this.margin = {
       top: 0,
-      left: 150,
+      left: 120,
       right: 0,
       bottom: 0
     };
 
     this.padding = {
-      top: 50,
+      top: 10,
       bottom: 10,
       left: 0,
       right: 0
     };
 
     this.column = {
-      gap: 10
+      gap: 20
     };
 
     this.width = width;
@@ -70,9 +71,9 @@ class EventStack {
       |--------------------------------------------------------------------------
       */
       let content = this.g.append("g")
-      .attr("transform", () => `translate(${i * (this.width / 2)},0)`);
-      // .call(this.hover, this.x);
-
+      .attr("transform", () => `translate(${i * (this.width / 2)},0)`)
+      .call(this.hover, this.x);
+      
       /*
       |--------------------------------------------------------------------------
       | Row : Player : White Rectangle for interaction
@@ -84,7 +85,6 @@ class EventStack {
       .attr("y", 0)
       .attr("width", this.x(data.duration + this.column.gap))
       .attr("height", this.fullHeight)
-      .attr("class", "white-rectangle")
       .attr("fill", "#fff");
 
       /*
@@ -134,12 +134,14 @@ class EventStack {
       .attr("stroke", "#000")
       .attr("display", "none");
     }
+
     this.draw();
   }
 
   series(i) {
     let aggr = 12;
     let dataset = [];
+    
     for (let j = 0; j < this.data.duration / aggr; j++) {
       let qty = {};
       this.categories.forEach(c => {
@@ -153,7 +155,7 @@ class EventStack {
         dataset.push(qty);
       }
     }
-    console.log(dataset);
+    
     return d3.stack()
     .keys(this.categories)
     (dataset);
@@ -171,6 +173,7 @@ class EventStack {
       .enter()
       .append("path")
       .attr("d", this.area)
+      .attr("stroke-width", 0)
       .style("fill", d => this.color(d.key));
     });
   }

@@ -25,7 +25,7 @@
 
     // Tooltip settings
     let tooltip = {
-      width: 250,
+      width: 200,
       spacing: 10
     };
 
@@ -131,7 +131,6 @@
     let y = d3.scaleLinear()
     .domain([0, d3.max(maxPerCategory)])
     .range([subPlotHeight, 0]);
-
 
     /*
     |--------------------------------------------------------------------------
@@ -277,22 +276,21 @@
       | Row : Player : Background Rectangles
       |--------------------------------------------------------------------------
       */
-/*
-      player.append("rect")
-          .attr("x", 0)
-          .attr("y", 0)
-          .attr("width", x(data.duration) + column.gap)
-          .attr("height", d => d.height)
-          .attr("fill", "#fff");
 
-*/
       player.append("rect")
-          .attr("x", 0)
-          .attr("y", 0)
-          .attr("width", x(data.duration))
-          .attr("height", d => d.height - row.margin.top - row.margin.bottom)
-          .attr("fill", d => color(d.id))
-          .attr("opacity", "0.1");
+      .attr("x", 0)
+      .attr("y", 0)
+      .attr("width", x(data.duration) + column.gap)
+      .attr("height", d => d.height)
+      .attr("fill", "#fff");
+
+      player.append("rect")
+      .attr("x", 0)
+      .attr("y", 0)
+      .attr("width", x(data.duration))
+      .attr("height", d => d.height - row.margin.top - row.margin.bottom)
+      .attr("fill", d => color(d.id))
+      .attr("opacity", "0.1");
 
       /*
       |--------------------------------------------------------------------------
