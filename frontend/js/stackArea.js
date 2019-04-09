@@ -72,7 +72,7 @@ class StackArea {
             */
 
             let content = this.g.append("g")
-            .attr("transform", d => `translate(${i * (this.width / 2)},0)`)
+            .attr("transform", () => `translate(${i * (this.width / 2)},0)`)
             .call(this.hover, this.x);
 
             /*
@@ -95,7 +95,7 @@ class StackArea {
             */
 
             let player = content.append("g")
-            .attr("transform", d => `translate(0,${this.padding.top})`);
+            .attr("transform", () => `translate(0,${this.padding.top})`);
 
             /*
             |--------------------------------------------------------------------------
@@ -134,7 +134,6 @@ class StackArea {
             .attr("y2", this.contentHeight)
             .attr("stroke", "#000")
             .attr("display", "none");
-
         }
 
         this.draw();
@@ -150,7 +149,7 @@ class StackArea {
         .attr("ry", 4)
         .style("cursor", "pointer")
         .attr("fill", "#f1f1f1")
-        .on("click", d => {
+        .on("click", () => {
             if (this.showProbe) {
                 header.select("text").text("Show Probes");
                 header.select("rect").attr("width", 105);
@@ -228,7 +227,7 @@ class StackArea {
 
     updateY() {
         this.domainY = d3.max(this.data.players, p => {
-            let keys = Object.keys(p.unit_supplies).filter(k => k != 'Probe' || this.showProbe);
+            let keys = Object.keys(p.unit_supplies).filter(k => k !== 'Probe' || this.showProbe);
 
             let values = [];
 
