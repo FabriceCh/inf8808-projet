@@ -76,10 +76,7 @@
       });
     });
 
-    // TODO: Set plot heights dynamically?
-    let subPlotHeightConst = 10;
-    let subPlotHeight = d3.max(maxPerCategory) * subPlotHeightConst;
-
+    let subPlotHeight = 120;
     let numEventCategories = Object.keys(players[0].apms).length;
 
     // Add event category information section
@@ -246,12 +243,11 @@
     rows.append("text")
     .attr("text-anchor", "end")
     .attr("x", -10)
-    .attr("y", 100)
+    .attr("y", subPlotHeight/2)
     .attr("style", "font-weight: 600")
     .text(d => d.name)
     .attr("fill", d => color(d.id))
-    .attr("alignment-baseline", "hanging");
-
+    .attr("alignment-baseline", "center");
 
     /*
     |--------------------------------------------------------------------------
@@ -269,7 +265,7 @@
 
       let player = rows.append("g")
       .attr("transform", d => `translate(${i*(width/2)}, 0)`)
-      .call(hover, x);
+      //.call(hover, x);
 
       /*
       |--------------------------------------------------------------------------
@@ -329,7 +325,7 @@
       |--------------------------------------------------------------------------
       */
 
-      player.append("line")
+      /* player.append("line")
       .attr("class", "interaction-line")
       .attr("x1", 0)
       .attr("x2", 0)
@@ -337,7 +333,7 @@
       .attr("y2", d => d.height - row.margin.top - row.margin.bottom)
       .attr("stroke", "#000")
       .attr("display", "none")
-      .style("pointer-events", "none");
+      .style("pointer-events", "none"); */
     }
 
     function brushUpdate() {
