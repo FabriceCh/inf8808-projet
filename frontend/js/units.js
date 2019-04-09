@@ -70,15 +70,17 @@
     // For each unit, the height and vertical offset is calculated
     // to correctly position the rows on the graph.
     let offset = 0;
+    const unit_data = units();
 
-    let filteredUnits = units().filter(u => data.players[0].unit_counts[u.id].reduce((acc,i) => acc += i, 0) > 0 || data.players[1].unit_counts[u.id].reduce((acc,i) => acc += i, 0) > 0)
+    let filteredUnits = unit_data.filter(u => data.players[0].unit_counts[u.id].reduce((acc,i) => acc += i, 0) > 0 || data.players[1].unit_counts[u.id].reduce((acc,i) => acc += i, 0) > 0)
     //let filteredUnits = units();
 
     data.units = filteredUnits.map(u => {
       u.offset = offset;
       u.height = Math.max(
           d3.max(data.players, p => {
-            return p.unit_lifetimes[u.id] && p.unit_lifetimes[u.id].length || 0;
+            const unit = unit_data.find(d => d.id === u.id);
+            return p.unit_lifetimes[u.id] && (p.unit_lifetimes[u.id].length * unit.supply_per_unit) || 0;
           }) * (line.height+line.gap) + row.margin.top + row.margin.bottom,
           50);
       offset += u.height;
