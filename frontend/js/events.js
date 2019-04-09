@@ -32,7 +32,7 @@
     let row = {
       // Margin between rows
       margin: {
-        top: 10,
+        top: 0,
         bottom: 10
       }
     };
@@ -51,7 +51,10 @@
     // Image section attributes
     let image = {
       width: 400,
-      height: 316
+      height: 316,
+      margin: {
+        bottom: 20
+      }
     };
 
     /*
@@ -81,14 +84,15 @@
 
     // Add event category information section
     data.categories = [];
+
     Object.keys(players[0].apms).forEach((eventCategory, i) => {
       let categoryInfo = {};
       categoryInfo.id = eventCategory;
       categoryInfo.name = eventCategory.capitalize();
-      categoryInfo.offset = i * subPlotHeight;
-      categoryInfo.height = subPlotHeight;
       data.categories.push(categoryInfo);
     });
+
+    data.categories.reverse();
 
     // Organize player data as array
     data.players = [];
@@ -106,8 +110,8 @@
     |--------------------------------------------------------------------------
     */
 
-    let height = subPlotHeight * numEventCategories;
-    let fullHeight = height + margin.top + margin.bottom;
+   let height = subPlotHeight * numEventCategories + image.height + image.margin.bottom;
+   let fullHeight = height + margin.top + margin.bottom;
 
     /*
     |--------------------------------------------------------------------------
@@ -136,13 +140,23 @@
     .range([subPlotHeight, 0]);
 
     let graphLine = d3.line()
-      .x(function(d, i) { 
-        return xLine(i);
-      })
-      .y(function(d) { 
-        return y(d);
-      })
-      .curve(d3.curveBasisOpen);
+    .x(function(d, i) { 
+      return xLine(i);
+    })
+    .y(function(d) { 
+      return y(d);
+    })
+    .curve(d3.curveBasisOpen);
+
+    let graphArea = d3.area()
+    .x(function(d, i) { 
+      return xLine(i);
+    })
+    .y0(d => y(0))
+    .y1(function(d) { 
+      return y(d);
+    })
+    .curve(d3.curveBasisOpen);
 
     /*
     |--------------------------------------------------------------------------
@@ -150,7 +164,7 @@
     |--------------------------------------------------------------------------
     */
 
-    let svg = d3.select("#viz").attr("height", fullHeight + 300);
+    let svg = d3.select("#viz").attr("height", fullHeight);
 
     let g = svg
       .append("g")
@@ -232,7 +246,7 @@
     .data(data.categories)
     .enter()
     .append("g")
-    .attr("transform", d => `translate(0, ${image.height + d.offset + margin.bottom})`);
+    .attr("transform", (d, i) => `translate(0, ${image.margin.bottom + image.height + subPlotHeight * i})`);
 
     /*
     |--------------------------------------------------------------------------
@@ -243,11 +257,11 @@
     rows.append("text")
     .attr("text-anchor", "end")
     .attr("x", -10)
-    .attr("y", subPlotHeight/2)
+    .attr("y", subPlotHeight - 10)
     .attr("style", "font-weight: 600")
     .text(d => d.name)
     .attr("fill", d => color(d.id))
-    .attr("alignment-baseline", "center");
+    .attr("alignment-baseline", "top");
 
     /*
     |--------------------------------------------------------------------------
@@ -276,17 +290,17 @@
       player.append("rect")
       .attr("x", 0)
       .attr("y", 0)
-      .attr("width", x(data.duration) + column.gap)
-      .attr("height", d => d.height)
+      .attr("width", x(data.duration) + column.gap/2)
+      .attr("height", subPlotHeight)
       .attr("fill", "#fff");
 
       player.append("rect")
       .attr("x", 0)
       .attr("y", 0)
       .attr("width", x(data.duration))
-      .attr("height", d => d.height - row.margin.top - row.margin.bottom)
+      .attr("height", subPlotHeight - row.margin.top - row.margin.bottom)
       .attr("fill", d => color(d.id))
-      .attr("opacity", "0.1");
+      .attr("opacity", "0");
 
       /*
       |--------------------------------------------------------------------------
@@ -304,20 +318,19 @@
       .attr("class", "y axis")
       .call(y);
 */
-      
       player
       .append("path")
       .attr("class", "line")
       .attr("data-player", i)
-      .attr("d", function(d) {return graphLine(data.players[i].apms[d.id]);})
-      .attr("stroke", function(d) {
-         return color(d.id);
-       })
-      .attr("stroke-width", function(d) {
-         return 1;
-        })
-        .attr("fill", "none")
-        .attr("transform", `translate(0, ${- row.margin.top - row.margin.bottom})`);
+      .attr("d", d => graphArea(data.players[i].apms[d.id]))
+      .attr("stroke", d => color(d.id))
+      .attr("stroke-width", 0)
+      .attr("fill", d => {
+        let c = d3.color(color(d.id));
+        c.opacity = 0.9;
+        return c;
+      })
+      .attr("transform", `translate(0, ${- row.margin.top - row.margin.bottom})`);
 
       /*
       |--------------------------------------------------------------------------
@@ -358,7 +371,7 @@
       xLine.domain([min, max]);
 
       svg.selectAll(".line").attr("d", (d, i, nodes) => {
-        return graphLine(data.players[nodes[i].getAttribute('data-player')].apms[d.id])
+        return graphArea(data.players[nodes[i].getAttribute('data-player')].apms[d.id])
       });
     }  
 
@@ -418,7 +431,7 @@
      * @param {*} g 
      * @param {*} x 
      */
-    function hover (g, x) {
+    function hover (g) {
 
       g.style("position", "relative");
       
