@@ -76,10 +76,7 @@
       });
     });
 
-    // TODO: Set plot heights dynamically?
-    let subPlotHeightConst = 15;
-    let subPlotHeight = d3.max(maxPerCategory) * subPlotHeightConst;
-
+    let subPlotHeight = 120;
     let numEventCategories = Object.keys(players[0].apms).length;
 
     // Add event category information section
@@ -128,9 +125,24 @@
     .domain([0, data.duration])
     .range([0, width/2 - column.gap/2]);
 
+    // x scale for the line graphs
+    let xLine = d3.scaleLinear()
+    .domain([0, data.duration])
+    .range([0, width/2 - column.gap/2])
+    .clamp(true);
+
     let y = d3.scaleLinear()
     .domain([0, d3.max(maxPerCategory)])
     .range([subPlotHeight, 0]);
+
+    let graphLine = d3.line()
+      .x(function(d, i) { 
+        return xLine(i);
+      })
+      .y(function(d) { 
+        return y(d);
+      })
+      .curve(d3.curveBasisOpen);
 
     /*
     |--------------------------------------------------------------------------
@@ -138,9 +150,7 @@
     |--------------------------------------------------------------------------
     */
 
-    let svg = d3.select("#viz").attr("height", fullHeight
-    + 600
-    );
+    let svg = d3.select("#viz").attr("height", fullHeight + 300);
 
     let g = svg
       .append("g")
@@ -233,25 +243,12 @@
     rows.append("text")
     .attr("text-anchor", "end")
     .attr("x", -10)
-    .attr("y", 100)
+    .attr("y", subPlotHeight/2)
     .attr("style", "font-weight: 600")
     .text(d => d.name)
     .attr("fill", d => color(d.id))
-    .attr("alignment-baseline", "hanging");
+    .attr("alignment-baseline", "center");
 
-    /*
-     * brushes
-     */
-
-    var currentBrush = null;
-
-    var brush = d3.brushX().extent([[0, 0], [x(data.duration), subPlotHeight]])
-    .on("start", function(d, i, nodes) {
-      currentBrush = nodes[0];
-    })
-    .on("brush", brushUpdate);
-
-    var brush_ = d3.brushX().extent([[0, 0], [x(data.duration), subPlotHeight]]);
 
     /*
     |--------------------------------------------------------------------------
@@ -308,18 +305,11 @@
       .attr("class", "y axis")
       .call(y);
 */
-      let graphLine = d3.line()
-        .x(function(d, i) { 
-          return x(i);
-        })
-        .y(function(d) { 
-          return y(d);
-        })
-        .curve(d3.curveBasisOpen);
       
       player
       .append("path")
       .attr("class", "line")
+      .attr("data-player", i)
       .attr("d", function(d) {return graphLine(data.players[i].apms[d.id]);})
       .attr("stroke", function(d) {
          return color(d.id);
@@ -345,24 +335,17 @@
       .attr("stroke", "#000")
       .attr("display", "none")
       .style("pointer-events", "none");
-
-      /*
-      |--------------------------------------------------------------------------
-      | Row : Player : brushing
-      |--------------------------------------------------------------------------
-      */
-      
-      player.append("g")
-      .attr("id", d => `brush_${i}_${d.id}`)
-      .attr("class", "x brush")
-      .call(brush);
     }
 
     function brushUpdate() {
-
       let brushSelection = d3.event.selection;
-      let min = x.invert(brushSelection[0]);
-      let max = x.invert(brushSelection[1]);
+      let min = x(0);
+      let max = x(data.duration);
+
+      if (brushSelection != null) {
+        min = x.invert(brushSelection[0]);
+        max = x.invert(brushSelection[1]);
+      }
 
       svg.selectAll("circle")
       .attr("visibility", function(d) {
@@ -373,8 +356,11 @@
         }
       });
 
+      xLine.domain([min, max]);
 
-
+      svg.selectAll(".line").attr("d", (d, i, nodes) => {
+        return graphLine(data.players[nodes[i].getAttribute('data-player')].apms[d.id])
+      });
     }  
 
     /*
@@ -383,7 +369,7 @@
     |--------------------------------------------------------------------------
     */
 
-    new EventStack(data, width, color, hover, x);
+    new EventStack(data, width, color, hover, x, brushUpdate);
 
     /*
     |--------------------------------------------------------------------------
