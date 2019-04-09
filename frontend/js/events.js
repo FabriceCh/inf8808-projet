@@ -15,7 +15,7 @@
     */
 
     let margin = {
-      top: 110,
+      top: 100,
       left: 120,
       right: 0,
       bottom: 10
@@ -147,6 +147,26 @@
       .append("g")
       .attr("transform", `translate(${margin.left} ${margin.top})`);
 
+    /*
+    |--------------------------------------------------------------------------
+    | Players' names
+    |--------------------------------------------------------------------------
+    */
+
+    for (let i = 0; i < 2; i++) {
+      let text = data.metadata.players[i].name;
+      if (data.metadata.winner.name == text) {
+        text += ' 🏆';
+      }
+      g.append("text")
+      .text(text)
+      .attr("y", -13)
+      .attr("x", i*width/2 + width/4)
+      .attr("text-anchor", "middle")
+      .style("font-weight", 500)
+      .style("font-size", "1.1rem");
+    }
+
     
     /*
     |--------------------------------------------------------------------------
@@ -174,7 +194,7 @@
 
       mapgroup
       .append('image')
-      .attr('xlink:href','/data/maps/50percentBandW.png')
+      .attr('xlink:href','/data/maps/50percentBandW_light.jpg')
       .attr('height', image.height)
       .attr('width', image.width);
       
