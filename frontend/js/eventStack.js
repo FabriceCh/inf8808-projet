@@ -37,7 +37,7 @@ class EventStack {
 
     this.area = d3.area()
     .x((d, i) => {
-      this.x(i)
+      return this.x(i)
     })
     .y0((d) => this.y(d[0]))
     .y1((d) => this.y(d[1]));
