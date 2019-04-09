@@ -200,7 +200,7 @@
 
       mapgroup
       .append('image')
-      .attr('xlink:href','/data/maps/50percentBandW.png')
+      .attr('xlink:href','/data/maps/50percentBandW_light.jpg')
       .attr('height', image.height)
       .attr('width', image.width);
       
