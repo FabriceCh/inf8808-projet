@@ -77,7 +77,7 @@
     });
 
     // TODO: Set plot heights dynamically?
-    let subPlotHeightConst = 15;
+    let subPlotHeightConst = 10;
     let subPlotHeight = d3.max(maxPerCategory) * subPlotHeightConst;
 
     let numEventCategories = Object.keys(players[0].apms).length;
@@ -153,9 +153,7 @@
     |--------------------------------------------------------------------------
     */
 
-    let svg = d3.select("#viz").attr("height", fullHeight
-    + 600
-    );
+    let svg = d3.select("#viz").attr("height", fullHeight + 300);
 
     let g = svg
       .append("g")
