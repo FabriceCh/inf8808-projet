@@ -25,7 +25,7 @@
 
     // Tooltip settings
     let tooltip = {
-      width: 250,
+      width: 200,
       spacing: 10
     };
 
@@ -131,7 +131,6 @@
     let y = d3.scaleLinear()
     .domain([0, d3.max(maxPerCategory)])
     .range([subPlotHeight, 0]);
-
 
     /*
     |--------------------------------------------------------------------------
@@ -243,11 +242,16 @@
     /*
      * brushes
      */
-    var brush = d3.brushX()
-    .extent([[0, 0], [x(data.duration), subPlotHeight ]])
-    .on("brush", function () {
-      brushUpdate(mapGroup1, mapGroup2);
-    });
+
+    var currentBrush = null;
+
+    var brush = d3.brushX().extent([[0, 0], [x(data.duration), subPlotHeight]])
+    .on("start", function(d, i, nodes) {
+      currentBrush = nodes[0];
+    })
+    .on("brush", brushUpdate);
+
+    var brush_ = d3.brushX().extent([[0, 0], [x(data.duration), subPlotHeight]]);
 
     /*
     |--------------------------------------------------------------------------
@@ -272,22 +276,21 @@
       | Row : Player : Background Rectangles
       |--------------------------------------------------------------------------
       */
-/*
-      player.append("rect")
-          .attr("x", 0)
-          .attr("y", 0)
-          .attr("width", x(data.duration) + column.gap)
-          .attr("height", d => d.height)
-          .attr("fill", "#fff");
 
-*/
       player.append("rect")
-          .attr("x", 0)
-          .attr("y", 0)
-          .attr("width", x(data.duration))
-          .attr("height", d => d.height - row.margin.top - row.margin.bottom)
-          .attr("fill", d => color(d.id))
-          .attr("opacity", "0.1");
+      .attr("x", 0)
+      .attr("y", 0)
+      .attr("width", x(data.duration) + column.gap)
+      .attr("height", d => d.height)
+      .attr("fill", "#fff");
+
+      player.append("rect")
+      .attr("x", 0)
+      .attr("y", 0)
+      .attr("width", x(data.duration))
+      .attr("height", d => d.height - row.margin.top - row.margin.bottom)
+      .attr("fill", d => color(d.id))
+      .attr("opacity", "0.1");
 
       /*
       |--------------------------------------------------------------------------
@@ -329,16 +332,6 @@
 
       /*
       |--------------------------------------------------------------------------
-      | Row : Player : brushing
-      |--------------------------------------------------------------------------
-      */
-      
-      player.append("g")
-        .attr("class", "x brush")
-        .call(brush);
-
-      /*
-      |--------------------------------------------------------------------------
       | Row : Player : Interaction Vertical Line
       |--------------------------------------------------------------------------
       */
@@ -352,9 +345,20 @@
       .attr("stroke", "#000")
       .attr("display", "none")
       .style("pointer-events", "none");
+
+      /*
+      |--------------------------------------------------------------------------
+      | Row : Player : brushing
+      |--------------------------------------------------------------------------
+      */
+      
+      player.append("g")
+      .attr("id", d => `brush_${i}_${d.id}`)
+      .attr("class", "x brush")
+      .call(brush);
     }
-    
-    function brushUpdate(g1, g2) {
+
+    function brushUpdate() {
 
       let brushSelection = d3.event.selection;
       let min = x.invert(brushSelection[0]);
@@ -367,7 +371,10 @@
         } else {
           return "hidden";
         }
-      })
+      });
+
+
+
     }  
 
     /*
