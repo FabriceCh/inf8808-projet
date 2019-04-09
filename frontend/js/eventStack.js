@@ -4,9 +4,11 @@ class EventStack {
     this.hover = hover;
     this.data = data;
 
+    this.aggr = 2;
+
     this.margin = {
       top: 0,
-      left: 120,
+      left: 0,
       right: 0,
       bottom: 0
     };
@@ -30,7 +32,7 @@ class EventStack {
     this.color = color;
 
     this.x = x.copy();
-    this.x.domain([0, data.duration/12]);
+    this.x.domain([0, data.duration/this.aggr]);
 
     this.y = d3
     .scaleLinear()
@@ -161,14 +163,14 @@ class EventStack {
   }
 
   series(i) {
-    let aggr = 12;
+    
     let dataset = [];
     
-    for (let j = 0; j < this.data.duration / aggr; j++) {
+    for (let j = 0; j < this.data.duration / this.aggr; j++) {
       let qty = {};
       this.categories.forEach(c => {
         qty[c] = 0;
-        for (let k = 0; k < aggr; k++) {
+        for (let k = 0; k < this.aggr; k++) {
           qty[c] += this.data.players[i].apms[c][k * j] ;
         }
       });
@@ -215,13 +217,12 @@ class EventStack {
   updateY() {
     this.domainY = d3.max(
       this.data.players.map(player => {
-        let aggr = 12;
         let max = 0;
 
-        for (let j = 0; j < this.data.duration / aggr; j++) {
+        for (let j = 0; j < this.data.duration / this.aggr; j++) {
           let qty = 0;
           this.categories.forEach(c => {
-            for (let k = 0; k < aggr; k++) {
+            for (let k = 0; k < this.aggr; k++) {
               qty += player.apms[c][k * j];
             }
 

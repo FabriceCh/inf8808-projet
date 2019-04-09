@@ -262,7 +262,7 @@
       .attr("y", 0)
       .attr("width", x(game.duration) + column.gap)
       .attr("height", d => d.height)
-      .attr("fill", "#fff");
+      .attr("fill", "none");
 
       player.append("rect")
       .attr("x", 0)
@@ -461,9 +461,9 @@
     let counts = tooltipUnits.append("div")
     .attr("class", "count");
 
-    counts.append("span").attr("id", d => `tooltip-${d.id}-0`).text(d => data.players[0].unit_counts[d.id][1000]);
-    counts.append("span").text("-");
-    counts.append("span").attr("id", d => `tooltip-${d.id}-1`).text(d => data.players[1].unit_counts[d.id][1000]);
+    counts.append("span").attr("class", "tag").attr("id", d => `tooltip-${d.id}-0`).text(d => data.players[0].unit_counts[d.id][1000]);
+    counts.append("span").text(" ");
+    counts.append("span").attr("class", "tag").attr("id", d => `tooltip-${d.id}-1`).text(d => data.players[1].unit_counts[d.id][1000]);
 
     /**
      * React to mouse actions over a graph
@@ -531,7 +531,7 @@
         tooltipNode.attr("style", `transform: translate(${xTranslation}px,${yTranslation}px)`);
 
         // Update data displayed in tooltip
-        tooltipNode.select("h2 .time").text(`${time} seconds`); 
+        tooltipNode.select("h2 .time").text(`${parseInt(time/60)} minutes`); 
         data.units.forEach(u => {
           d3.select(`#tooltip-${u.id}-0`).text(d => data.players[0].unit_counts[d.id][time]);
           d3.select(`#tooltip-${u.id}-1`).text(d => data.players[1].unit_counts[d.id][time])

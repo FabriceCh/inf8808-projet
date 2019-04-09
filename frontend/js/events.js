@@ -16,7 +16,7 @@
 
     let margin = {
       top: 100,
-      left: 120,
+      left: 0,
       right: 0,
       bottom: 10
     };
@@ -33,7 +33,7 @@
       // Margin between rows
       margin: {
         top: 0,
-        bottom: 10
+        bottom: 0
       }
     };
 
@@ -165,6 +165,7 @@
     */
 
     let svg = d3.select("#viz").attr("height", fullHeight);
+    createDefs(svg);
 
     let g = svg
       .append("g")
@@ -225,8 +226,8 @@
           .data(data.players[playerId].events)
           .enter()
         .append("circle")
-          .attr("cx", function (d) { return d.location[0]*3.2 - 70; })
-          .attr("cy", function (d) { return d.location[1]*2 - 15; })
+          .attr("cx", function (d) { return d.location[0]*3.1 - 60; })
+          .attr("cy", function (d) { return d.location[1]*2 - 10; })
           .attr("r", 1.5)
           .attr("opacity", circleOpacity)
           .attr("fill", function(d) {
@@ -247,21 +248,6 @@
     .enter()
     .append("g")
     .attr("transform", (d, i) => `translate(0, ${image.margin.bottom + image.height + subPlotHeight * i})`);
-
-    /*
-    |--------------------------------------------------------------------------
-    | Row : Left Text
-    |--------------------------------------------------------------------------
-    */
-
-    rows.append("text")
-    .attr("text-anchor", "end")
-    .attr("x", -10)
-    .attr("y", subPlotHeight - 10)
-    .attr("style", "font-weight: 600")
-    .text(d => d.name)
-    .attr("fill", d => color(d.id))
-    .attr("alignment-baseline", "top");
 
     /*
     |--------------------------------------------------------------------------
@@ -292,15 +278,15 @@
       .attr("y", 0)
       .attr("width", x(data.duration) + column.gap/2)
       .attr("height", subPlotHeight)
-      .attr("fill", "#fff");
+      .attr("fill", "none");
 
       player.append("rect")
       .attr("x", 0)
       .attr("y", 0)
       .attr("width", x(data.duration))
       .attr("height", subPlotHeight - row.margin.top - row.margin.bottom)
-      .attr("fill", d => color(d.id))
-      .attr("opacity", "0");
+      .attr("fill", "#fff")
+      .style("filter", "url(#drop-shadow)");
 
       /*
       |--------------------------------------------------------------------------
@@ -331,6 +317,21 @@
         return c;
       })
       .attr("transform", `translate(0, ${- row.margin.top - row.margin.bottom})`);
+
+      /*
+      |--------------------------------------------------------------------------
+      | Row : Left Text
+      |--------------------------------------------------------------------------
+      */
+
+      rows.append("text")
+      .attr("text-anchor", "start")
+      .attr("x", width/2*i + 10)
+      .attr("y", 10)
+      .attr("style", "font-weight: 600")
+      .text(d => d.name)
+      .attr("fill", "#333")
+      .attr("alignment-baseline", "hanging");
 
       /*
       |--------------------------------------------------------------------------
@@ -402,7 +403,7 @@
     tooltipHeader
     .append("span")
     .attr("class", "time")
-    .text("0 seconds");
+    .text("0 minutes");
 
     let tooltipRows = d3.select("#tooltip")
     .selectAll(".row")
@@ -421,9 +422,10 @@
     .attr("style", d => `background-color: ${color(d)}`)
 
     tooltipTitle.append("span").attr("class", "is-capitalized").text(d => d).style('padding-right', '4px');
-    tooltipTitle.append("span").attr("class", "tag is-pulled-right").attr("id", d => `tooltip-${d}-1`).text(d => data.players[1].apms[d][0]);
-    tooltipTitle.append("span").attr("class", "is-pulled-right").text(" ");
-    tooltipTitle.append("span").attr("class", "tag is-pulled-right").attr("id", d => `tooltip-${d}-0`).text(d => data.players[0].apms[d][0]);
+    let right = tooltipTitle.append("span").attr("class", "is-pulled-right").text(" ");
+    right.append("span").attr("class", "tag").attr("id", d => `tooltip-${d}-0`).text(d => data.players[0].apms[d][0]);
+    right.append("span").text(" ");
+    right.append("span").attr("class", "tag").attr("id", d => `tooltip-${d}-1`).text(d => data.players[1].apms[d][0]);
 
     /**
      * React to mouse actions over a graph
@@ -478,7 +480,7 @@
         let tooltipWidth = tooltipNode.node().clientWidth;
         
         let xTranslation = event.x - tooltipWidth - tooltip.spacing;
-        let yTranslation = event.y;
+        let yTranslation = event.y - tooltipHeight;
         
         if (window.innerWidth - event.x > tooltipWidth + tooltip.spacing + 20) {
           xTranslation = event.x + tooltip.spacing;
@@ -491,7 +493,7 @@
         tooltipNode.attr("style", `transform: translate(${xTranslation}px,${yTranslation}px)`);
 
         // Update data displayed in tooltip
-        tooltipNode.select("h2 .time").text(`${time} seconds`); 
+        tooltipNode.select("h2 .time").text(`${parseInt(time/60)} minutes`); 
         data.categories.forEach(u => {
           d3.select(`#tooltip-${u.id}-0`).text(data.players[0].apms[u.id][time]);
           d3.select(`#tooltip-${u.id}-1`).text(data.players[1].apms[u.id][time])
@@ -547,4 +549,42 @@ function uniq(a) {
   return a.filter(function(item) {
       return seen.hasOwnProperty(item) ? false : (seen[item] = true);
   })
+}
+
+function createDefs(svg) {
+  // filters go in defs element
+  var defs = svg.append("defs");
+
+  // create filter with id #drop-shadow
+  // height=130% so that the shadow is not clipped
+  var filter = defs.append("filter")
+    .attr("id", "drop-shadow")
+    .attr("height", "130%");
+
+  // SourceAlpha refers to opacity of graphic that this filter will be applied to
+  // convolve that with a Gaussian with standard deviation 3 and store result
+  // in blur
+  filter.append("feGaussianBlur")
+    .attr("in", "SourceAlpha")
+    .attr("stdDeviation", 3);
+
+  // translate output of Gaussian blur to the right and downwards with 2px
+  // store result in offsetBlur
+  filter.append("feOffset")
+    .attr("dx", 1)
+    .attr("dy", 1);
+
+  filter.append("feComponentTransfer")
+    .append("feFuncA")
+    .attr("type", "linear")
+    .attr("slope", 0.03);
+
+  // overlay original SourceGraphic over translated blurred opacity by using
+  // feMerge filter. Order of specifying inputs is important!
+  var feMerge = filter.append("feMerge");
+
+  feMerge.append("feMergeNode")
+    .attr("in", "offsetBlur")
+  feMerge.append("feMergeNode")
+    .attr("in", "SourceGraphic");
 }

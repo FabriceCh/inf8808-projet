@@ -1,3 +1,7 @@
+body {
+    background-color: #f9f9f9;
+}
+
 .section {
     padding-bottom: 300px;
 }
@@ -61,6 +65,11 @@
 
 #tooltip .unit {
     font-size: 0.85rem;
+}
+
+#tooltip .tag {
+    height: 19px;
+    font-weight: 400;
 }
 
 .aggregation {
