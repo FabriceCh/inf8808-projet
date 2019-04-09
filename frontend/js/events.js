@@ -343,10 +343,14 @@
     }
 
     function brushUpdate() {
-
       let brushSelection = d3.event.selection;
-      let min = x.invert(brushSelection[0]);
-      let max = x.invert(brushSelection[1]);
+      let min = x(0);
+      let max = x(data.duration);
+
+      if (brushSelection != null) {
+        min = x.invert(brushSelection[0]);
+        max = x.invert(brushSelection[1]);
+      }
 
       svg.selectAll("circle")
       .attr("visibility", function(d) {

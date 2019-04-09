@@ -62,6 +62,7 @@ class EventStack {
     .on("start", function(d, i, nodes) {
       currentBrush = nodes[0];
     })
+    .on("end", brushUpdate)
     .on("brush", brushUpdate);
 
     // Array containing stack area paths for each player
