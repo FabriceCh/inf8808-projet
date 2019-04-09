@@ -42,7 +42,7 @@ class EventStack {
     .y0((d) => this.y(d[0]))
     .y1((d) => this.y(d[1]));
 
-    this.categories = ['selection', 'commands', 'events'];
+    this.categories = ['camera', 'commands', 'selection'];
 
     // Select new SVG
     this.svg = d3.select("#aggregation").attr("height", this.fullHeight);
@@ -142,19 +142,14 @@ class EventStack {
     let dataset = [];
     for (let j = 0; j < this.data.duration; j++) {
       let qty = {};
-      let dummy = 1;
       this.categories.forEach(c => {
-        // if (i < 5) {
-        //   // console.log(this.data.players[i].apms[c]);
-        // }
-        // qty[c] = this.data.players[0].apms
-        // .filter(u => u[this.categories] == c)
-        // .reduce((acc, u) => acc += this.data.players[i].unit_supplies[u.id][j], 0);
-        qty[c] = dummy++;
+        qty[c] = this.data.players[i].apms[c][j]
       });
       dataset.push(qty);
+
     }
 
+    console.log(dataset);
     return d3.stack()
     .keys(this.categories)
     (dataset);
@@ -165,10 +160,6 @@ class EventStack {
     this.areaCharts.forEach((areaChart, i) => {
 
       let series = this.series(i);
-      // areaChart.append("rect")
-      // .attr("width", 50)
-      // .attr("height", 50)
-      // .attr("fill", "red");
 
       areaChart
       .selectAll("path")

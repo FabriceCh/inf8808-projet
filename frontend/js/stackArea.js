@@ -180,8 +180,8 @@ class StackArea {
             let qty = {};
             this.categories.forEach(c => {
                 qty[c] = this.data.units
-                .filter(u => u.category == c)
-                .filter(u => u.id != 'Probe' || this.showProbe)
+                .filter(u => u.category === c)
+                .filter(u => u.id !== 'Probe' || this.showProbe)
                 .reduce((acc, u) => acc += this.data.players[i].unit_supplies[u.id][j], 0);
             });
             dataset.push(qty);
