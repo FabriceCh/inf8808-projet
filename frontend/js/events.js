@@ -352,52 +352,31 @@
       |--------------------------------------------------------------------------
       */
 
-     player.append("line")
-     .attr("class", "interaction-line")
-     .attr("x1", 0)
-     .attr("x2", 0)
-     .attr("y1", 0)
-     .attr("y2", d => d.height - row.margin.top - row.margin.bottom)
-     .attr("stroke", "#000")
-     .attr("display", "none")
-     .style("pointer-events", "none");
-      
-
+      player.append("line")
+      .attr("class", "interaction-line")
+      .attr("x1", 0)
+      .attr("x2", 0)
+      .attr("y1", 0)
+      .attr("y2", d => d.height - row.margin.top - row.margin.bottom)
+      .attr("stroke", "#000")
+      .attr("display", "none")
+      .style("pointer-events", "none");
     }
-
-
+    
     function brushUpdate(g1, g2) {
-      //d3.selectAll('.brush').remove();
-
-
       var brushSelection = d3.event.selection;
       let min = x.invert(brushSelection[0]);
       let max = x.invert(brushSelection[1])
 
-      console.log(x.invert(brushSelection[0]), x.invert(brushSelection[1]));
-      g1.selectAll("circle")
+      svg.selectAll("circle")
       .attr("visibility", function(d) {
-        console.log(d.second);
         if(d.second > min && d.second < max) {
           return "visible";
         } else {
           return "hidden";
         }
       })
-      g2.selectAll("circle")
-      .attr("visibility", function(d) {
-        console.log(d.second);
-        if(d.second > min && d.second < max) {
-          return "visible";
-        } else {
-          return "hidden";
-        }
-      })
-    }
-
-  
-
-    
+    }  
 
     /*
     |--------------------------------------------------------------------------
