@@ -1,7 +1,6 @@
 class EventStack {
 
   constructor(data, width, color, hover, x) {
-    // this.hover = hover;
     this.data = data;
 
     this.margin = {
@@ -29,11 +28,12 @@ class EventStack {
 
     this.color = color;
 
-    this.x = x;
+    this.x = x.domain([0, data.duration]);
 
     this.y = d3
     .scaleLinear()
-    .range([this.contentHeight, 10]);
+    .range([this.contentHeight, 10])
+    .domain([0, 30]);
 
     this.area = d3.area()
     .curve(d3.curveCatmullRom.alpha(0.5))
@@ -69,9 +69,8 @@ class EventStack {
       | Row : Player : Group for each player
       |--------------------------------------------------------------------------
       */
-
       let content = this.g.append("g")
-      .attr("transform", d => `translate(${i * (this.width / 2)},0)`);
+      .attr("transform", () => `translate(${i * (this.width / 2)},0)`);
       // .call(this.hover, this.x);
 
       /*
@@ -95,7 +94,7 @@ class EventStack {
       */
 
       let player = content.append("g")
-      .attr("transform", d => `translate(0,${this.padding.top})`);
+      .attr("transform", () => `translate(0,${this.padding.top})`);
 
       /*
       |--------------------------------------------------------------------------
@@ -139,14 +138,14 @@ class EventStack {
   }
 
   series(i) {
-    let aggr = 10;
+    let aggr = 12;
     let dataset = [];
     for (let j = 0; j < this.data.duration / aggr; j++) {
       let qty = {};
       this.categories.forEach(c => {
-        qty[c] = 0
+        qty[c] = 0;
         for (let k = 0; k < aggr; k++) {
-          qty[c] += this.data.players[i].apms[c][k * j]
+          qty[c] += this.data.players[i].apms[c][k * j] / aggr;
         }
       });
 
