@@ -51,36 +51,15 @@ def match_events_to_units(categories):
 
 
 def get_event_time(e: sc2reader.events.tracker.Event):
-    pass
     return {'second': e.second, 'frame': e.frame}
 
 
 def prepare_signle_unit_for_visualisation(unit_lifetime_events):
-    """ Input: A dict like
-    {
-        born: A UnitBornEvent
-        died: A UnitDiedEvent concerning the same unit
-        init: A UnitDiedEvent concerning the same unit
-        : A UnitDiedEvent concerning the same unit
-
-        """
-    prepared_datum = {}
-    born_time = get_event_time(unit_lifetime_events['born'])
-    prepared_datum['unit_type'] = unit_lifetime_events['born'].unit.name
-    prepared_datum['born_time'] = born_time['second']
-
-    # TODO Change this to get_died_time(unit_lifetime_events) which will look at
-    #  all lifetime events, find the one that is not none, and use that as the
-    #  died time.  Otherwise, the function should return the end-time of the
-    #  game or a special value to indicate that the unit was never killed.
-    died_time = get_event_time(unit_lifetime_events['died'])['second'] if unit_lifetime_events['died'] else 'EOG'
-    prepared_datum['died_time'] = died_time
-    prepared_datum['player'] = unit_lifetime_events['born'].unit.owner.team_id
-
-    # Redundant data or other secondary stuff to add for whatever practical purposes
-    prepared_datum['lifetime'] = {
-        'born_time': born_time,
-        'died_time': died_time
+    prepared_datum = {
+        'unit_type' : unit_lifetime_events['born'].unit.name,
+        'born_time' : get_event_time(unit_lifetime_events['born'])['second'],
+        'died_time' : get_event_time(unit_lifetime_events['died'])['second'] if unit_lifetime_events['died'] else 'EOG',
+        'player' : unit_lifetime_events['born'].unit.owner.team_id
     }
     return prepared_datum
 
