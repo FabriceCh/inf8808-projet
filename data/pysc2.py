@@ -55,70 +55,40 @@ def get_event_time(e: sc2reader.events.tracker.Event):
 
 
 def prepare_signle_unit_for_visualisation(unit_lifetime_events):
+
+    born_time = get_event_time(unit_lifetime_events['born'])['second']
+    died_time = get_event_time(unit_lifetime_events['died'])['second'] if unit_lifetime_events['died'] else 'EOG'
     prepared_datum = {
         'unit_type' : unit_lifetime_events['born'].unit.name,
-        'born_time' : get_event_time(unit_lifetime_events['born'])['second'],
-        'died_time' : get_event_time(unit_lifetime_events['died'])['second'] if unit_lifetime_events['died'] else 'EOG',
-        'player' : unit_lifetime_events['born'].unit.owner.team_id
+        'born_time' : born_time,
+        'died_time' : died_time,
+        'player' : unit_lifetime_events['born'].unit.owner.team_id,
+        'lifetime' : [born_time, died_time]
     }
     return prepared_datum
 
 
-def prepare_data_for_visualisation(unit_lifetime_events):
-    first_element = unit_lifetime_events[0]
-    assert ('born' in first_element)
+def group_unit_lifetimes_by_player_and_unit_type(unit_lifetime_events):
     prepared_lifetime_events = list(map(prepare_signle_unit_for_visualisation, unit_lifetime_events))
 
-    # NOTE: Fun fact about generators, if I don't wrap the map in a list(), then
-    #  p2_unit_lifetime_events will be empty.  Because map returns a generator,
-    #  we use that in calculating the p1_unit_lifetime_events.  But that uses up
-    #  the generator so the second one doesn't work.
-    #  The simpler way would be to iterate using a for loop and putting each element
-    #  in one list or the other as we read it.
-    # I'm being overly cautious about turning everything into lists, but that is
-    # because I like using the map, filter and other features of python, but for
-    # the rest of you who haven't been bitten in the ass by having generators
-    # instead of lists, it's better to hide the generators.
     lifetimes_by_player = [
         list(filter(lambda ule: ule['player'] == 1, prepared_lifetime_events)),
         list(filter(lambda ule: ule['player'] == 2, prepared_lifetime_events))
     ]
 
-    # TODO Calculate total numbers of live units of each type, for each of the two preceding lists.
-    #   This task involves some problem solving and since it is used to draw
-    #   paths on a line graph, it can wait, I think.
-    #  p1_unit_counts, p2_unit_counts
-    # They should be of the form
-    # p1_unit_counts = {
-    #     "Zealot": [ ... #TODO Refise what should go into that list ],
-    #     "Stalker: [ ... ],
-    #     ...
-    # }
-    lifetimes = []
-    for i in range(2):
-        lifetimes.append({})
-        for unit in lifetimes_by_player[i]:
-            if unit['unit_type'] not in lifetimes[i]:
-                lifetimes[i][unit['unit_type']] = []
-            lifetimes[i][unit['unit_type']].append(
-                [
-                    unit['born_time'],
-                    unit['died_time']
-                ]
-            )
+    def group_unit_lifetimes_by_unit(unit_lifetimes):
+        lifetimes_by_unit = {}
+        for unit in unit_lifetimes:
+            if unit['unit_type'] not in lifetimes_by_unit:
+                lifetimes_by_unit[unit['unit_type']] = []
+            # Lifetime to interval
+            lifetimes_by_unit[unit['unit_type']].append(unit['lifetime'])
+        return lifetimes_by_unit
 
-    return {
-        "players": [
-            {
-                'unit_lifetimes': lifetimes[0],
-                'unit_counts': {}
-            },
-            {
-                'unit_lifetimes': lifetimes[1],
-                'unit_counts': {}
-            }
-        ]
-    }
+    return list(map(
+        lambda player: { 'unit_lifetimes': group_unit_lifetimes_by_unit(player), 'unit_counts': {}},
+        lifetimes_by_player
+    ))
 
 
 def categorize(event_list, category_map, value_map=None):

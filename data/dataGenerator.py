@@ -169,11 +169,12 @@ def generate_unit_composition_data(**kwargs):
     }
     """
     replay = pysc2.SC2ReplayWrapper(kwargs.get('replay'))
-    replay.categorize_unit_lifetime_events()
     categories = replay.categorize_unit_lifetime_events()
-    processed_data = list(pysc2.match_events_to_units(categories))
+    lifetimes = list(pysc2.match_events_to_units(categories))
 
-    unit_composition = pysc2.prepare_data_for_visualisation(processed_data)
+    unit_composition = {
+        'players': pysc2.group_unit_lifetimes_by_player_and_unit_type(lifetimes)
+    }
 
     duration = replay._replay.events[-1].second
     unit_composition['duration'] = duration
