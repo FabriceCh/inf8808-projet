@@ -13,6 +13,50 @@ class Pysc2EmptyListError(Pysc2Error):
     pass
 
 
+supply_per_unit = {
+    'Adept': 2,
+    'Archon': 4,
+    'Carrier': 6,
+    'Colossus': 6,
+    'DarkTemplar': 2,
+    'Disruptor': 3,
+    'HighTemplar': 2,
+    'Immortal': 4,
+    'Mothership': 8,
+    'Observer': 1,
+    'Oracle': 3,
+    'Phoenix': 2,
+    'Probe': 1,
+    'Sentry': 2,
+    'Stalker': 2,
+    'VoidRay': 4,
+    'WarpPrism': 2,
+    'Zealot': 2,
+    'Tempest': 5
+}
+
+protoss_unit_list = [
+    'Adept',
+    'Archon',
+    'Carrier',
+    'Colossus',
+    'DarkTemplar',
+    'Disruptor',
+    'HighTemplar',
+    'Immortal',
+    'Mothership',
+    'Observer',
+    'Oracle',
+    'Phoenix',
+    'Probe',
+    'Sentry',
+    'Stalker',
+    'VoidRay',
+    'WarpPrism',
+    'Zealot',
+    'Tempest'
+]
+
 def _select_from_list(ev_list, predicate):
     """Select all events from a list satisfying a predicate"""
     for e in ev_list:
@@ -209,41 +253,17 @@ class SC2ReplayWrapper:
         plt.show()
 
     def get_unit_lifetime_events(self):
-        valid_unit_names = [
-            'Probe',
-            'Zealot',
-            'Sentry',
-            'Stalker',
-            'Adept',
-            'HighTemplar',
-            'DarkTemplar',
-            'Archon',
-            'Observer',
-            'WarpPrism',
-            'Immortal',
-            'Colossus',
-            'Disruptor',
-            'Phoenix',
-            'VoidRay',
-            'Oracle',
-            'Tempest',
-            'Carrier',
-            'Mothership'
+        unit_lifetime_event_types = [
+            sc2reader.events.UnitBornEvent,
+            sc2reader.events.UnitInitEvent,
+            sc2reader.events.UnitDiedEvent,
+            sc2reader.events.UnitDoneEvent
         ]
+
         def selector(e):
-            if hasattr(e, 'unit') and e.unit.name not in valid_unit_names:
-                return False
-            return (
-                        (isinstance(e, sc2reader.events.UnitBornEvent)
-                         and (e.control_pid == 1 or e.control_pid == 2)
-                             # TODO Remove the true when we are sure that all the
-                             #  names are good.  Leave it though so that the output
-                             #  can show what the good and bad names are.
-                         )
-                        or isinstance(e, sc2reader.events.UnitInitEvent)
-                        or isinstance(e, sc2reader.events.UnitDiedEvent)
-                        or isinstance(e, sc2reader.events.UnitDoneEvent)
-            )
+            return (type(e) in unit_lifetime_event_types
+                    and hasattr(e, 'unit')
+                    and e.unit.name in protoss_unit_list)
 
         return self.select_from_events(predicate=selector)
 

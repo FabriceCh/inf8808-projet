@@ -13,27 +13,6 @@ OUTPUT_PATH = os.path.normpath(THIS_DIR + '/' + '../frontend/datafiles/')
 
 pp = pprint.PrettyPrinter(indent=4)
 
-supply_per_unit = {
-    'Adept': 2,
-    'Archon': 4,
-    'Carrier': 6,
-    'Colossus': 6,
-    'DarkTemplar': 2,
-    'Disruptor': 3,
-    'HighTemplar': 2,
-    'Immortal': 4,
-    'Mothership': 8,
-    'Observer': 1,
-    'Oracle': 3,
-    'Phoenix': 2,
-    'Probe': 1,
-    'Sentry': 2,
-    'Stalker': 2,
-    'VoidRay': 4,
-    'WarpPrism': 2,
-    'Zealot': 2,
-    'Tempest': 5
-}
 
 def get_last_death(lifetime_dict):
     death_info_list = list(map(lambda u: u.get('died_time'), lifetime_dict))
@@ -89,33 +68,11 @@ def unit_lifetimes_to_unit_counts(unit_lifetimes, duration):
 
 
 def add_empties_for_missing_units_quick_fix(data):
-    unit_list = [
-        'Adept',
-        'Archon',
-        'Carrier',
-        'Colossus',
-        'DarkTemplar',
-        'Disruptor',
-        'HighTemplar',
-        'Immortal',
-        'Mothership',
-        'Observer',
-        'Oracle',
-        'Phoenix',
-        'Probe',
-        'Sentry',
-        'Stalker',
-        'VoidRay',
-        'WarpPrism',
-        'Zealot',
-        'Tempest'
-    ]
-
     for player_data in data['players']:
         unit_lifetimes = player_data['unit_lifetimes']
         unit_counts = player_data['unit_counts']
         unit_supplies = player_data['unit_supplies']
-        for unit_name in unit_list:
+        for unit_name in pysc2.protoss_unit_list:
             if unit_name not in unit_lifetimes:
                 unit_lifetimes[unit_name] = []
             if unit_name not in unit_counts:
@@ -187,7 +144,7 @@ def generate_unit_composition_data(**kwargs):
             player_unit_lifetimes,
             unit_composition['duration']
         )
-        unit_supplies = { unit: unit_count_to_unit_supply(unit_counts[unit], supply_per_unit[unit])
+        unit_supplies = { unit: unit_count_to_unit_supply(unit_counts[unit], pysc2.supply_per_unit[unit])
                           for unit in unit_counts}
         player['unit_supplies'] = unit_supplies
         player['unit_counts'] = unit_counts
