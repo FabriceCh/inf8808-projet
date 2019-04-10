@@ -34,32 +34,20 @@ def select_events_related_to_unit(event_list, unit_identifier):
 
 
 def match_events_to_units(categories):
-    processed_data = []
-    init_events = categories[sc2reader.events.tracker.UnitInitEvent]
+
     done_events = categories[sc2reader.events.tracker.UnitDoneEvent]
     born_events = categories[sc2reader.events.tracker.UnitBornEvent]
     died_events = categories[sc2reader.events.tracker.UnitDiedEvent]
 
-    for born in born_events :
-        id = get_unit_from_event(born)
+    def find_match_from_unit(event, event_list):
+        id = get_unit_from_event(event)
+        unit_died_events = select_events_related_to_unit(event_list, id)
+        return unit_died_events[0] if unit_died_events else None
 
-        unit_died_events = select_events_related_to_unit(died_events, id)
-
-        processed_data.append({
-            'born': born,
-            'died': unit_died_events[0] if unit_died_events else None,
-        })
-
-    for done in done_events:
-        id = get_unit_from_event(done)
-
-        unit_died_events = select_events_related_to_unit(died_events, id)
-        processed_data.append({
-            'born': done,
-            'died': unit_died_events[0] if unit_died_events else None,
-        })
-
-    return sorted(processed_data, key=lambda u: u['born'].second)
+    return map(lambda e: {
+        'born': e,
+        'died': find_match_from_unit(e, died_events)
+    }, sorted(born_events + done_events, key= lambda e: e.second) )
 
 
 def get_event_time(e: sc2reader.events.tracker.Event):
