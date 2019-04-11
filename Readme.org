@@ -1,0 +1,43 @@
+* Starcraft 2 visualization tools
+
+Hosted at [[inf8808.witify.io][inf8808.witify.io]]
+
+** Operation:
+
+Visit [[inf8808.witify.io][inf8808.witify.io]]
+
+Click on one of the two visualisations, select a replay (the last one is the
+coolest).
+
+Unit compostion vis: move cursor on vis to get two corresponding vertical lines.
+
+Unit apm vis: select an interval on the bottom area chart to make a brush.  Move
+the brush around to see dots moving on the map.
+
+** Data preprocessing
+
+The directory =data= contains replays and python code that extracts the data
+from those replay files.
+
+The code uses a python package =sc2reader= that allows us to load a replay file
+as a python object.
+
+- =pysc2.py= defines a wrapper around the replay object provided by the
+  =sc2reader= library,
+- =dataGenerator.py= generates the data for both visualizations, and saves the files,
+- =apmviz.py= has the implementation of most of the things that are used to
+  generate the APM visualization.
+
+** Data display
+
+In the =frontent= directory, we have the code for the visualizations themselves.
+
+At the top level, we have simple =.html= files that simply contain the
+visualizations.
+
+The main code is in the =js= subdirectory:
+- =unit.js= has the code for the Unit Compostion visualisation with
+  =stackArea.js= containing the implementation of the bottom stack area chart.
+- =events.js= has the code for the unit lifetimes and composition vis.  And
+  =eventStack.js= implements the bottom stack area chart for the actions visualisation.
+
