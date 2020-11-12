@@ -1,10 +1,10 @@
 * Starcraft 2 visualization tools
 
-Hosted at [[inf8808.witify.io][inf8808.witify.io]]
+Hosted at [[http://inf8808.witify.io][inf8808.witify.io]]
 
 ** Operation:
 
-Visit [[inf8808.witify.io][inf8808.witify.io]]
+Visit [[http://inf8808.witify.io][inf8808.witify.io]]
 
 Click on one of the two visualisations, select a replay (the last one is the
 coolest).
