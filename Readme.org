@@ -1,4 +1,4 @@
-* Starcraft 2 visualization tools
+* Starcraft 2 visualisation tools
 
 Hosted at [[http://inf8808.witify.io][inf8808.witify.io]]
 
